@@ -1,0 +1,520 @@
+<rss xmlns:atom="http://www.w3.org/2005/atom" version="2.0">
+    <channel>
+      <title>🪴 Quartz 4.0</title>
+      <link>https://quartz.jzhao.xyz</link>
+      <description>Recent content on 🪴 Quartz 4.0</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <atom:link href="https://quartz.jzhao.xyz/index.xml" rel="self" type="application/rss+xml"/>
+    </channel>
+    <items>
+    <title>README</title>
+    <link>https://quartz.jzhao.xyz/README</link>
+    <guid>https://quartz.jzhao.xyz/README</guid>
+    <description>本仓库用于备份本地 Obsidian 的笔记文件，用于管理，组织个人笔记。为保证数据的兼容性，所有笔记尽量只使用 Markdown 的标准语法。 下面介绍我的笔记发布流程。整个过程大致如下： Obsidian 中编辑内容 -&gt; 推送至私有仓库 -&gt; 触发 action，将内容过滤筛选后以覆盖的形式推送至私有 quartz 仓库 -&gt; 再次触发 action 构建页面并发布至 github page。 其中只有最后的 github page 仓库是 public 的，这样做是为了避免对外展示不必要的内容。同时如果你的 Obsidian 的 valut 中包含很多体积较大的文件，那么可能并不适合使用 github 的个人免费版本，因为 lfs 的容量是有限的，可考虑搭建自己的 git 服务器。 文章的发布使用了 quartz 项目，它可以将 md 文章生成静态页面，该项目基于 hugo，相比传统 hugo 主题，最大的不同是与 obsidian 的设计理念类似，以链接的形式串联你的知识。 使用 quartz 时，若不希望文章被发布可在 md 中添加 metadata，这也是我使用最多的方式，其它方式可参考 Ignoring Notes。 draft: true 为什么我没有选择直接将原本的存放笔记的仓库和 quartz 合并？ 主要目的是不想改变已有的笔记仓库的结构，其次拆分增加了可操作性，毕竟目前 quartz 项目还处于快速迭代的阶段，可能会有许多问题。.</description>
+    <pubDate>Tue, 31 Oct 2023 12:21:34 GMT</pubDate>
+  </items><items>
+    <title>Trganda's Site</title>
+    <link>https://quartz.jzhao.xyz/</link>
+    <guid>https://quartz.jzhao.xyz/</guid>
+    <description>基于 Quartz 搭建的个人知识库平台。有关我是如何发布 Obsidian 中的文章至 Github Page 的可见 README。 Content § 可在 Tags 查看所有内容，完整的目录结构如下：.</description>
+    <pubDate>Sat, 19 Aug 2023 06:25:16 GMT</pubDate>
+  </items><items>
+    <title>Website</title>
+    <link>https://quartz.jzhao.xyz/cheat-sheets/Website</link>
+    <guid>https://quartz.jzhao.xyz/cheat-sheets/Website</guid>
+    <description>网络安全 § Coco413 整理维护的网络安全咨询汇集平台 cve 「搜索 CVE」 vulners.com 『漏洞库，支持 RSS 订阅』 会议 § FOSDEM 2023 - Home 漏洞挖掘/赏金 § 开源软件的漏洞挖掘平台 huntr.dev 开源软件查找 § Open Source Libs - Best Open Source Software Projects 书籍 § 中文 数字图书馆。搜索书籍。免费下载书籍 (ca1lib.</description>
+    <pubDate>Fri, 03 Nov 2023 01:35:24 GMT</pubDate>
+  </items><items>
+    <title>Kubespray 安装 Kubernetes 集群</title>
+    <link>https://quartz.jzhao.xyz/projects/kubernetes/Kubernetes---Kubespray-安装-K8s-集群</link>
+    <guid>https://quartz.jzhao.xyz/projects/kubernetes/Kubernetes---Kubespray-安装-K8s-集群</guid>
+    <description>初始化 § 首先克隆 kubespray 至本地，之后安装 ansible，官方文档推荐使用 python 的虚拟环境进行安装。主要执行以下命令前前不要切换至克隆的 kubespray 目录 VENVDIR=kubespray-venv KUBESPRAYDIR=kubespray python3 -m venv $VENVDIR source $VENVDIR/bin/activate cd $KUBESPRAYDIR pip install -U -r requirements.</description>
+    <pubDate>Wed, 11 Oct 2023 04:17:18 GMT</pubDate>
+  </items><items>
+    <title>Kubernetes - Learn Kubernetes Basics</title>
+    <link>https://quartz.jzhao.xyz/projects/kubernetes/Kubernetes---Learn-Kubernetes-Basics</link>
+    <guid>https://quartz.jzhao.xyz/projects/kubernetes/Kubernetes---Learn-Kubernetes-Basics</guid>
+    <description> 本文内容为官方文档的学习记录。 官方文档提供了一个教程，学习以下内容： 在集群中发布应用 伸缩发布的应用 更新发布的应用 调试发布的应用 Kubernetes 介绍 § Kubernetes 集群为主从模式，由 Control Plane『Master』 和 Node『Slave』 组成， Control Plane 负责管理集群，协调集群中的所有活动，例如调度应用程序、维护应用程序的所需状态、扩展应用程序以及更新。 Node 可以看作是一台虚拟机或者物理机，它是 Kubernetes 集群中的工作节点。每个 Node 上包含一个 Kubelet 服务，它是一个 agent，用于与 Control Plane 通信『通过 Kubernetes API』。为了支持容器相关操作，Node 上还需要安装支持 CRI 的组件，例如 containerd、CRI-O 或是 Docker。 Kubernetes 安装 § 在开始学习之前，先通过 minikube 项目在本地搭建一个 Kubernetes 集群，国区安装可参考 Minikube 国区安装 设置镜像。这里不必纠结 Kubernetes 的具体内容，先安装上手体验一下。 minikube 是开源社区打造的本地化 Kubernetes 集群安装工具，对初学者很友好。 安装 minikube 前需要先安装 Docker。 Mac 下可通过 brew 进行安装 brew install minikube 之后启动一个集群 minikube start 使用 kubectl 工具查看集群中的 Nodes，输出如下 kubectl get nodes // output NAME STATUS ROLES AGE VERSION minikube Ready control-plane 1m v1.</description>
+    <pubDate>Thu, 28 Sep 2023 09:09:23 GMT</pubDate>
+  </items><items>
+    <title>Kubernetes - OCI CCM 安装</title>
+    <link>https://quartz.jzhao.xyz/projects/kubernetes/Kubernetes---OCI-CCM-安装</link>
+    <guid>https://quartz.jzhao.xyz/projects/kubernetes/Kubernetes---OCI-CCM-安装</guid>
+    <description> 项目主页见 OCI Cloud Controller Manager (CCM)。 安装步骤 § 安装前的准备工作： 在每个所有 node 节点的 kubelet 中设置参数 --cloud-provider=external。 在每个所有 node 节点的 kubelet 中设置参数 --provider-id=&lt;instanceID&gt;，&lt;instanceID&gt; 为云主机的 OCID。 在 kube-controller-manager 中设置 --cloud-provider=external 参数。 设置 providerID § 集群环境是通过 Kubespray 安装的，可通过修改 kubelet.</description>
+    <pubDate>Tue, 17 Oct 2023 01:20:01 GMT</pubDate>
+  </items><items>
+    <title>Kubernetes - Kubespray 多架构下的安装</title>
+    <link>https://quartz.jzhao.xyz/projects/kubernetes/Kubernetes-Kubespray-多架构下的安装</link>
+    <guid>https://quartz.jzhao.xyz/projects/kubernetes/Kubernetes-Kubespray-多架构下的安装</guid>
+    <description>在不同架构的机器上，使用 kubespray 安装 kubernetes 时出现如下错误。 fatal: [master1]: FAILED! =&gt; {&quot;attempts&quot;: 4, &quot;changed&quot;: true, &quot;checksum_dest&quot;: null, &quot;checksum_src&quot;: &quot;d283b806282faaccdb9d85e033ba964729ee2ddd&quot;, &quot;dest&quot;: &quot;/tmp/releases/runc-v1.</description>
+    <pubDate>Wed, 11 Oct 2023 01:59:44 GMT</pubDate>
+  </items><items>
+    <title>Arch Linux Installtation</title>
+    <link>https://quartz.jzhao.xyz/til/installation/Arch-Linux-Installtation</link>
+    <guid>https://quartz.jzhao.xyz/til/installation/Arch-Linux-Installtation</guid>
+    <description>Pre-Request § Download the iso file of archlinux from offical site. And boot it from your (virtual) machine. Preparation § Tips: If you are installing arch on a virtual machine, after arch connect to network, you can change the password or live system by passwd and use ssh to remote control the installation.</description>
+    <pubDate>Thu, 21 Sep 2023 02:21:20 GMT</pubDate>
+  </items><items>
+    <title>Arm 系列的 Mac 上安装 Arch  Parallels 虚拟机</title>
+    <link>https://quartz.jzhao.xyz/til/installation/Arm-系列的-Mac-上安装-Arch--Parallels-虚拟机</link>
+    <guid>https://quartz.jzhao.xyz/til/installation/Arm-系列的-Mac-上安装-Arch--Parallels-虚拟机</guid>
+    <description>Arch 的社区提供了开箱即用的 Parallels 虚拟机，可从 parallels 下载，解压后用 Parallels 打开即可。默认用户名和密码为 user: root passwd: 123 .</description>
+    <pubDate>Wed, 30 Aug 2023 06:57:16 GMT</pubDate>
+  </items><items>
+    <title>M1 Mac 搭建 SQL Server</title>
+    <link>https://quartz.jzhao.xyz/til/installation/M1-Mac-搭建-SQL-Server</link>
+    <guid>https://quartz.jzhao.xyz/til/installation/M1-Mac-搭建-SQL-Server</guid>
+    <description>在 Arm 系列的 Mac 中，使用虚拟机（Windows 11 Arm）安装 SQL Server 会失败。原因可能是 SQL Server 目前还不支持在 Arm 架构上运行。 Azure SQL Edge 的数据库引擎与 SQL Server 兼容，它由 SQL Server 的数据库引擎优化更新而来，主要面对 IOT 场景。可以使用 Azure SQL Edge 来代替 SQL Server。 安装步骤如下： 安装 Docker。 拉取 [Azure SQL Edge](Docker Hub) 镜像。 docker pull mcr.</description>
+    <pubDate>Mon, 12 Jun 2023 06:44:13 GMT</pubDate>
+  </items><items>
+    <title>Neo4j Desktop 下载</title>
+    <link>https://quartz.jzhao.xyz/til/installation/Neo4j-Desktop-下载</link>
+    <guid>https://quartz.jzhao.xyz/til/installation/Neo4j-Desktop-下载</guid>
+    <description>可直接使用如下链接访问下载页面，只需修改对应参数『flavour=osx&amp;release=1.5.8』即可 Mac 下需要使用 safari 浏览器，前端 JS 会检查 Agent。 ?edition=desktop&amp;flavour=osx&amp;release=1.5.8&amp;offline=false .</description>
+    <pubDate>Tue, 05 Sep 2023 09:02:12 GMT</pubDate>
+  </items><items>
+    <title>Neo4j 安装</title>
+    <link>https://quartz.jzhao.xyz/til/installation/Neo4j-安装</link>
+    <guid>https://quartz.jzhao.xyz/til/installation/Neo4j-安装</guid>
+    <description>首先下载 Neo4j Desktop，见 Neo4j Desktop 下载。 在 Neo4j Desktop 的 Project 中创建一个新的本地数据库，选择所需版本并填入密码『默认账号名为 neo4j』即可。 创建完成后，可通过内置的 Neo4j Browser 访问，或通过浏览器访问 http://localhost:7474/browser/，输入账号密码登陆。.</description>
+    <pubDate>Mon, 11 Sep 2023 02:23:57 GMT</pubDate>
+  </items><items>
+    <title>安装 Komodor 管理 Kubernetes 集群</title>
+    <link>https://quartz.jzhao.xyz/til/installation/安装-Komodor-管理-Kubernetes-集群</link>
+    <guid>https://quartz.jzhao.xyz/til/installation/安装-Komodor-管理-Kubernetes-集群</guid>
+    <description> 参考 Install-Komodor-Agent.html#step-3-integrate-additional-clusters 住 Kubernetes 集群中安装 Komodor Agent。 没有使用官方的 安装脚本，选择通过 helm 进行安装。根据文档，在执行如下命令前，需要先安装 Helm3。如果使用的是 kubespray 安装的集群，可在 addon.</description>
+    <pubDate>Tue, 19 Sep 2023 06:57:49 GMT</pubDate>
+  </items><items>
+    <title>镜像整理</title>
+    <link>https://quartz.jzhao.xyz/til/installation/镜像整理</link>
+    <guid>https://quartz.jzhao.xyz/til/installation/镜像整理</guid>
+    <description>Cargo § 推荐使用 HTTP 协议镜像，编辑 ~/.cargo/config 文件，添加以下内容： [source.crates-io] replace-with = &#039;mirror&#039; [source.mirror] registry = &quot;sparse+https://mirrors.</description>
+    <pubDate>Fri, 18 Aug 2023 03:30:02 GMT</pubDate>
+  </items><items>
+    <title>长亭雷池</title>
+    <link>https://quartz.jzhao.xyz/til/installation/长亭雷池安装</link>
+    <guid>https://quartz.jzhao.xyz/til/installation/长亭雷池安装</guid>
+    <description>计划安装长亭雷池社区版本，部署在其它 web 服务之前。 安装 § 安装方式很简单，这里直接使用安装脚本 bash -c &quot;$(curl -fsSLk https://waf-ce.chaitin.cn/release/latest/setup.sh)&quot; 安装位置为 /opt/safeline 可修改 /opt/safeline/.</description>
+    <pubDate>Tue, 19 Sep 2023 07:33:54 GMT</pubDate>
+  </items><items>
+    <title>Arch - Signature is unknown trust</title>
+    <link>https://quartz.jzhao.xyz/til/issues/Arch---Signature-is-unknown-trust</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/Arch---Signature-is-unknown-trust</guid>
+    <description># 删除旧的签名密钥 rm -R /etc/pacman.d/gnupg # 初始化密钥数据库文件 pacman-key --init # 获取密钥数据 pacman-key --populate archlinux 安装 archlinuxcn 中的包出现类似如下报错，需要更新导入 archlinuxcn-keyring signature from &quot;lilac (build machine) &lt;lilac@build.</description>
+    <pubDate>Sat, 19 Aug 2023 07:33:58 GMT</pubDate>
+  </items><items>
+    <title>Cargo SSL connect error</title>
+    <link>https://quartz.jzhao.xyz/til/issues/Cargo-SSL-connect-error</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/Cargo-SSL-connect-error</guid>
+    <description>Cargo 安装其它包时出现以下错误信息 Updating crates.io index warning: spurious network error (2 tries remaining): [35] SSL connect error (LibreSSL SSL_connect: SSL_ERROR_SSL in connection to crates.</description>
+    <pubDate>Mon, 12 Jun 2023 07:37:55 GMT</pubDate>
+  </items><items>
+    <title>Docker no space left on device</title>
+    <link>https://quartz.jzhao.xyz/til/issues/Docker-no-space-left-on-device</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/Docker-no-space-left-on-device</guid>
+    <description>构建漏洞环境的时候遇到此问题，Docker 报错 docker: write /var/lib/docker/tmp/GetImageBlock***: no space left on device 看意思，是分配给 Docker 的某些空间不足，在 Docker论坛 上找到此问题。 缓解方式有两种： 删除不需要的 Docker 镜像 docker system prune --help。 对空间进行扩容。 第一种方式，执行如下命令会出现提示，删除不需要的内容即可。 docker system prune ARNING! This will remove: - all stopped containers - all networks not used by at least one container - all dangling images - all dangling build cache 第二种方式，扩容 试了配置文档中的方式，在 daemon.</description>
+    <pubDate>Mon, 12 Jun 2023 07:38:21 GMT</pubDate>
+  </items><items>
+    <title>Github - Actions 定时任务</title>
+    <link>https://quartz.jzhao.xyz/til/issues/Github---Actions-定时任务</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/Github---Actions-定时任务</guid>
+    <description>github action 支持多种方式触发 action 的执行，其中包括定时执行 schedule。该方法使用 POSIX cron syntax 下面的例子设置在每天的 5:30 和 17:30 『UTC』 触发 action workflows，有关 cron 的语法可参考 Cron 语法 on: schedule: # * is a special character in YAML so you have to quote this string - cron: &#039;30 5,17 * * *&#039;.</description>
+    <pubDate>Fri, 18 Aug 2023 03:33:19 GMT</pubDate>
+  </items><items>
+    <title>LaunchPad 删除无效图标</title>
+    <link>https://quartz.jzhao.xyz/til/issues/LaunchPad-删除无效图标</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/LaunchPad-删除无效图标</guid>
+    <description>Mac 上卸载或删除软件后，图标可能仍会存在于 Launchpad 中，清除方式如下。 进入 db 目录 /private/var/folders/fm/xrz9qhzj5snf0s3btxb3jw280000gn/0/com.apple.dock.launchpad/db 不确定目录位置可以先进入 /private/var/folders/fm 再搜索 com.</description>
+    <pubDate>Mon, 12 Jun 2023 07:40:11 GMT</pubDate>
+  </items><items>
+    <title>Mac 上启动 OpenLDAP</title>
+    <link>https://quartz.jzhao.xyz/til/issues/Mac-上启动-OpenLDAP</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/Mac-上启动-OpenLDAP</guid>
+    <description>Mac 默认安装了 openldap，启动方式如下，执行 slappasswd 生成密钥，在 /etc/openldap 下创建配置文件 slapd.conf cp slapd.conf.default slapd.conf 修改 rootpw 字段，填入刚刚生成的密钥 rootpw {SSHA}LDAN/F815HvwHmMUsUX4byoK9aoo2p8m 启动 /usr/libexec/slapd -d 255 Reference Starting OpenLDAP on Mac OS X Client - krypted .</description>
+    <pubDate>Mon, 12 Jun 2023 07:41:07 GMT</pubDate>
+  </items><items>
+    <title>Mac 开启 SSHD 服务</title>
+    <link>https://quartz.jzhao.xyz/til/issues/Mac-开启-SSHD-服务</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/Mac-开启-SSHD-服务</guid>
+    <description>本地化伪分布式部署 Hadoop 时需要用到 ssh，这里记录 Mac 下开启 sshd 的步骤。 在 Mac 上打开 Remote Login 访问权限 勾选 Apple menu &gt; System Preferences &gt; Sharing &gt; Remote Login 选择当前用户 检查 sshd 配置，文件位于 /etc/ssh/sshd_confg 生成 ssh 公私钥，将公钥放入 ~/.</description>
+    <pubDate>Wed, 13 Sep 2023 07:13:09 GMT</pubDate>
+  </items><items>
+    <title>OrbStack 卸载</title>
+    <link>https://quartz.jzhao.xyz/til/issues/OrbStack-卸载</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/OrbStack-卸载</guid>
+    <description>OrbStack 的资源消耗确实比 Docker Desktop 好不少，但是出于个人原因，还是把它卸载并换回了 Docker Desktop。卸载过程『从 Application 中直接删除 OrbStack，官方文档 推荐的也是这样』中遇到了以下问题 docker images Cannot connect to the Docker daemon at unix:///Users/trganda/.</description>
+    <pubDate>Mon, 12 Jun 2023 07:44:05 GMT</pubDate>
+  </items><items>
+    <title>Ranger with Kitty 图片预览</title>
+    <link>https://quartz.jzhao.xyz/til/issues/Ranger-with-Kitty-图片预览</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/Ranger-with-Kitty-图片预览</guid>
+    <description> 使用环境 macOS Ventura 13.2 安装 Kitty 和 Ranger § 从 kitty: Cross-platform, fast, feature-rich, GPU based terminal (github.com) 下载对应版本的 kitty 并进行安装即可。 通过 brew 安装 ranger brew install ranger 配置 Ranger § 编辑配置文件 vim ~/.</description>
+    <pubDate>Fri, 12 May 2023 09:07:14 GMT</pubDate>
+  </items><items>
+    <title>SSH 端口转发</title>
+    <link>https://quartz.jzhao.xyz/til/issues/SSH-端口转发</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/SSH-端口转发</guid>
+    <description> 防火墙阻断了 HTTP 协议访问目标机器，但是 SSH 正常。可以通过 SSH 的动态转发功能绕过此限制。 动态转发 § 以下内容，修改自[1] 动态转发指的是，本机与 SSH 服务器之间创建了一个加密连接，然后本机内部针对某个端口的通信，都通过这个加密连接转发。它的一个使用场景就是，访问所有外部网站，都通过 SSH 转发。 动态转发需要把本地端口绑定到 SSH 服务器。至于 SSH 服务器要去访问哪一个网站，完全是动态的，取决于原始通信，所以叫做动态转发。 下面命令中，-D 表示动态转发，local-port 是本地端口，tunnel-host 是 SSH 服务器，-N 表示这个 SSH 连接只进行端口转发，不登录远程 Shell，不能执行远程命令，只能充当隧道。 ssh -D local-port user@tunnel-host -N 举例来说，如果本地端口是 2121，那么动态转发的命令就是下面这样。 ssh -D 2121 user@tunnel-host -N 输入密码后，会在本地的 2121 端口开启一个 SOCK5 代理，之后使用该代理访问目标地址，如 curl -x sock5://127.</description>
+    <pubDate>Fri, 18 Aug 2023 03:36:11 GMT</pubDate>
+  </items><items>
+    <title>SSH 走 HTTP 代理或者 SOCKS5 代理</title>
+    <link>https://quartz.jzhao.xyz/til/issues/SSH-走-HTTP-代理或者-SOCKS5-代理</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/SSH-走-HTTP-代理或者-SOCKS5-代理</guid>
+    <description>有时候你的 SSH 因为某些原因, 或者你的 VPS 的 SSH 端口被某些无法阻挡的力量被封禁了, 你使用普通的 SSH 方式无法登录你的服务器, 所以这时候我们需要使用一些方式, 让你的 SSH 通过代理连接你的服务器, 进而解决这个问题. 直接配置 § 如何让你的 ssh 链接使用 socks 代理呢, 我们可以使用 nc 命令, 使用 ssh 的 ProxyCommand 配合 nc 可以让 ssh 通过你设置的代理访问服务器 其中使用 ProxyCommand 命令, 带上具体内容 nc -X 5 -x 127.</description>
+    <pubDate>Mon, 12 Jun 2023 07:48:47 GMT</pubDate>
+  </items><items>
+    <title>Win10 查看 WIFI 密码</title>
+    <link>https://quartz.jzhao.xyz/til/issues/Win10-查看-WIFI-密码</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/Win10-查看-WIFI-密码</guid>
+    <description>四哥分享的技巧，以下内容复制自 202303012116.txt 。 这算是个奇技淫巧，大多数人这辈子都不知道；另有一些相关行业人士早就知道，但大概率这辈子都不会用上；换句话说，这是个鸡肋技巧。不过，干咱们这行的，多知道一些总归不会错的。 确保 wlansvc 服务启动中，没有无线网络的台式机，该服务未启动 $ sc query wlansvc | findstr STATE STATE : 4 RUNNING 查看曾经连接过的无线网络 $ netsh wlan show profiles.</description>
+    <pubDate>Mon, 12 Jun 2023 07:49:00 GMT</pubDate>
+  </items><items>
+    <title>Windows 中运行 Ysoserial.jar，序列化数据头部错误</title>
+    <link>https://quartz.jzhao.xyz/til/issues/Windows-中运行-Ysoserial.jar，序列化数据头部错误</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/Windows-中运行-Ysoserial.jar，序列化数据头部错误</guid>
+    <description>起因 § 在 Windows 中使用 ysoserial.jar 生成 payload 并写入文件 java -jar ysoserial.jar CommonsBeanutils1 &quot;notepad&quot; &gt; poc.ser 文件 poc.ser 的头部却不是 ACED ➜ hexdump -C poc.</description>
+    <pubDate>Fri, 18 Aug 2023 03:36:43 GMT</pubDate>
+  </items><items>
+    <title>asciinema 记录终端并转 Gif</title>
+    <link>https://quartz.jzhao.xyz/til/issues/asciinema-记录终端并转-Gif</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/asciinema-记录终端并转-Gif</guid>
+    <description>在终端启用记录 asciinema rec 出现如下提示 asciinema: recording asciicast to /var/folders/fm/xrz9qhzj5snf0s3btxb3jw280000gn/T/tmpy28p758a-ascii.cast asciinema: press &lt;ctrl-d&gt; or type &quot;exit&quot; when you&#039;re done 随意输入一些命令 ➜ ~ pwd /Users/trganda ➜ ~ whoami trganda ➜ ~ asciinema: recording finished asciinema: press &lt;enter&gt; to upload to asciinema.</description>
+    <pubDate>Sat, 19 Aug 2023 07:34:33 GMT</pubDate>
+  </items><items>
+    <title>如何为 Linux 的分区拓展空间</title>
+    <link>https://quartz.jzhao.xyz/til/issues/如何为-Linux-的分区拓展空间</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/如何为-Linux-的分区拓展空间</guid>
+    <description> 使用 fdisk 删除旧分区，再新建分区，不会删除分区中原有的数据，但以防万一建议进行备份。 如果是修改 / 路径挂载的分区，需通过 USB Live 系统启动进行操作 假设有如下分区，其中 /dev/sdb3 后有空闲的空间 /dev/sdb1 /dev/sdb2 /dev/sdb3 操作步骤如下，非 live 情况下，需要先 unmout fdisk /dev/sdb 删除旧分区 d -&gt; 3 创建新分区，并包含所有空闲空间 n 检查分区并验证是否包含错误，同时提示进行修复 e2fsck -f /dev/sdb3 e2fsck 1.</description>
+    <pubDate>Tue, 25 Jul 2023 01:05:27 GMT</pubDate>
+  </items><items>
+    <title>查看 MobaXterm 中的密码</title>
+    <link>https://quartz.jzhao.xyz/til/issues/查看-MobaXterm-中的密码</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/查看-MobaXterm-中的密码</guid>
+    <description>免费版本不支持查看保存的 ssh 密码。需要借助 how-does-MobaXterm-encrypt-password 工具。 查看加密后的密码 § 首先，先查看保存的密码，这里将密码保存至注册表中。 使用以下命令查看。 reg query HKEY_CURRENT_USER\Software\Mobatek\MobaXterm\C # Credentials reg query HKEY_CURRENT_USER\Software\Mobatek\MobaXterm\P # Passwords 解密 § 克隆 how-does-MobaXterm-encrypt-password: This repo offers a tool to reveal password encrypted by MobaXterm.</description>
+    <pubDate>Mon, 12 Jun 2023 07:52:14 GMT</pubDate>
+  </items><items>
+    <title>甲骨文云主机引导盘扩容</title>
+    <link>https://quartz.jzhao.xyz/til/issues/甲骨文云主机引导盘扩容</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/甲骨文云主机引导盘扩容</guid>
+    <description>甲骨文云主机免费服务提供总计 200 G 的引导卷。默认创建主机时选择的是 47G。现在有一台 47G 的主机，希望对它进行扩容使用剩余的免费容量。 首先进入引导卷的设置页面，修改目标主机的引导卷大小 修改完成之后保存。 步骤 § 跟随提示中的指引信息，首先扫描磁盘空间 扫描磁盘空间 § 先查看当前磁盘设备 fdisk -l 这里要调整的是 /dev/sda 根据文档，使用如下命令扫描磁盘，替换 &lt;device_name&gt; 为 sda，请根据个人情况进行修改。 sudo dd iflag=direct if=/dev/&lt;device_name&gt; of=/dev/null count=1 echo &quot;1&quot; | sudo tee /sys/class/block/&lt;device_name&gt;/device/rescan 成功的话输出如下 1+0 records in 1+0 records out 512 bytes copied, 0.</description>
+    <pubDate>Fri, 01 Sep 2023 09:44:16 GMT</pubDate>
+  </items><items>
+    <title>甲骨文云免费套餐</title>
+    <link>https://quartz.jzhao.xyz/til/issues/甲骨文云免费套餐</link>
+    <guid>https://quartz.jzhao.xyz/til/issues/甲骨文云免费套餐</guid>
+    <description>Oracle Cloud 提供一下称为 Always Free 的服务，只要注册即可享受下图中提供的云服务。 有关这项服务的具体介绍，见 Always Free。需要注意的是此项服务有资源回收策略，见如下说明 Idle Always Free compute instances may be reclaimed by Oracle.</description>
+    <pubDate>Fri, 01 Sep 2023 09:57:33 GMT</pubDate>
+  </items><items>
+    <title>After the Advisory</title>
+    <link>https://quartz.jzhao.xyz/archived/projects/supply-chains/After-the-Advisory</link>
+    <guid>https://quartz.jzhao.xyz/archived/projects/supply-chains/After-the-Advisory</guid>
+    <description> Security Day 2022 on Google Open Source Live 上，Nicky Ringland 发表的谈话。 文章，After the Advisory | Open Source Insights 视频，After advisory: dependencies post disclosure | Security Day 2022 on Google Open Source Live - YouTube 作者首先介绍了开源软件生态下，漏洞的传播效应，和修复策略以及通常会遇到的问题。并以 Maven 生态的 Log4Shell 和 NPM 生态的 Color 事件为例，对比了不同生态下，包管理系统的不同而产生的漏洞传播和修复速度的差异。 The Amplification of Vulnerability Impact § 作者统计了大约有 20 万（0.</description>
+    <pubDate>Fri, 16 Jun 2023 07:34:31 GMT</pubDate>
+  </items><items>
+    <title>Dependency Confusion Vulnerability</title>
+    <link>https://quartz.jzhao.xyz/archived/projects/supply-chains/Dependency-Confusion-Vulnerability</link>
+    <guid>https://quartz.jzhao.xyz/archived/projects/supply-chains/Dependency-Confusion-Vulnerability</guid>
+    <description>2021 年 2 月 9 日，安全研究员 Alex Birsan，发布了一篇 文章，介绍依赖管理工具在处理依赖的顺序上可能存在的安全问题。可以通过这篇文章了解，依赖混淆漏洞（Dependecy Confusion Vulnerability）。 微软发布了 白皮书，其中描述了缓解措施。 当执行 pip install -r requiremetns.</description>
+    <pubDate>Mon, 12 Jun 2023 01:43:26 GMT</pubDate>
+  </items><items>
+    <title>Dependency Data for Secure Supply Chains</title>
+    <link>https://quartz.jzhao.xyz/archived/projects/supply-chains/Dependency-Data-for-Secure-Supply-Chains</link>
+    <guid>https://quartz.jzhao.xyz/archived/projects/supply-chains/Dependency-Data-for-Secure-Supply-Chains</guid>
+    <description>谷歌的 Open Source Security 团队开放了开源软件的数据查询接口 deps.dev。目前支持的生态包括 GO, NPM, CARGO, MAVEN, PYPI, NUGE，其数据从公开范围收集，具体说明如下： 对于 Maven 包，除了 Maven Central 之外，它还从 Jenkins 和 Google 注册中心收集工件（一般为 Jar 包）。 对于 PyPI，它只收集作为 wheels 和 sdists 发布的包。 对于 Go，它只收集通过 proxy.</description>
+    <pubDate>Mon, 12 Jun 2023 01:45:21 GMT</pubDate>
+  </items><items>
+    <title>Open Source Vulnerability Database (OSV)</title>
+    <link>https://quartz.jzhao.xyz/archived/projects/supply-chains/Open-Source-Vulnerability-Database-(OSV)</link>
+    <guid>https://quartz.jzhao.xyz/archived/projects/supply-chains/Open-Source-Vulnerability-Database-(OSV)</guid>
+    <description>介绍 § OSV 是 Open Source Security 团队的开源项目，目标是作为开源软件安全的一个基础架构平台。OSV 通过聚合各个软件生态下的漏洞数据，并统一成 OpenSSF Vulnerability Format 中定义的数据格式。该平台目前还提供免费的查询接口供开发者使用，并通过二分搜索和版本分析，保障查询结果的准确性。 漏洞数据源 § 目前有部分漏洞库，已经原生支持 OpenSSF Vulnerability Format 格式： GitHub Advisory Database (CC-BY 4.</description>
+    <pubDate>Mon, 12 Jun 2023 01:46:31 GMT</pubDate>
+  </items><items>
+    <title>Supply-chain Levels for Software Artifacts ( SLSA)</title>
+    <link>https://quartz.jzhao.xyz/archived/projects/supply-chains/Supply-chain-Levels-for-Software-Artifacts-(-SLSA)</link>
+    <guid>https://quartz.jzhao.xyz/archived/projects/supply-chains/Supply-chain-Levels-for-Software-Artifacts-(-SLSA)</guid>
+    <description>SLSA『读作 salsa』，全称 Supply-chain Levels for Software Artifacts，是 OpenSSF 推出的一项软件供应链安全标准，框架，和控制清单，用于防止包篡改、提高完整性以及保护包和基础设施『如包管理平台和构建平台』。 使整个 SDL 流程的任何环节从『足够安全』到尽可能具有弹性。 软件开发的任何过程都有可能引入供应链安全问题，随着系统越来越复杂，需要坚实的基础和随系统改变的安全方案才能更好的应对新的威胁。SLSA 就是构建此坚实基础的标准方案。 SLSA 具体是做什么的 § 软件供应链安全里，SBOM 是软件的物料清单，告诉使用者，此软件中使用了哪些依赖等信息。类比之下，可以理解为从食品加工厂生产的食物上注明的配料表。而 SLSA 则可以类比为告诉你，用于加工该食品等各个配料已经食品本身，是以安全的方式进行加工生产的，例如干净卫生的加工环节，外卖袋子上防篡改的密封胶带，确保你在食用时，食物未被他人动过。 所以 SLSA 也是一套信任机制，确保软件成分的完整性和可验证性。这意味着，作为软件使用者，你不仅知道软件中有什么（依赖），还可以确认它是不是真的只包含这些（依赖），以及是否是来自可信平台构建完成的，而没有被掺杂进其它恶意代码。这可以避免以下安全风险： 代码修改（通过在源代码开始构建前，向代码添加防篡改『标签』） 上传的软件不是由预期（可信）的 CI/CD 平台构建的（通过使用平台相关的标签来标记软件，显示哪个构建平台创建了它） 针对构建平台的威胁（通过为构建平台服务商提供 『构建过程』的最佳实践） Provenance § Provenance 是 SLSA 引入的一个重要概念，它的作用就是为了实现软件供应链中的完整性和可验证性。Provenance 提供了一组元数据，描述软件的出处，它的作用如下 使用者可以验证软件是否是根据预期构建的 如果需要，其他人可以重新构建该软件 Provenance 和另一个概念 Attestation 是相辅相成的，它存储了关于软件的经过身份验证的签名（元数据）。它的结构描述如下图： 下图是一个示例 而 Bundle 则是 Attestation 的合集，Storage/Lookup 表示 Bundle/Attestation 的存储位置或者告知使用者如何获取它们。 各个部分的推荐构建方式见下表 ComponentRecommendationEnvelopeDSSE (ECDSA over NIST P-256 (or stronger) and SHA-256.</description>
+    <pubDate>Tue, 09 May 2023 01:06:39 GMT</pubDate>
+  </items><items>
+    <title>Tabby 的初始化配置</title>
+    <link>https://quartz.jzhao.xyz/notes/code-analysis/tabby/Tabby-的初始化配置</link>
+    <guid>https://quartz.jzhao.xyz/notes/code-analysis/tabby/Tabby-的初始化配置</guid>
+    <description>步骤 § 参考 Neo4j 环境配置 V5 进行配置。 首先，安装 Neo4j 5.10.0 版本『当前最新版本』数据库，见 Neo4j 安装。 安装 APOC 插件 § 手动安装方式，下载如下两个项目的 release 版本，注意需下载与 Neo4j 数据库兼容的版本，例如数据库版本为 v5.3.</description>
+    <pubDate>Mon, 11 Sep 2023 02:22:31 GMT</pubDate>
+  </items><items>
+    <title>MySQL Local File Read</title>
+    <link>https://quartz.jzhao.xyz/notes/security/mysql/MySQL-Local-File-Read-Arbitrary-File-Read-Vulnerability</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/mysql/MySQL-Local-File-Read-Arbitrary-File-Read-Vulnerability</guid>
+    <description> 来自 LoRexxar@Knownsec 404Team &amp; Dawu@Knownsec 404Team 在 CSS-T 上的分享。 此漏洞的利用方式同样适用于 JDBC MySQL Connecter。 如果 mysql 客户端在连接服务端时使用了 –enable-local-infile 选项，并执行 LOAD DATA LOCAL INFILE &#039;/etc/passwd&#039; INTO TABLE test FIELDS TERMINATED BY &#039;\n&#039;; 语句，客户端会读取本地的文件并将其内容发送至服务端。 因此，如果 mysql 服务器是不受信任的服务器，一个简单的建立连接行为可能会导致对客户端的任意文件读取。 LOAD DATA INFILE § LOAD DATA INFILE 是 SQL 注入中常用的语句，用于读取 mysql 服务器上的文件， load data infile &quot;/etc/passwd&quot; into table foo FIELDS TERMINATED BY &#039;\n&#039;; 但它通常都会遭受 secure_file_priv 权限的限制，利用难度较高。 mysql&gt; load data infile &quot;/etc/passwd&quot; into table foo FIELDS TERMINATED BY &#039;\n&#039;; ERROR 1290 (HY000): The MySQL server is running with the --secure-file-priv option so it cannot execute this statement 但是该语句有一个关键词，添加 local load data local infile &quot;/etc/passwd&quot; into table foo FIELDS TERMINATED BY &#039;\n&#039;; 它会读取 client 的文件 /etc/passwd 并填入 server 端表格 foo 中。 mysql&gt; load data local infile &quot;/etc/passwd&quot; into table foo FIELDS TERMINATED BY &#039;\n&#039;; Query OK, 7 rows affected (0.</description>
+    <pubDate>Thu, 25 May 2023 01:49:37 GMT</pubDate>
+  </items><items>
+    <title>MySQL Protocol - Basic Type</title>
+    <link>https://quartz.jzhao.xyz/notes/security/mysql/MySQL-Protocol---Basic-Type</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/mysql/MySQL-Protocol---Basic-Type</guid>
+    <description>Integer Types § 数值类型分为两种，固定长度和可变长度。 FixedLengthInteger § 固定长度有 6 种，长度分别为 1、2、3、4、6、8 字节。 TypeLengthint&lt;1&gt;1 byteint&lt;2&gt;2 byteint&lt;3&gt;3 bytesint&lt;4&gt;4 byteint&lt;6&gt;6 byteint&lt;8&gt;8 byte LengthEncodedInteger § 可变长度遵循以下规则 [0, 251)：int&lt;1&gt; [251, 2^16)：0xFC + int&lt;2&gt; [2^16, 2^24)：0xFD + int&lt;3&gt; [2^24, 2^64)：0xFE + int&lt;8&gt; String Types § 一共 5 种 FixedLengthString § 固定长度字符串，例如 ERR_Package 中的 State 字段，长度固定为 5 个字节。 NullTerminatedString § 以 00 结尾的字符串。 VariableLengthString § 可变长度的字符串，字符串的长度由其它字段提供，或在运行时进行计算。 LengthEncodedStrings § 带长度前缀的字符串，前缀说明后续字符串内容的长度。 RestOfPacketString § 如果字符串处于 Packet 的结尾，那么它的长度可以通过整个 Packet 的长度减去前面的内容的长度而计算出。.</description>
+    <pubDate>Fri, 18 Aug 2023 03:55:58 GMT</pubDate>
+  </items><items>
+    <title>MySQL Protocol - LOCAL INFILE Request</title>
+    <link>https://quartz.jzhao.xyz/notes/security/mysql/MySQL-Protocol---LOCAL-INFILE-Request</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/mysql/MySQL-Protocol---LOCAL-INFILE-Request</guid>
+    <description>MySQL 支持读取客户端文件发送至服务端的表格中『通过 Load Local inFile 语句』，此请求属于 Text Protocol 类别下的 COM_QUERY。 Payload 结构 § 请求的 Payload 结构定义如下： int&lt;1&gt;(command): 0x03 - COM_QUERY if CLIENT_QUERY_ATTRIBUTES is set: int&lt;lenenc&gt;(parameter_count): Number of parameters int&lt;lenenc&gt;(parameter_set_count): Number of parameter sets.</description>
+    <pubDate>Fri, 26 May 2023 09:36:26 GMT</pubDate>
+  </items><items>
+    <title>MySQL Protocol - ResultSet</title>
+    <link>https://quartz.jzhao.xyz/notes/security/mysql/MySQL-Protocol---ResultSet</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/mysql/MySQL-Protocol---ResultSet</guid>
+    <description>MySQL 的查询结果是一个类似表格的结构 ColumnDefinition41 § 如果在 Greeting 包中设置了 CLIENT_PROTOCOL_41 标志则使用此格式传输列定义。 此部分内容包含表格中每一列的定义，例如数据类型，标志，名称等。 Payload 结构 § 请求的 Payload 结构定义如下： 对 MySQL 数据库不熟，这里并不清楚 virtual 和 physical 的具体区别。 string&lt;lenenc&gt;(catalog): The catalog used.</description>
+    <pubDate>Sat, 03 Jun 2023 03:52:31 GMT</pubDate>
+  </items><items>
+    <title>runc 容器逃逸漏洞分析（CVE-2024-21626）</title>
+    <link>https://quartz.jzhao.xyz/notes/security/vulnerabilities/runc-容器逃逸漏洞分析（CVE-2024-21626）</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/vulnerabilities/runc-容器逃逸漏洞分析（CVE-2024-21626）</guid>
+    <description>记录对 CVE-2024-21626-container-escape.html 这篇分析文章的学习，原文中有很多错别字，以及不太了解的概念，导致看着有点费劲，故重新梳理一下。 先来了解一些 Linux 系统相关的前置知识 /proc/self 目录是内核提供的，用于便捷查询进程自身状态的文件，它存在于内存中。如果想查看指定进程的目录，则可访问 /proc/&lt;pid&gt;。 而 /proc/self/fd/.</description>
+    <pubDate>Fri, 09 Feb 2024 03:51:36 GMT</pubDate>
+  </items><items>
+    <title>SQL Injection</title>
+    <link>https://quartz.jzhao.xyz/notes/security/web/SQL-Injection</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/web/SQL-Injection</guid>
+    <description>SQL 注入的危害 § 注入成功可能导致，未授权情况下获取敏感信息，如密码，身份卡等或其他个人信息。在特定条件下甚至可以执行命令，上传恶意文件，从而注入 Webshell 或后门。 SQL 注入示例 § portswigger 上列举了一些例子 获取本不该出现的数据 修改应用逻辑 UNION 查询 获取数据库的信息，如版本，表结构 盲注，此时不会有明显的回显 Retrieving Hidden Data § 比如某个网站接口如下 https://insecure-website.</description>
+    <pubDate>Tue, 24 Oct 2023 01:55:43 GMT</pubDate>
+  </items><items>
+    <title>README</title>
+    <link>https://quartz.jzhao.xyz/notes/tech/Arangodb/README</link>
+    <guid>https://quartz.jzhao.xyz/notes/tech/Arangodb/README</guid>
+    <description>arangodb 是一款开源的可扩展的图形数据库系统。 安装 § 从 Download 下载，解压后执行如下命令启动数据库 arangodb start 之后可通过 Web 页面 http://localhost:8529/ 进行访问，也可通过控制台访问。默认包含 _system 数据库和名为 root 用户。 可通过如下命令重设 root 用户密码 sudo systemctl stop arangodb3 # 关闭服务器 arango-secure-installation 数据结构 § arangodb 将数据分为 3 层 database-&gt;collections-&gt;documents Documents § 其中 documents 中的数据以 json 形式进行存储，每一对 k-v 被称为 attribute，所有的 document 都包含两个默认属性，_id 和 _key，可以手动指定，若没有则会自动生成，它们都是唯一的，创建后无法修改。此外还有 _rev 属性，由系统进行维护，无需进行设定。 下面是一个示例 { &quot;_id&quot; : &quot;myusers/3456789&quot;, &quot;_key&quot; : &quot;3456789&quot;, &quot;_rev&quot; : &quot;14253647&quot;, &quot;firstName&quot; : &quot;John&quot;, &quot;lastName&quot; : &quot;Doe&quot;, &quot;address&quot; : { &quot;street&quot; : &quot;Road To Nowhere 1&quot;, &quot;city&quot; : &quot;Gotham&quot; }, &quot;hobbies&quot; : [ { &quot;name&quot;: &quot;swimming&quot;, &quot;howFavorite&quot;: 10 }, { &quot;name&quot;: &quot;biking&quot;, &quot;howFavorite&quot;: 6 }, { &quot;name&quot;: &quot;programming&quot;, &quot;howFavorite&quot;: 4 } ] } 在底层，documents 数据以一种称为 VelocyPack 的 binary 格式存储。 每个 document 都有与之关联的 key，也就是 _key 属性，它的值需要遵循如下规范： 由大小写字母，阿拉伯数字，_、 -、 .</description>
+    <pubDate>Thu, 31 Aug 2023 06:53:00 GMT</pubDate>
+  </items><items>
+    <title>普通用户运行 Docker</title>
+    <link>https://quartz.jzhao.xyz/notes/tech/Docker/普通用户运行-Docker</link>
+    <guid>https://quartz.jzhao.xyz/notes/tech/Docker/普通用户运行-Docker</guid>
+    <description>配置 § 创建 docker 组 sudo groupadd docker 添加用户至 docker 组中 sudo usermod -aG docker $USER 登出或重启后再次登入，使设置生效。 参考 § Run the Docker daemon as a non-root user (Rootless mode) | Docker Documentation Run Docker as a non-root user – The Geek Diary .</description>
+    <pubDate>Tue, 11 Jul 2023 03:22:36 GMT</pubDate>
+  </items><items>
+    <title>maven-assembly-plugin 模块打包</title>
+    <link>https://quartz.jzhao.xyz/notes/tech/Maven/maven-assembly-plugin-模块打包</link>
+    <guid>https://quartz.jzhao.xyz/notes/tech/Maven/maven-assembly-plugin-模块打包</guid>
+    <description>单模块 § 对于单个模块的情况，如果想将项目静态（带依赖）打包为一个完整的 jar 包，那么可以使用直接使用 maven-assembly-plugin 预定义的 jar-with-dependencies 配置进行打包。 &lt;assembly xmlns=&quot;http://maven.</description>
+    <pubDate>Thu, 31 Aug 2023 03:12:23 GMT</pubDate>
+  </items><items>
+    <title>Prettier 格式化</title>
+    <link>https://quartz.jzhao.xyz/notes/tech/Web/Prettier-格式化</link>
+    <guid>https://quartz.jzhao.xyz/notes/tech/Web/Prettier-格式化</guid>
+    <description>全局安装 prettier 工具 npm install --global prettier 定义配置文件 .prettierrc.json『支持多种格式』，例如 { &quot;printWidth&quot;: 120, &quot;tabWidth&quot;: 4, &quot;useTabs&quot;: false, &quot;singleQuote&quot;: false, &quot;semi&quot;: true, &quot;endOfLine&quot;: &quot;lf&quot;, &quot;bracketSpacing&quot;: true, &quot;arrowParens&quot;: &quot;always&quot; } 之后执行如下命令，格式化所需文件，下面的命令表示，格式化 src 目录下所有后缀为 ts 的文件。 prettier --config .</description>
+    <pubDate>Tue, 19 Sep 2023 08:04:25 GMT</pubDate>
+  </items><items>
+    <title>Neo4j 密码修改</title>
+    <link>https://quartz.jzhao.xyz/notes/tech/neo4j/Neo4j-密码修改</link>
+    <guid>https://quartz.jzhao.xyz/notes/tech/neo4j/Neo4j-密码修改</guid>
+    <description>初始密码 § Neo4j 的默认账号和密码为 neo4j/neo4j，若是通过 Neo4j Desktop 创建的数据库，则在创建时会要求你设置密码。 设置完成后，参考 Neo4j 安装 中的方式，从浏览器或 Neo4j Browser 中登陆数据库。 修改密码 § 若是通过 Web 端访问，输入语句 :server change-password，按照提示进行操作即可。 若是控制台访问，进入数据库的安装目录下的 bin 目录，执行 cypher-shell 文件 .</description>
+    <pubDate>Wed, 06 Sep 2023 03:55:20 GMT</pubDate>
+  </items><items>
+    <title>URLDNS</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/gadget/URLDNS</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/gadget/URLDNS</guid>
+    <description>前置条件 § None 利用链分析 § 该利用链多用于验证反序列化漏洞的存在，通过它能够发起 DNS 请求。调用过程如下 Gadget Chain: HashMap.readObject() HashMap.putVal() HashMap.hash() URL.hashCode() 这个利用链的最终目的是调用能够发起 DNS 请求的方法。 这个方法为 URLStreamHandler#getHostAddress()，而 URL 类中有一个成员 handler 的类型就是 URLStreamHandler。那么如何让 URL 对象反序列化时调用它呢？这里再次利用了 HashMap 的特点，hashCode 方法。 URL 的 hashCode 方法如下 public synchronized int hashCode() { if (hashCode != -1) return hashCode; hashCode = handler.</description>
+    <pubDate>Fri, 18 Aug 2023 08:11:10 GMT</pubDate>
+  </items><items>
+    <title>Hessian 反序列化流程分析</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/hessian/Hessian-反序列化流程分析</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/hessian/Hessian-反序列化流程分析</guid>
+    <description>Hessian 简介 § 最近在学习 Apache Dubbo 的漏洞，故先来了解一下 Hessian。Hessian，是一种 binary 形式的 web service 协议，简单点讲它的目的是为了能够在两端之间，高效快速的传输 binary 数据（对象）。并以此来实现其它功能，RPC 和消息服务等，官网上给了一个 java 形式的 例子。 Hessian 提供了多种语言下的实现，包括 wiki、Java、Flash/Flex、Python、C++、.</description>
+    <pubDate>Fri, 18 Aug 2023 08:11:36 GMT</pubDate>
+  </items><items>
+    <title>JNDI</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/java-native-serialization/JNDI</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/java-native-serialization/JNDI</guid>
+    <description>JNDI(Java Naming and Directory Interface) 是 Java 提供的 Java 命名和目录接口。通过调用 JNDI 的 API 应用程序可以定位资源和其他程序对象。JNDI 是 Java EE 的重要部分，需要注意的是它并不只是包含了 DataSource(JDBC 数据源)，JNDI 可访问的现有的目录及服务有:JDBC、LDAP、RMI、DNS、NIS、CORBA。 Naming Service 命名服务： 命名服务将名称和对象进行关联，提供通过名称找到对象的操作，例如：DNS 系统将计算机名和 IP 地址进行关联、文件系统将文件名和文件句柄进行关联等等。 Directory Service 目录服务： 目录服务是命名服务的扩展，除了提供名称和对象的关联，还允许对象具有属性。目录服务中的对象称之为目录对象。目录服务提供创建、添加、删除目录对象以及修改目录对象属性等操作。 Reference 引用： 在一些命名服务系统中，系统并不会直接将 Java 对象序列化后存储在系统中，而是持有对象的引用。这是因为通常序列化的对象占有的空间还是略大的。 所谓引用，包含了如何访问实际对象的信息，JNDI 接口中提供了类 javax.</description>
+    <pubDate>Mon, 04 Dec 2023 08:53:35 GMT</pubDate>
+  </items><items>
+    <title>JDBC Connection URL Attack</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/JDBC-Connection-URL-Attack</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/JDBC-Connection-URL-Attack</guid>
+    <description> 在 JDBC URL 可控的情况下，进行利用 TimeLine § 最开始在 BlackHat Europe 2019 上由 Back2Zero 团队提出， PPT：eu-19-Zhang-New-Exploit-Technique-In-Java-Deserialization-Attack.pdf 视频：New Exploit Technique In Java Deserialization Attack - YouTube 后在 HITB SECCONF Singapore-2021 上由 Litch1 &amp; pyn3rd 进行了拓展和延伸。 PPT： D1T2 - Make JDBC Attacks Brilliant Again - Xu Yuanzhen &amp; Chen Hongkun.</description>
+    <pubDate>Mon, 05 Jun 2023 09:46:37 GMT</pubDate>
+  </items><items>
+    <title>JDBC RoadMap</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/JDBC-RoadMap</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/JDBC-RoadMap</guid>
+    <description>所有版本 1.0、1.2、2.0、2.1、3.0、4.0、4.1、4.2。 (Note that the JDBC 2.1 core API and the JDBC 2.0 Optional Package API together are referred to as the JDBC 2.0 API.</description>
+    <pubDate>Fri, 18 Aug 2023 08:12:43 GMT</pubDate>
+  </items><items>
+    <title>Part-I New Exploit Technique In Java Deserialization Attack</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/Part-I-New-Exploit-Technique-In-Java-Deserialization-Attack</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/Part-I-New-Exploit-Technique-In-Java-Deserialization-Attack</guid>
+    <description>BlackHat Europe 2019 上由 Back2Zero 团队提出， PPT：eu-19-Zhang-New-Exploit-Technique-In-Java-Deserialization-Attack.pdf 视频：New Exploit Technique In Java Deserialization Attack - YouTube 8.</description>
+    <pubDate>Mon, 05 Jun 2023 09:46:11 GMT</pubDate>
+  </items><items>
+    <title>Part-II Make JDBC Attacks Brilliant Again</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/Part-II-Make-JDBC-Attacks-Brilliant-Again</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/Part-II-Make-JDBC-Attacks-Brilliant-Again</guid>
+    <description>HITB SECCONF Singapore-2021 上由阿里巴巴云安全团队的 Litch1 &amp; pyn3rd 进行了拓展和延伸。其中提到了除 MySQL Connector 之外的诸多主流驱动存在的安全问题。 PPT： D1T2 - Make JDBC Attacks Brilliant Again - Xu Yuanzhen &amp; Chen Hongkun.</description>
+    <pubDate>Sat, 10 Jun 2023 05:21:03 GMT</pubDate>
+  </items><items>
+    <title>Part-III A New Attack Interface in Java Application</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/Part-III-A-New-Attack-Interface-in-Java-Application</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/Part-III-A-New-Attack-Interface-in-Java-Application</guid>
+    <description>BlackHat Asis 2023 上 pyn3rd 再次分享了该攻击技术的新成果。 PPT：BLACKHAT_Asia2023 · GitHub 议题分 5 个部分，介绍 JDBC 的攻击利用方法 Abused Connection Resource，滥用连接资源 Arbitrary Log File Writing，任意日志文件写入 Lexical Syntax Compatibility， Unchecked Initialization Class，不安全的类初始化 Incorrect Response Disposal，错误的响应转发 IBM Informix § Informix 是 IBM 旗下的数据库产品。 Infomix 支持从 LDAP 中获取数据库服务端主机的信息，见 Dynamically reading the sqlhosts file。可通过如下参数指定连接类型为 LDAP SQLH_TYPE=LDAP LDAP_URL=ldap://host-name:port-number，LDAP 服务的主机名和端口号 LDAP_IFXBASE=Informix-base-DN LDAP_USER=user LDAP_PASSWD=password 测试环境 com.</description>
+    <pubDate>Thu, 29 Jun 2023 15:00:04 GMT</pubDate>
+  </items><items>
+    <title>SQLite Extension 编写</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/SQLite-Extension-编写</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/jdbc-attack/SQLite-Extension-编写</guid>
+    <description>Run-Time Loadable Extensions Load An Extension #include &lt;sqlite3ext.h&gt; #include &lt;stdlib.h&gt; SQLITE_EXTENSION_INIT1 #ifdef _WIN32 __declspec(dllexport) #endif int poc( /* &lt;== Change this name, maybe */ sqlite3 *db, char **pzErrMsg, const sqlite3_api_routines *pApi ){ int rc = SQLITE_OK; SQLITE_EXTENSION_INIT2(pApi); /* insert code to initialize your extension here */ system(&quot;touch /tmp/poc_trganda&quot;); return rc; } 问题，SELECT load_extension() 会根据系统自动添加后缀 安装依赖 sudo apt install libsqlite3-dev linux gcc -g -fPIC -shared poc.</description>
+    <pubDate>Fri, 18 Aug 2023 08:13:07 GMT</pubDate>
+  </items><items>
+    <title>Java 安全 - RMI 介绍</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---RMI-介绍</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---RMI-介绍</guid>
+    <description>在分布式应用场景中，会经常使用到一个概念，叫 RPC（远程方法调用协议）。它的目的是让一台机器可以向另一台机器发出请求，协助计算一个任务并返回计算结果。RMI 是 Java 语言中，一种实现 RPC 的方式，完全由 Java 语言编写，在 TCP 之上使用 Java Remote Method Protocol(JRMP) 协议进行传输。由于采用的是自己设计的协议，它的缺点是只支持 Java 语言。 后续为了能够让其它语言也能与 RMI 对象进行交互，Java 开始支持 CORBA 架构下的 IIOP 协议，并由此引出了名为 RMI-IIOP 的概念。这里只是顺带一提，不细究。 RMI 和其他的 RPC 实现方式都是类似的，主要由 3 个部分组成。 Client（客户端） Registry（注册中心） Server（服务端） RMI 的调用过程会借助名为 Stub 和 Skel 的结构，它们可以看作是 Client 与 Server 沟通的代理。 RPC 的实现方式一般为，服务端向注册中心注册自己开放的计算服务，可以简单的理解为一个方法或函数。客户端在需要使用时，先访问注册中心，查找是否有自己需要的计算服务，成功获取需要的信息（如 Server 的 IP 和 Port）后再去访问 Server。 下面先看 Java 中 RMI 的代码示例，Java 中的 RMI 是以接口的形式来提供远程调用服务的。 快速开始 § 下面通过示例代码演示 RMI 的调用过程。 服务端代码 § 服务端代码： public interface RemoteService extends java.</description>
+    <pubDate>Fri, 18 Aug 2023 08:14:24 GMT</pubDate>
+  </items><items>
+    <title>Java 安全 - 其它反序列化漏洞</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---其它反序列化漏洞</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---其它反序列化漏洞</guid>
+    <description>mbechler 在 Java 语言生态下的其它类型反序列化漏洞中，做了一项非常具有开创性的工作。建议阅读他的研究报告 Java Unmarshaller Security Turning Your Data into Code Execution 再进行学习，或参考之前的文章 Turning Your Data into Code Execution 了解其大致内容。 JAXB § Java Architecture for XML Binding (JAXB) 提供了一种模式，可将 XML 文档与 Java 对象相互绑定。JAXB 当前最新版本是 2.</description>
+    <pubDate>Wed, 20 Sep 2023 07:12:46 GMT</pubDate>
+  </items><items>
+    <title>Java 安全 - 动态代理</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---动态代理</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---动态代理</guid>
+    <description>Java 动态代理是一种，运行时状态下，非侵入式的，对方法进行二次封装的技术。而所谓代理，是指对于原本要调用的方法，进行『隐藏』，可在调用真正的方法前/后进行代理，从而实现其它操作。例如，Benchmark 测试，功能拓展。动态代理被许多框架中广泛使用，如 Spring。 InvocationHandler § 使用动态代理需要先实现 java.</description>
+    <pubDate>Wed, 30 Aug 2023 03:11:59 GMT</pubDate>
+  </items><items>
+    <title>Java 安全 - 原生反序列化漏洞</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---原生反序列化漏洞</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---原生反序列化漏洞</guid>
+    <description>简单介绍完 Java 的 反序列化机制，下面来看看反序列化漏洞，也就是 Java 反序列化机制的安全问题。 想要利用反序列化漏洞，就需要 Gadget Chain（可以简称 Gadget 或利用链），所谓 Gadget 可以理解成一系列的方法调用，连接起漏洞的触发点（如：readObject）和最后执行命令的地方（如：Runtime.</description>
+    <pubDate>Wed, 30 Aug 2023 03:15:01 GMT</pubDate>
+  </items><items>
+    <title>Java 安全 - 反射</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---反射</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---反射</guid>
+    <description>反射，是反序列化的基础，了解 Java 的反射机制能够更好的理解反序列化漏洞。 反射是一种运行时机制，能够让程序在运行时了解自身的结构。具体点来讲，一个类的方法可以在运行时查看自身所属类的有哪些成员，哪些方法，甚至是执行这些方法。该机制的特点是，为 Java 提供了类似动态语言的特性。 反射相关的工具类主要位于 java.</description>
+    <pubDate>Tue, 16 May 2023 11:38:47 GMT</pubDate>
+  </items><items>
+    <title>Java 安全 - 反序列化</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---反序列化</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全---反序列化</guid>
+    <description> 如不特意说明，反序列化一律指代 Java 中的反序列化。 反序列化的概念 § 在前面介绍 RMI 的通信流程和攻击方法中，已经看到过 Java 反序列化的身影。 下面具体说说，反序列化是什么，以及它为何容易引起安全问题。 序列化与反序列化（marshal/unmarshal）是一种存储和转化数据（将数据变为内存中对象或变量，反之亦然）的方式，例如 json、xml 等文件格式，它是一种通用的标准。但它们的缺点是不支持复杂的数据结构，只有基本的数据类型，数值，字符串，布尔值等 为例支持更复杂的内容的传输，才出现了诸如 Jackson、Fastjson、XStream 等第三方的序列化库。 而 Java 则内置了自己的序列化与反序列化机制，它有自己定义的标准 Java Object Serialization Specification: Contents (oracle.</description>
+    <pubDate>Thu, 27 Jul 2023 02:12:03 GMT</pubDate>
+  </items><items>
+    <title>Java 安全文章收录</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全文章收录</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全文章收录</guid>
+    <description> What Do WebLogic, WebSphere, JBoss, Jenkins, OpenNMS, and Your Application Have in Common? This Vulnerability. CommonCollections deserialization attack payloads from ysoserial failing on &gt; JRE 8u72 · The Grey Corner .</description>
+    <pubDate>Wed, 23 Aug 2023 02:16:46 GMT</pubDate>
+  </items><items>
+    <title>Java 安全知识整理</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全知识整理</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/roadmap/Java-安全知识整理</guid>
+    <description>重新归纳整理 Java 安全相关的知识点，目前已经完成的部分： Java 安全 - 反射 Java 安全 - 动态代理 Java 安全 - 动态代理 Java 安全 - 原生反序列化漏洞 Java 安全 - 其它反序列化漏洞 Java 安全 - RMI 介绍 Java 安全 - RMI 攻击面 .</description>
+    <pubDate>Wed, 23 Aug 2023 08:42:20 GMT</pubDate>
+  </items><items>
+    <title>XStream 下的 URLDNS</title>
+    <link>https://quartz.jzhao.xyz/notes/security/java/xstream/XStream-下的-URLDNS</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/java/xstream/XStream-下的-URLDNS</guid>
+    <description>Java 反序列化中 URLDNS 调用链如下 HashMap.readObject() HashMap.putVal() HashMap.hash() URL.hashCode() 在验证 XStream 相关漏洞时，看到其 URLDNS 的 Poc 如下 &lt;map&gt; &lt;entry&gt; &lt;url&gt;http://*.</description>
+    <pubDate>Mon, 28 Aug 2023 12:06:52 GMT</pubDate>
+  </items><items>
+    <title>ActiveMQ 远程代码执行漏洞（CVE-2023-46604）</title>
+    <link>https://quartz.jzhao.xyz/notes/security/vulnerabilities/apache-activemq/ActiveMQ-远程代码执行漏洞（CVE-2023-46604）</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/vulnerabilities/apache-activemq/ActiveMQ-远程代码执行漏洞（CVE-2023-46604）</guid>
+    <description> 分析版本 5.18.2 补丁分析 § 查看补丁内容，在 BaseDataStreamMarshaller#createThrowable 方法中，可以调用指定类的参数类型为 String 的构造方法。 该方法在 v5.18.2 版本中的实现如下 private Throwable createThrowable(String className, String message) { try { Class clazz = Class.</description>
+    <pubDate>Thu, 23 Nov 2023 03:29:40 GMT</pubDate>
+  </items><items>
+    <title>Apache NiFi Code Injection with Database Services using H2 (CVE-2023-34468)</title>
+    <link>https://quartz.jzhao.xyz/notes/security/vulnerabilities/apache-nifi/Apache-NiFi-Code-Injection-with-Database-Services-using-H2-(CVE-2023-34468)</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/vulnerabilities/apache-nifi/Apache-NiFi-Code-Injection-with-Database-Services-using-H2-(CVE-2023-34468)</guid>
+    <description> Apache NiFi Security Reports Apache NiFi 最近出了两个漏洞 CVE-2023-34468&amp;CVE-2023-34212，分别利用 JDBC URL 和 JMS，因为最近在学习 JDBC Connection URL Attack，所以来看看 CVE-2023-34468。 漏洞利用需要拥有授权，触发点位于 Controller Services 功能中，相关点 Services 有两个 DBCPConnectionPool 和 HikariCPConnectionPool 影响版本 § Apache NiFi 0.</description>
+    <pubDate>Fri, 18 Aug 2023 07:07:54 GMT</pubDate>
+  </items><items>
+    <title>Apache RocketMQ Remote Command Execution Vulnerability (CVE-2023-37582)</title>
+    <link>https://quartz.jzhao.xyz/notes/security/vulnerabilities/apache-rocketmq/Apache-RocketMQ-Remote-Command-Execution-Vulnerability-(CVE-2023-37582)</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/vulnerabilities/apache-rocketmq/Apache-RocketMQ-Remote-Command-Execution-Vulnerability-(CVE-2023-37582)</guid>
+    <description>CVE-2023-37582 是对历史漏洞 CVE-2023-33246 的绕过。 CVE-2023-33246 § 分析版本 5.1.0 在 CVE-2023-33246 中，如果 RocketMQ 暴露在公网，且没有配置认证。可以通过下面的 POC 来执行命令 public static void main(String[] args) throws Exception { String targetHost = &quot;127.</description>
+    <pubDate>Fri, 18 Aug 2023 07:07:36 GMT</pubDate>
+  </items><items>
+    <title>Apache Struts Remote Code Execution Vulnerability ( S2-066 CVE-2023-50164)</title>
+    <link>https://quartz.jzhao.xyz/notes/security/vulnerabilities/apache-struts/Apache-Struts-Remote-Code-Execution-Vulnerability-(-S2-066-CVE-2023-50164)</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/vulnerabilities/apache-struts/Apache-Struts-Remote-Code-Execution-Vulnerability-(-S2-066-CVE-2023-50164)</guid>
+    <description> An attacker can manipulate file upload params to enable paths traversal and under some circumstances this can lead to uploading a malicious file which can be used to perform Remote Code Execution.</description>
+    <pubDate>Sun, 10 Dec 2023 13:38:34 GMT</pubDate>
+  </items><items>
+    <title>泛微 Ecology Dwr SQL 注入漏洞</title>
+    <link>https://quartz.jzhao.xyz/notes/security/vulnerabilities/ecology/泛微-Ecology-Dwr-SQL-注入漏洞</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/vulnerabilities/ecology/泛微-Ecology-Dwr-SQL-注入漏洞</guid>
+    <description>分析 § 查看 ecology/WEB-INF/dwr.xml 配置文件 &lt;dwr&gt; &lt;allow&gt; &lt;!-- .</description>
+    <pubDate>Sat, 19 Aug 2023 09:11:03 GMT</pubDate>
+  </items><items>
+    <title>泛微 Ecology XmlRpcServlet 远程代码执行漏洞</title>
+    <link>https://quartz.jzhao.xyz/notes/security/vulnerabilities/ecology/泛微-Ecology-XmlRpcServlet-远程代码执行漏洞</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/vulnerabilities/ecology/泛微-Ecology-XmlRpcServlet-远程代码执行漏洞</guid>
+    <description>分析 § 泛微 Ecology 中使用了依赖 org.apache.xmlrpc:xmlrpc-server:3.1.3，此依赖中的类 org.apache.xmlrpc.webserver.XmlRpcServlet 继承了 HttpServlet。而 Resin 容器配置了 InvokerServlet，可通过类的全限定名称来加载 Servlet，具体见 resin.</description>
+    <pubDate>Mon, 21 Aug 2023 09:09:04 GMT</pubDate>
+  </items><items>
+    <title>帆软报表 - 文件覆盖漏洞</title>
+    <link>https://quartz.jzhao.xyz/notes/security/vulnerabilities/finereport/帆软报表---文件覆盖漏洞</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/vulnerabilities/finereport/帆软报表---文件覆盖漏洞</guid>
+    <description>漏洞详情 § 帆软报表存在文件覆盖漏洞，可以覆盖已有 jsp 文件，从而写入 webshell。 漏洞验证 § 后台洞，需要获取权限。 update.jsp 文件的初始内容如下 &lt;%@ page language=&quot;java&quot; pageEncoding=&quot;GBK&quot;%&gt; &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.</description>
+    <pubDate>Fri, 18 Aug 2023 07:05:52 GMT</pubDate>
+  </items><items>
+    <title>Jumpserver 验证码可计算推演(CVE-2023-42820)</title>
+    <link>https://quartz.jzhao.xyz/notes/security/vulnerabilities/jumpserver/Jumpserver-验证码可计算推演(CVE-2023-42820)</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/vulnerabilities/jumpserver/Jumpserver-验证码可计算推演(CVE-2023-42820)</guid>
+    <description>漏洞的根本原因是由于使用了不够安全的 rand 方法，当 seed 固定时，攻击者可以推测出通过该 seed 生成的随机数，从而推断出验证码。 漏洞分析 § 伪随机数的安全性 § JumperServer 使用如下函数生成随机字符串，使用它作为重置密码的验证码『正常的业务逻辑，会将该验证码发送至用户的邮箱』 代码文件路径 apps/common/utils/random.</description>
+    <pubDate>Tue, 10 Oct 2023 06:42:38 GMT</pubDate>
+  </items><items>
+    <title>蓝凌 EKP - sysUiExtend 文件上传漏洞</title>
+    <link>https://quartz.jzhao.xyz/notes/security/vulnerabilities/landray-ekp/蓝凌-EKP-sysUiExtend-文件上传漏洞</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/vulnerabilities/landray-ekp/蓝凌-EKP-sysUiExtend-文件上传漏洞</guid>
+    <description>路由如下 /sys/ui/sys_ui_extend/sysUiExtend.do?method=upload 漏洞分析 § 根据路由可定位至 com.landray.kmss.sys.ui.service.SysUiExtendService 对应的方法为 upload 方法。 public void upload(SysUiExtendForm xform, RequestContext requestInfo) throws Exception { HttpServletRequest request = requestInfo.</description>
+    <pubDate>Thu, 17 Aug 2023 12:03:17 GMT</pubDate>
+  </items><items>
+    <title>OAuth Attacks</title>
+    <link>https://quartz.jzhao.xyz/notes/security/web/oauth/OAuth-Attacks</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/web/oauth/OAuth-Attacks</guid>
+    <description>OAuth Authorization Code 模式回顾 § Authorization Code 授权模式的大致流程如下，注意其中未使用 state 参数，各个请求阶段相对独立而无状态。 @startuml skinparam Shadowing true skinparam sequenceMessageAlign direction participant User participant Client participant AuthServer participant ResourceServer autonumber User -&gt; Client: &quot;GET /peek&quot; activate User activate Client Client -&gt; User : &quot;302: Location=auth/authorize&quot; deactivate Client deactivate User User -&gt; AuthServer: &quot;GET /authorize&quot; activate User activate AuthServer AuthServer -&gt; User: &quot;{messages: &quot;Do you approve?&quot;}&quot; deactivate User deactivate AuthServer User -&gt; AuthServer: &quot;approve&quot; activate User activate AuthServer AuthServer -&gt; User: &quot;302: Location=clien/handle_code?code=random_code&quot; deactivate User deactivate AuthServer User -&gt; Client: &quot;GET /handle_code?code=randome_code&quot; activate User activate Client Client -&gt; AuthServer: &quot;POST /token?code=randome_code&quot; activate AuthServer AuthServer -&gt; Client: &quot;200: {access_token=random_token}&quot; deactivate AuthServer Client -&gt; ResourceServer: &quot;GET /resource?token=access_token&quot; activate ResourceServer ResourceServer -&gt; Client: &quot;200: respoonse&quot; deactivate ResourceServer Client -&gt; User: &quot;200: result&quot; deactivate User deactivate Client @enduml OAuth 下的安全问题 § HTTP 是无状态协议，需要通过 Session 一类的机制，来区分请求来自谁，来自哪里。 OAuth 下的安全问题 缺少 state 参数，或者 state 参数是固定可猜测的从而导致 OAuth 下的 CSRF 问题。 redirect_uri 的绕过，如果 redirect_uri 可控，那么意味着可以获取 access_token。一般 redirect_uri 都会有过滤机制，可能的绕过方式 开放重定向：https://yourtweetreader.</description>
+    <pubDate>Sun, 14 Jan 2024 05:31:02 GMT</pubDate>
+  </items><items>
+    <title>OAuth - 简介</title>
+    <link>https://quartz.jzhao.xyz/notes/security/web/oauth/OAuth</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/web/oauth/OAuth</guid>
+    <description>OAuth 是一种开放授权标准，目前广泛使用的版本为 2.0，主要用于解决第三方应用以用户身份访问其它资源的问题。 例如你在 github 拥有账号，通过 oauth 授权 synk 扫描在 github 上的仓库，特别是私有仓库。 概念定义 § RFC6749 文档中将整个授权过程的参与者抽象成了 3 类，资源所有者（Resource Owner）、客户端（Client）和认证服务器（Authorization Server） Client：指第三方应用 Resource Owner：指用户 Authorization Server：指 OAuth 认证和授权服务提供者 Resource server：资源服务器，即服务提供商存放用户生资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器『位于内部网络』。 下图展示了通过 OAuth 进行授权的例子 OAuth 2.</description>
+    <pubDate>Mon, 06 Nov 2023 03:45:48 GMT</pubDate>
+  </items><items>
+    <title>iptables 学习记录</title>
+    <link>https://quartz.jzhao.xyz/notes/tech/linux/iptables/iptables-学习记录</link>
+    <guid>https://quartz.jzhao.xyz/notes/tech/linux/iptables/iptables-学习记录</guid>
+    <description>基本概念 § 首先需要明确，iptables 只是用户态下的一款命令行工具，并不是真正意义上的防火墙。实际起到防火墙作用的是内核中的模块 netfilter。iptables 只是用于操作它的工具，后面将 iptables/netfilter 简称为 iptables 表和链 § iptables 将流量的检测分为了 5 个区域（链），分别是 PREROUTING、INPUT、FORWARD、OUTPUT、POSTROUTING，每个链所能使用的表的种类是不一样的，而每个表中包含的则是具体的规则。 iptables 为我们提供了如下规则的分类，或者说，iptables 为我们提供了如下『表』 filter 表：负责过滤功能，防火墙；内核模块：iptables_filter nat 表：network address translation，网络地址转换功能；内核模块：iptable_nat mangle 表：拆解报文，做出修改，并重新封装的功能；内核模块：iptable_mangle raw 表：关闭 nat 表上启用的连接追踪机制；内核模块：iptable_raw 上述 5 个链所能使用的表『规则类别』是不同的： PREROUTING ：raw 表，mangle 表，nat 表。 INPUT ：mangle 表，filter 表，（centos7 中还有 nat 表，centos6 中没有）。 FORWARD ：mangle 表，filter 表。 OUTPUT ：raw 表， mangle 表，nat 表，filter 表。 POSTROUTING ：mangle 表，nat 表。 下图为『朱双印』整理的对照关系，注意其中不同链所处的位置，在编写规则是需要清楚其作用范围。 除了系统默认 5 条链，用户也可以自定义一条链，但是需要将它作为引用插入到前述 5 条链之中才能使用。 规则 § 规则的逻辑很简单，如果数据包符合指定的条件，则进行某个动作。最基础的匹配条件有两个，源地址和目的地址，除此之外还包含拓展匹配功能，需要有相应的内核模块才能使用，这些扩展条件其实也是 netfilter 中的一部分。例如 state，匹配 TCP 协议的状态。 常见的规则动作有如下几种： ACCEPT：允许数据包通过。 DROP：直接丢弃数据包，不给任何回应信息，这时候客户端会感觉自己的请求泥牛入海了，过了超时时间才会有反应。 REJECT：拒绝数据包通过，必要时会给数据发送端一个响应的信息，客户端刚请求就会收到拒绝的信息。 SNAT：源地址转换，解决内网用户用同一个公网地址上网的问题。 MASQUERADE：是 SNAT 的一种特殊形式，适用于动态的、临时会变的 ip 上。 DNAT：目标地址转换。 REDIRECT：在本机做端口映射。 LOG：在 /var/log/messages 文件中记录日志信息，然后将数据包传递给下一条规则，也就是说除了记录以外不对数据包做任何其他操作，仍然让下一条规则去匹配。 基本操作 § 规则都是存在于表中，类比数据库中的表，它的相关操作也是类似的，有增删改查。 规则的查找 § 查找是最简单的，可通过如下命令查看 filter 表中的规则，参数 -t 表示查看的表类型，-L 表示列出规则 iptables -t filter -L 输出结果如下『内容较长，只截取了一部分』，红色方块包含的为规则的内容，蓝色方块包含的为对应的链，图中展示了两个链，INPUT 和 FORWARD。 假设希望放通其它机器对本机的特定端口的访问，那么可以在 filter 表中定义规则，并放入 INPUT 链上。 此外，举一反三，若是想查看其它表的规则，可使用如下命令 iptables -t raw -L iptables -t mangle -L iptables -t nat -L 如果省略 -t 参数，默认操作 filter 表。所以可以也可以直接使用 iptables -L 若是想查看特定链上的规则信息，使用如下命令，其中若不指定 -t 参数则默认读取 filter 中的规则 iptables -L INPUT -t filter 图中自由 5 列，而使用 -v 参数可以看到更详细的信息 iptables -vL INPUT 各个字段的含义如下： pkts: 对应规则匹配到的报文的个数。 bytes: 对应匹配到的报文包的大小总和。 target: 规则对应的 target，往往表示规则对应的『动作』，即规则匹配成功后需要采取的措施。 prot: 表示规则对应的协议，是否只针对某些协议应用此规则。 opt: 表示规则对应的选项。 in: 表示数据包由哪个接口 (网卡) 流入，即从哪个网卡来。 out: 表示数据包将由哪个接口 (网卡) 流出，即到哪个网卡去。 source: 表示规则对应的源头地址，可以是一个 IP，也可以是一个网段。 destination: 表示规则对应的目标地址。可以是一个 IP，也可以是一个网段。 source 和 destination 在规则中是设置成 ip 形式的，而前面的执行结果中展示的都是 anywhere，它对应 0.</description>
+    <pubDate>Sat, 02 Sep 2023 03:01:18 GMT</pubDate>
+  </items><items>
+    <title>CycloneDX</title>
+    <link>https://quartz.jzhao.xyz/archived/projects/supply-chains/software-component-analysis/sbom/CycloneDX</link>
+    <guid>https://quartz.jzhao.xyz/archived/projects/supply-chains/software-component-analysis/sbom/CycloneDX</guid>
+    <description>CyclonedX 是由 OWASP 推出的 SBOM 规范，并提供了一系列工具来辅助开源项目构建自己的 SBOM 文件，支持多种格式，包括 xml、json、protobuf。在官方仓库中提供了该格式在不同方面的应用 示例， 下图为 CycloneDX 的抽象模型。 CycloneDX 的设计宣称，除了基本的 SBOM 能力，还具备其他 BOM 功能。它们分别是： CycloneDX - Software-as-a-Service BOM (SaaSBOM) 支持云原生应用程序的清单服务、端点以及数据流和分类，由 services 部分提供支持。 CycloneDX - Vulnerability Exploitability eXchange (VEX) 支持在使用它们的软件的上下文中传达漏洞信息，如某个依赖组件存在的漏洞，漏洞是否会影响当前软件等。 CycloneDX - Hardware Bill of Materials (HBOM) 支持硬件物料清单，可列举物联网、ICS 和其他类型的嵌入式和连接设备的库存硬件组件。 CycloneDX - Operations Bill of Materials (OBOM) 支持运行时环境、配置和附加依赖项的全栈清单，可存放于 metadata.</description>
+    <pubDate>Tue, 16 May 2023 01:49:14 GMT</pubDate>
+  </items><items>
+    <title>如何构建高质量的 SBOM 清单</title>
+    <link>https://quartz.jzhao.xyz/archived/projects/supply-chains/software-component-analysis/sbom/如何构建高质量的-SBOM-清单</link>
+    <guid>https://quartz.jzhao.xyz/archived/projects/supply-chains/software-component-analysis/sbom/如何构建高质量的-SBOM-清单</guid>
+    <description> 原文，How to Make High-Quality SBOMs By John Speed Meyers, Chainguard。 作者在文章里提到衡量 SBOM 的一种标准，National Telecommunications and Information Administration (NTIA) minimum elements standard。并提及了目前公开的两种 SBOM 质量衡量工具， ntia-conformance-checker sbom-scorecard 例如，这些工具会衡量 SBOM 文件中的 Component 是否具有包 Id（PURL 或者 CPE）、版本和开源协议等信息等。此外 sbom-scorecard 还提供了网页端的工具，sbom-scorecard，以便快速进行使用。 另外，作者提到了一个数据集 bom-shelter，其中包含了来自公开渠道或者实验室中构造的 SBOM 文件，这些文件由不同的工具创建，共计 3000 个。作者对这些文件使用上述的工具进行评估，发现只有 1% 是符合“高质量”地标准的。 最后作者对构建高质量的 SBOM 清单给出了如下建议步骤： 使用上述或其他工具，衡量你生成的 SBOM 质量。 改进使用的 SBOM 生成工具，如共享代码，提出 Issue 等，或者使用更好的工具。 加入 SBOM 的第三方库的开发中，贡献代码。 参考 are-sboms-good-enough-for-government-work are-sboms-any-good-preliminary-measurement-of-the-quality-of-open-source-project-sboms how-to-make-high-quality-sboms .</description>
+    <pubDate>Mon, 15 May 2023 11:58:43 GMT</pubDate>
+  </items><items>
+    <title>CycloneDX VEX 的使用</title>
+    <link>https://quartz.jzhao.xyz/archived/projects/supply-chains/software-component-analysis/工具开发/CycloneDX-VEX-的使用</link>
+    <guid>https://quartz.jzhao.xyz/archived/projects/supply-chains/software-component-analysis/工具开发/CycloneDX-VEX-的使用</guid>
+    <description>聚合 deps.dev 和 osv.dev 的信息，用于构建 SBOM 文件。 CycloneDX 的 Vulnerabilities 字段的标准格式定义如下 @startjson { &quot;bomFormat&quot;: &quot;CycloneDX&quot;, &quot;specVersion&quot;: &quot;1.</description>
+    <pubDate>Mon, 12 Jun 2023 01:41:42 GMT</pubDate>
+  </items><items>
+    <title>Java MANIFEST.MF 文件</title>
+    <link>https://quartz.jzhao.xyz/archived/projects/supply-chains/software-component-analysis/工具开发/Java-MANIFEST.MF-文件</link>
+    <guid>https://quartz.jzhao.xyz/archived/projects/supply-chains/software-component-analysis/工具开发/Java-MANIFEST.MF-文件</guid>
+    <description>MANIFEST.MF 是 Java 中包的描述文件，用于记录包的元信息。 结构 § 默认的 MANIFEST § 在 openjdk11 下，执行如下命令 jar cf MyJar.jar classes/ 生成的 Jar 包中的 MANIFEST 文件内容如下 Manifest-Version: 1.</description>
+    <pubDate>Mon, 12 Jun 2023 01:42:22 GMT</pubDate>
+  </items><items>
+    <title>帆软报表 - channel 反序列化漏洞</title>
+    <link>https://quartz.jzhao.xyz/notes/security/vulnerabilities/finereport/channel-反序列化漏洞/帆软报表---channel-反序列化漏洞</link>
+    <guid>https://quartz.jzhao.xyz/notes/security/vulnerabilities/finereport/channel-反序列化漏洞/帆软报表---channel-反序列化漏洞</guid>
+    <description> 分析版本 11.0.10，此漏洞为 channel 接口 22 年历史漏洞的绕过。 接口位置位于 /webroot/decision/remote/design/channel 调用链大致为 RemoteDesignResource#onMessage RemoteDesignService.getInstance().</description>
+    <pubDate>Wed, 13 Sep 2023 01:45:51 GMT</pubDate>
+  </items>
+  </rss>
