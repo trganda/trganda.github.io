@@ -1,0 +1,44 @@
+    public static void recursionJar(File file, JarOutputStream jarOut, String filePath) throws Exception {
+        if (file.isDirectory()) {
+            String path = Objects.equals(filePath, "") ? "" : filePath + "/";
+            if (path.length() > 0)
+                jarOut.putNextEntry(new JarEntry(path));
+            File[] files = file.listFiles();
+            for (File fileSrc : files) {
+                if (fileSrc.isDirectory()) {
+                    recursionJar(fileSrc, jarOut, path + fileSrc.getName());
+                } else {
+                    recursionJar(fileSrc, jarOut, path);
+                }
+            }
+        } else {
+            String path = Objects.equals(filePath, "") ? "" : filePath;
+            InputStream input = new FileInputStream(file);
+            jarOut.putNextEntry(new JarEntry(path + file.getName()));
+            byte[] buffer = new byte[4096];
+            int len = -1;
+            while ((len = input.read(buffer)) != -1) {
+                jarOut.write(buffer, 0, len);
+            }
+            input.close();
+        }
+    }
+
+    public static void main(String[] args) {
+        if (args.length < 2) {
+            return;
+        }
+
+        String pathToCompress = args[0];
+        String jarName = args[1];
+
+        File file = new File(pathToCompress);
+
+        try {
+            JarOutputStream jos = new JarOutputStream(new FileOutputStream(jarName));
+            recursionJar(file, jos, "");
+            jos.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }

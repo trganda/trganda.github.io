@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>Trganda&#039;s Notes</title>
+      <link>https://www.trganda.top</link>
+      <description>Last 10 notes on Trganda&#039;s Notes</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>安全会议</title>
+    <link>https://www.trganda.top/articles/security/%E5%AE%89%E5%85%A8%E4%BC%9A%E8%AE%AE</link>
+    <guid>https://www.trganda.top/articles/security/%E5%AE%89%E5%85%A8%E4%BC%9A%E8%AE%AE</guid>
+    <description>技术 Black Hat | Home DEF CON® Hacking Conference Home XCon KCon 黑客大会 - kcon.knownsec.com HITBC .</description>
+    <pubDate>Thu, 18 Apr 2024 04:36:53 GMT</pubDate>
+  </item><item>
+    <title>Bash 中的 $IFS</title>
+    <link>https://www.trganda.top/articles/tech/linux/bash/Bash-%E4%B8%AD%E7%9A%84-$IFS</link>
+    <guid>https://www.trganda.top/articles/tech/linux/bash/Bash-%E4%B8%AD%E7%9A%84-$IFS</guid>
+    <description>Table of Contents IFS 使用示例 参考 IFS 是 bash 的内置变量，是一个用于分割字段的字符列表『不止一个字符』，在大多数情况下，它的默认值是 &lt;space&gt;&lt;tab&gt;&lt;newline&gt;，也即 \t\n，不过在 zsh 下这个值是 \t\n\x00，即多一个 \x00。 ...</description>
+    <pubDate>Thu, 18 Apr 2024 04:36:53 GMT</pubDate>
+  </item><item>
+    <title>Starred Repositories 自动更新展示</title>
+    <link>https://www.trganda.top/archived/projects/github-starred-updater/Starred-Repositories-%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E5%B1%95%E7%A4%BA</link>
+    <guid>https://www.trganda.top/archived/projects/github-starred-updater/Starred-Repositories-%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E5%B1%95%E7%A4%BA</guid>
+    <description>期望实现的功能 新建一个仓库 配合 github action 自动扫描当前用户已经 starred 的仓库，并根据 tag 更新 README.md 让 github action 定时运行，或者在 star 某个仓库后允许 参考 TILs from Dan Nguyen github action 定时任务 Running a CRON Job with ...</description>
+    <pubDate>Thu, 18 Apr 2024 04:36:53 GMT</pubDate>
+  </item><item>
+    <title>Cron 语法</title>
+    <link>https://www.trganda.top/articles/tech/Cron-%E8%AF%AD%E6%B3%95</link>
+    <guid>https://www.trganda.top/articles/tech/Cron-%E8%AF%AD%E6%B3%95</guid>
+    <description>在类 Unix 系统下可使用 cron 命令设定定时任务，该工具遵循 cron 语法。 cron 语法一共包含 5 个字短，由空格分开，每个字段表示时间单元 ┌───────────── minute (0 - 59) │ ┌───────────── hour (0 - 23) │ │ ┌───────────── day of the month (1 ...</description>
+    <pubDate>Wed, 17 Apr 2024 13:27:51 GMT</pubDate>
+  </item><item>
+    <title>runc 容器逃逸漏洞分析（CVE-2024-21626）</title>
+    <link>https://www.trganda.top/articles/security/vulnerabilities/runc-%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%EF%BC%88CVE-2024-21626%EF%BC%89</link>
+    <guid>https://www.trganda.top/articles/security/vulnerabilities/runc-%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90%EF%BC%88CVE-2024-21626%EF%BC%89</guid>
+    <description>记录对 bestwing.me/CVE-2024-21626-container-escape.html 这篇分析文章的学习，原文中有很多错别字，以及不太了解的概念，导致看着有点费劲，故重新梳理一下。 先来了解一些 Linux 系统相关的前置知识 /proc/self 目录是内核提供的，用于便捷查询进程自身状态的文件，它存在于内存中。如果想查看指定进程的目录，则可访问 ...</description>
+    <pubDate>Thu, 08 Feb 2024 14:19:21 GMT</pubDate>
+  </item><item>
+    <title>Apache Struts Remote Code Execution Vulnerability ( S2-066 CVE-2023-50164)</title>
+    <link>https://www.trganda.top/articles/security/vulnerabilities/apache-struts/Apache-Struts-Remote-Code-Execution-Vulnerability-(-S2-066-CVE-2023-50164)</link>
+    <guid>https://www.trganda.top/articles/security/vulnerabilities/apache-struts/Apache-Struts-Remote-Code-Execution-Vulnerability-(-S2-066-CVE-2023-50164)</guid>
+    <description>...</description>
+    <pubDate>Fri, 08 Dec 2023 03:32:05 GMT</pubDate>
+  </item><item>
+    <title>OAuth - 简介</title>
+    <link>https://www.trganda.top/articles/security/web/oauth/OAuth</link>
+    <guid>https://www.trganda.top/articles/security/web/oauth/OAuth</guid>
+    <description>OAuth 是一种开放授权标准，目前广泛使用的版本为 2.0，主要用于解决第三方应用以用户身份访问其它资源的问题。 例如你在 github 拥有账号，通过 oauth 授权 synk 扫描在 github 上的仓库，特别是私有仓库。 概念定义 RFC6749 文档中将整个授权过程的参与者抽象成了 3 类，资源所有者（Resource ...</description>
+    <pubDate>Mon, 06 Nov 2023 03:39:22 GMT</pubDate>
+  </item><item>
+    <title>OAuth Attacks</title>
+    <link>https://www.trganda.top/articles/security/web/oauth/OAuth-Attacks</link>
+    <guid>https://www.trganda.top/articles/security/web/oauth/OAuth-Attacks</guid>
+    <description>OAuth Authorization Code 模式回顾 Authorization Code 授权模式的大致流程如下，注意其中未使用 state 参数，各个请求阶段相对独立而无状态。 @startuml skinparam Shadowing true skinparam sequenceMessageAlign direction ...</description>
+    <pubDate>Tue, 31 Oct 2023 12:14:30 GMT</pubDate>
+  </item><item>
+    <title>ActiveMQ 远程代码执行漏洞（CVE-2023-46604）</title>
+    <link>https://www.trganda.top/articles/security/vulnerabilities/apache-activemq/ActiveMQ-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2023-46604%EF%BC%89</link>
+    <guid>https://www.trganda.top/articles/security/vulnerabilities/apache-activemq/ActiveMQ-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2023-46604%EF%BC%89</guid>
+    <description>...</description>
+    <pubDate>Thu, 26 Oct 2023 01:33:20 GMT</pubDate>
+  </item><item>
+    <title>Tabby 的实现原理</title>
+    <link>https://www.trganda.top/articles/code-analysis/tabby/Tabby-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86</link>
+    <guid>https://www.trganda.top/articles/code-analysis/tabby/Tabby-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86</guid>
+    <description>Workflow Tabby 的整体工作流程如下： 构建 CPG『代码属性图』，该图从逻辑上由 3 类图组合而成，分别是 ORG、PCG 和 MAG。 ORG『对象关系图』：提取类的语义信息，构建类和方法直接的关系，边有 3 种 HAS：某个类具有某个方法 EXTEND：某个类继承了另一个类 INTERFACE：某个类实现了某个接口 ...</description>
+    <pubDate>Wed, 18 Oct 2023 07:59:03 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>
