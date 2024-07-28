@@ -1,0 +1,31 @@
+{
+	"nodes":[
+		{"type":"text","text":"CS50 Tech Talk - GPT-4","id":"7f48b06fc644491d","x":-125,"y":-30,"width":250,"height":60},
+		{"type":"text","text":"介绍 GPT","id":"754187c71c519a8b","x":325,"y":-140,"width":250,"height":60},
+		{"type":"text","text":"如何制作AI原生软件","id":"33145f64ee472366","x":325,"y":-30,"width":250,"height":60},
+		{"type":"text","text":"GPT 初级阶段，可以用它做什么？","id":"8da8da71199fc510","x":775,"y":-30,"width":250,"height":60,"color":"5"},
+		{"type":"text","text":"- [x] 陪伴 `Companionship`，如 AI 伴侣\n- [x] 问答 Q & A\n- [x] 实用工具 Utility\n- [x] 创意工作 `Creativity`\n- [ ] 实验性\n\t- [ ] 多步任务处理 `Multi-step task agents`\n\t- [ ] 私人化 `Hyper-personalization`\n","id":"40e4c8485220aa00","x":1220,"y":-146,"width":340,"height":292,"color":"5"},
+		{"type":"text","text":"如何将 GPT 作为代理","id":"297e00a421191c1e","x":325,"y":200,"width":250,"height":60,"color":"2"},
+		{"type":"text","text":"工具案例：生成单元测试，总结等上下文非强相关的或上下文范围较小的工作。","id":"d13bbac212bee7af","x":720,"y":400,"width":250,"height":140,"color":"4"},
+		{"type":"text","text":"问答案例：询问特定内容，并进行回答","id":"884c6cbb17dbbae0","x":1125,"y":400,"width":320,"height":60,"color":"4"},
+		{"type":"text","text":"---\nlastmod: 2023-05-04T19:27:19+08:00\n---\n\n实现：利用 [向量](https://platform.openai.com/docs/guides/embeddings) 数据库存储预定义好的信息供 GPT 使用。\n\n原理：\n\n- embedding 技术：Text embedding 用于测量文本之间的相关性大小，一段文本可以看作是一串字符的有序排列。一次 Embedding 操作会将一段文本转换为一个向量 vector。通过测算两个 vector 之间的距离来评估它们的相关性，距离越小相关性越高。\n\n效果：\n\n- 输入问题，找到最相关的答案。\n\n真实案例：\n\n- Supabase 文档接入 GPT 后可实现能支持自然语言查询。\n","id":"a3be7e3733b31dcb","x":1125,"y":560,"width":320,"height":600,"color":"4"},
+		{"type":"text","text":"陪伴案例：中文成语教练","id":"e5defd7fcdd06d5e","x":325,"y":400,"width":250,"height":60,"color":"4"},
+		{"type":"text","text":"实现：只需简单包装 GPT Wrapper\n效果：\n- 输入一段话，找到贴切的成语表达。","id":"94648f846bcfcd57","x":325,"y":560,"width":250,"height":220,"color":"4"},
+		{"type":"text","text":"创意案例：提供灵感","id":"5e908975e3d5728c","x":1640,"y":400,"width":320,"height":60,"color":"4"},
+		{"type":"text","text":"---\nlastmod: 2023-05-04T19:27:16+08:00\n---\n\n实现：`idea -> [db -> gpt -> (programming language) -> domain knowledge] -> output`，将特定领域知识提供给 GPT。\n","id":"731ac10fee038633","x":1640,"y":560,"width":320,"height":160,"color":"4"}
+	],
+	"edges":[
+		{"id":"ac762eaeb1323e5e","fromNode":"7f48b06fc644491d","fromSide":"right","toNode":"754187c71c519a8b","toSide":"left"},
+		{"id":"e9616641519a8b8a","fromNode":"7f48b06fc644491d","fromSide":"right","toNode":"33145f64ee472366","toSide":"left"},
+		{"id":"61ab4fc88d03f180","fromNode":"33145f64ee472366","fromSide":"right","toNode":"8da8da71199fc510","toSide":"left"},
+		{"id":"4341e820def2b1dc","fromNode":"8da8da71199fc510","fromSide":"right","toNode":"40e4c8485220aa00","toSide":"left","color":"5"},
+		{"id":"065652a6070f5865","fromNode":"e5defd7fcdd06d5e","fromSide":"bottom","toNode":"94648f846bcfcd57","toSide":"top"},
+		{"id":"9c0601da2f3ff7c6","fromNode":"297e00a421191c1e","fromSide":"bottom","toNode":"e5defd7fcdd06d5e","toSide":"top","color":"4"},
+		{"id":"94214f3df16f0021","fromNode":"297e00a421191c1e","fromSide":"bottom","toNode":"d13bbac212bee7af","toSide":"top","color":"4"},
+		{"id":"3d6fa85ee7529684","fromNode":"33145f64ee472366","fromSide":"bottom","toNode":"297e00a421191c1e","toSide":"top"},
+		{"id":"97d4815e8f525acc","fromNode":"297e00a421191c1e","fromSide":"bottom","toNode":"884c6cbb17dbbae0","toSide":"top","color":"4"},
+		{"id":"ff6cad4b10193044","fromNode":"884c6cbb17dbbae0","fromSide":"bottom","toNode":"a3be7e3733b31dcb","toSide":"top"},
+		{"id":"370dc48d29e5a08f","fromNode":"5e908975e3d5728c","fromSide":"bottom","toNode":"731ac10fee038633","toSide":"top"},
+		{"id":"87c0d36506280b56","fromNode":"297e00a421191c1e","fromSide":"bottom","toNode":"5e908975e3d5728c","toSide":"top","color":"4"}
+	]
+}

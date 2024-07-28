@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>Trganda&#039;s Notes</title>
+      <link>https://www.trganda.top</link>
+      <description>Last 10 notes on Trganda&#039;s Notes</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>甲状腺结节与胆结石注意事项</title>
+    <link>https://www.trganda.top/til/issues/%E7%94%B2%E7%8A%B6%E8%85%BA%E7%BB%93%E8%8A%82%E4%B8%8E%E8%83%86%E7%BB%93%E7%9F%B3%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9</link>
+    <guid>https://www.trganda.top/til/issues/%E7%94%B2%E7%8A%B6%E8%85%BA%E7%BB%93%E8%8A%82%E4%B8%8E%E8%83%86%E7%BB%93%E7%9F%B3%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9</guid>
+    <description>作息 保持充足的睡眠，少熬夜，不可过度劳累 睡前关灯躺着玩手机 心情 保持心情愉悦，一般忌郁闷、愤怒、急躁 饮食 不建议 少辣 低盐 少吃油腻食物 推荐 首推南瓜 维生素A的食物，如玉米、青菜、白菜、香菇、黑木耳、藕、海带、银耳、黄瓜等 用植物油炒菜，菜以炖、烩、蒸为主，少油炸或油煎（最好不要）。 肉类选择高营养、低脂肪的，无筋的瘦肉、去皮鸡肉(但不能喝鸡汤)、牛肉、兔肉、有鳞的鱼(如鲫鱼) ...</description>
+    <pubDate>Sun, 28 Jul 2024 09:36:41 GMT</pubDate>
+  </item><item>
+    <title>拉里事迹</title>
+    <link>https://www.trganda.top/cavans/%E6%8B%89%E9%87%8C%E4%BA%8B%E8%BF%B9</link>
+    <guid>https://www.trganda.top/cavans/%E6%8B%89%E9%87%8C%E4%BA%8B%E8%BF%B9</guid>
+    <description>年少时偷跑到加拿大参加空军，结识好友帕特西，后好友为救拉里战死，对拉里的心灵造成很大震撼，从此开启自我心灵上的救赎之路。 归国后拒绝了马图林先生推荐的工作。 与伊莎贝尔约定前往巴黎两年，在巴黎的第二年初秋他与作者再次相遇。 此后伊莎贝尔与母亲一同前往过巴黎一次，她们，艾略特以及拉里相处了一段时间。四人参加了艾略特组织的聚会， ...</description>
+    <pubDate>Sun, 28 Jul 2024 09:36:41 GMT</pubDate>
+  </item><item>
+    <title>HTTP 协议与编码</title>
+    <link>https://www.trganda.top/projects/Web-%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98/HTTP-%E5%8D%8F%E8%AE%AE%E4%B8%8E%E7%BC%96%E7%A0%81</link>
+    <guid>https://www.trganda.top/projects/Web-%E6%BC%8F%E6%B4%9E%E8%A7%A3%E6%9E%90%E4%B8%8E%E6%94%BB%E9%98%B2%E5%AE%9E%E6%88%98/HTTP-%E5%8D%8F%E8%AE%AE%E4%B8%8E%E7%BC%96%E7%A0%81</guid>
+    <description>GET 参数 一般形式 key = value 数组形式 key[name] = value 编码 请求体中传输的内容，有多种形式，如传输文件一般使用 multipart/form-data，或数据量较大时『如：视频传输』采用 chunked 形式进行传输。 chunked 常见请求报文形式 POST /sqli.php HTTP/1.1 ...</description>
+    <pubDate>Sun, 28 Jul 2024 09:36:41 GMT</pubDate>
+  </item><item>
+    <title>安全会议</title>
+    <link>https://www.trganda.top/articles/security/%E5%AE%89%E5%85%A8%E4%BC%9A%E8%AE%AE</link>
+    <guid>https://www.trganda.top/articles/security/%E5%AE%89%E5%85%A8%E4%BC%9A%E8%AE%AE</guid>
+    <description>技术 Black Hat | Home DEF CON® Hacking Conference Home XCon KCon 黑客大会 - kcon.knownsec.com HITBC .</description>
+    <pubDate>Sun, 28 Jul 2024 09:36:40 GMT</pubDate>
+  </item><item>
+    <title>Cron 语法</title>
+    <link>https://www.trganda.top/articles/tech/Cron-%E8%AF%AD%E6%B3%95</link>
+    <guid>https://www.trganda.top/articles/tech/Cron-%E8%AF%AD%E6%B3%95</guid>
+    <description>在类 Unix 系统下可使用 cron 命令设定定时任务，该工具遵循 cron 语法。 cron 语法一共包含 5 个字短，由空格分开，每个字段表示时间单元 ┌───────────── minute (0 - 59) │ ┌───────────── hour (0 - 23) │ │ ┌───────────── day of the month (1 ...</description>
+    <pubDate>Sun, 28 Jul 2024 09:36:40 GMT</pubDate>
+  </item><item>
+    <title>Github CLI  使用</title>
+    <link>https://www.trganda.top/articles/tech/Github-CLI--%E4%BD%BF%E7%94%A8</link>
+    <guid>https://www.trganda.top/articles/tech/Github-CLI--%E4%BD%BF%E7%94%A8</guid>
+    <description>GitHub CLI 或简称 gh，是 Github 推出的控制台应用，用于管理和操作 Gtihub 上的内容，可以理解为控制台版的 GitHub。Mac 下的安装， brew install gh 其它平台见文档 GitHub - cli/cli: GitHub’s official command line tool 配置 首次使用需要进行登陆授权，登陆账户有两类，Personal ...</description>
+    <pubDate>Sun, 28 Jul 2024 09:36:40 GMT</pubDate>
+  </item><item>
+    <title>Jq 使用手册</title>
+    <link>https://www.trganda.top/articles/tech/Jq-%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C</link>
+    <guid>https://www.trganda.top/articles/tech/Jq-%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C</guid>
+    <description>查询内容的长度 jq 内嵌了 length 方法，对于不同的元素会返回不同的值： 字符串：返回字符个数 数组：返回数组长度 对象：返回对象 key-map 的个数 null：返回 0 .</description>
+    <pubDate>Sun, 28 Jul 2024 09:36:40 GMT</pubDate>
+  </item><item>
+    <title>Bash 中的 $IFS</title>
+    <link>https://www.trganda.top/articles/tech/linux/bash/Bash-%E4%B8%AD%E7%9A%84-$IFS</link>
+    <guid>https://www.trganda.top/articles/tech/linux/bash/Bash-%E4%B8%AD%E7%9A%84-$IFS</guid>
+    <description>Table of Contents IFS 使用示例 参考 IFS 是 bash 的内置变量，是一个用于分割字段的字符列表『不止一个字符』，在大多数情况下，它的默认值是 &lt;space&gt;&lt;tab&gt;&lt;newline&gt;，也即 \t\n，不过在 zsh 下这个值是 \t\n\x00，即多一个 \x00。 ...</description>
+    <pubDate>Sun, 28 Jul 2024 09:36:40 GMT</pubDate>
+  </item><item>
+    <title>学习方式</title>
+    <link>https://www.trganda.top/articles/%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%BC%8F</link>
+    <guid>https://www.trganda.top/articles/%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%BC%8F</guid>
+    <description>TK 在近期的 微博 上提到了他在 16 年分享的一篇微博，微博的内容是他在腾讯玄武实验室的一次分享，介绍个人成长的。 虽然研究的方向不同，但是分享的内容中有部分东西是可以借鉴的。 确立个人方向，结合工作内容，找出对应短板 该领域主要专家的工作十分都了解？ 相关网络协议，文件格式是否熟悉？ 相关的技术和主要工具是否看过、用过？ ...</description>
+    <pubDate>Sun, 28 Jul 2024 09:36:40 GMT</pubDate>
+  </item><item>
+    <title>Business Logic Vulnerabilities</title>
+    <link>https://www.trganda.top/articles/security/web/Business-Logic-Vulnerabilities</link>
+    <guid>https://www.trganda.top/articles/security/web/Business-Logic-Vulnerabilities</guid>
+    <description></description>
+    <pubDate>Sun, 28 Jul 2024 09:36:40 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>

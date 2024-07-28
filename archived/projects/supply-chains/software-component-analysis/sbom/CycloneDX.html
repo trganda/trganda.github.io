@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>CycloneDX</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM Plex Mono&amp;family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta property="og:title" content="CycloneDX"/><meta property="og:description" content="CyclonedX 是由 OWASP 推出的 SBOM 规范，并提供了一系列工具来辅助开源项目构建自己的 SBOM 文件，支持多种格式，包括 xml、json、protobuf。在官方仓库中提供了该格式在不同方面的应用 示例， 下图为 CycloneDX 的抽象模型。 CycloneDX 的设计宣称，除了基本的 SBOM 能力，还具备其他 ..."/><meta property="og:image" content="https://www.trganda.top/static/og-image.png"/><meta property="og:width" content="1200"/><meta property="og:height" content="675"/><link rel="icon" href="../../../../../static/icon.png"/><meta name="description" content="CyclonedX 是由 OWASP 推出的 SBOM 规范，并提供了一系列工具来辅助开源项目构建自己的 SBOM 文件，支持多种格式，包括 xml、json、protobuf。在官方仓库中提供了该格式在不同方面的应用 示例， 下图为 CycloneDX 的抽象模型。 CycloneDX 的设计宣称，除了基本的 SBOM 能力，还具备其他 ..."/><meta name="generator" content="Quartz"/><link href="../../../../../index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../../../../../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../../../../../static/contentIndex.json").then(data => data.json())</script></head><body data-slug="archived/projects/supply-chains/software-component-analysis/sbom/CycloneDX"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h1 class="page-title"><a href="../../../../..">Trganda's Notes</a></h1><div class="spacer mobile-only"></div><div class="search"><div id="search-icon"><p>Search</p><div></div><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search</title><desc id="desc">Search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></div><div id="search-container"><div id="search-space"><input autocomplete="off" id="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div id="search-layout" data-preview="true"></div></div></div></div><div class="darkmode"><input class="toggle" id="darkmode-toggle" type="checkbox" tabindex="-1"/><label id="toggle-label-light" for="darkmode-toggle" tabindex="-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg></label><label id="toggle-label-dark" for="darkmode-toggle" tabindex="-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></label></div><div class="recent-notes desktop-only"><h3>Recent Notes</h3><ul class="recent-ul"><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../../til/issues/甲状腺结节与胆结石注意事项" class="internal">甲状腺结节与胆结石注意事项</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../../cavans/拉里事迹" class="internal">拉里事迹</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../../projects/Web-漏洞解析与攻防实战/HTTP-协议与编码" class="internal">HTTP 协议与编码</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li></ul></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../../archived/">archived</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../../archived/projects/">projects</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../../archived/projects/supply-chains/">supply chains</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../../archived/projects/supply-chains/software-component-analysis/">software component analysis</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../../archived/projects/supply-chains/software-component-analysis/sbom/">sbom</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>CycloneDX</a></div></nav><h1 class="article-title">CycloneDX</h1><p show-comma="true" class="content-meta"><span>May 11, 2023</span><span>8 min read</span></p><ul class="tags"><li><a href="../../../../../tags/cyclonedx" class="internal tag-link">cyclonedx</a></li><li><a href="../../../../../tags/bom" class="internal tag-link">bom</a></li></ul></div></div><article class="popover-hint"><p><a href="https://cyclonedx.org/" class="external">CyclonedX<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 是由 <code>OWASP</code> 推出的 <code>SBOM</code> 规范，并提供了一系列工具来辅助开源项目构建自己的 <code>SBOM</code> 文件，支持多种格式，包括 <code>xml</code>、<code>json</code>、<code>protobuf</code>。在官方仓库中提供了该格式在不同方面的应用 <a href="https://github.com/CycloneDX/bom-examples/tree/master/SBOM" class="external">示例<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>，</p>
+<p>下图为 <code>CycloneDX</code> 的抽象模型。</p>
+<p><img src="../../../../../assets/archived/projects/supply-chains/software-component-analysis/sbom/CycloneDX/IMG-20230512162103456.svg" alt="CycloneDX Object Model Swimlane"/></p>
+<p><code>CycloneDX</code> 的设计宣称，除了基本的 <code>SBOM</code> 能力，还具备其他 <code>BOM</code> 功能。它们分别是：</p>
+<ul>
+<li><a href="https://cyclonedx.org/capabilities/saasbom/" class="external">CycloneDX - Software-as-a-Service BOM (SaaSBOM)<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+<ul>
+<li>支持云原生应用程序的清单服务、端点以及数据流和分类，由 <code>services</code> 部分提供支持。</li>
+</ul>
+</li>
+<li><a href="https://cyclonedx.org/capabilities/vex/" class="external">CycloneDX - Vulnerability Exploitability eXchange (VEX)<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+<ul>
+<li>支持在使用它们的软件的上下文中传达漏洞信息，如某个依赖组件存在的漏洞，漏洞是否会影响当前软件等。</li>
+</ul>
+</li>
+<li><a href="https://cyclonedx.org/capabilities/hbom/" class="external">CycloneDX - Hardware Bill of Materials (HBOM)<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+<ul>
+<li>支持硬件物料清单，可列举物联网、ICS 和其他类型的嵌入式和连接设备的库存硬件组件。</li>
+</ul>
+</li>
+<li><a href="https://cyclonedx.org/capabilities/obom/" class="external">CycloneDX - Operations Bill of Materials (OBOM)<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+<ul>
+<li>支持运行时环境、配置和附加依赖项的全栈清单，可存放于 <code>metadata.component.properties</code>，见示例 <a href="https://raw.githubusercontent.com/CycloneDX/bom-examples/master/OBOM/Example-1-Standalone/bom.json" class="external">Standalone<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 或示例 <a href="https://github.com/CycloneDX/bom-examples/tree/master/OBOM/Example-1-Decoupled" class="external">Decoupled<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>，OBOM 由 <a href="https://www.bsimm.com/" class="external">BSIMM<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 标准引入。</li>
+</ul>
+</li>
+<li><a href="https://cyclonedx.org/capabilities/vdr/" class="external">CycloneDX - Vulnerability Disclosure Report (VDR)<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+<ul>
+<li>传递影响组件和服务的已知和未知漏洞。</li>
+</ul>
+</li>
+<li><a href="https://cyclonedx.org/capabilities/bomlink/" class="external">CycloneDX BOM-Link<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+<ul>
+<li>从其他系统或其他 BOM 中引用组件、服务或 BOM 中的漏洞。</li>
+</ul>
+</li>
+<li><a href="https://cyclonedx.org/capabilities/bov/" class="external">CycloneDX - Bill of Vulnerabilities<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+<ul>
+<li>在系统和漏洞情报来源之间共享漏洞数据。</li>
+</ul>
+</li>
+</ul>
+<h4 id="package-urlpurl">Package URL(PURL)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#package-urlpurl" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p><code>Package URL</code> 是一类标准，用于统一表示开源软件在开源软件宇宙中的位置。例如使用了什么语言，在哪个仓库平台，软件名称，版本等信息，它的形式和 <code>URL</code> 很类似，在 2018 年的 FOSDEM 会议上被提出。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text-plain" data-theme="github-light github-dark"><code data-language="text-plain" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>scheme:type/namespace/name@version?qualifiers#subpath</span></span></code></pre></figure>
+<p>各组成部分的定义如下：</p>
+<ul>
+<li><code>scheme</code>：固定为 <code>pkg</code>，为未来的拓展做保留，必须</li>
+<li><code>type</code>：包的类型或者来源，如 <code>maven</code>、<code>npm</code>、<code>nuget</code>、<code>gem</code>、<code>pypi</code> 等，必须</li>
+<li><code>namespace</code>：名称空间，例如 <code>Maven</code> 中的 <code>groupid</code>，<code>Docker</code> 镜像中的所有者，<code>Github</code> 上的用户名或组织名，可选</li>
+<li><code>name</code>：包的名称，必须</li>
+<li><code>version</code>：版本号，可选</li>
+<li><code>qualifiers</code>：额外的元数据，例如操作系统，架构平台等，可选</li>
+<li><code>subpath</code>：相对于 <code>namespace</code> 的子路径，可选</li>
+</ul>
+<p>一些示例</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text-plain" data-theme="github-light github-dark"><code data-language="text-plain" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>pkg:bitbucket/birkenfeld/pygments-main@244fd47e07d1014f0aed9c</span></span>
+<span data-line> </span>
+<span data-line><span>pkg:deb/debian/curl@7.50.3-1?arch=i386&amp;distro=jessie</span></span>
+<span data-line> </span>
+<span data-line><span>pkg:docker/cassandra@sha256:244fd47e07d1004f0aed9c</span></span>
+<span data-line><span>pkg:docker/customer/dockerimage@sha256:244fd47e07d1004f0aed9c?repository_url=gcr.io</span></span>
+<span data-line> </span>
+<span data-line><span>pkg:gem/jruby-launcher@1.1.2?platform=java</span></span>
+<span data-line><span>pkg:gem/ruby-advisory-db-check@0.12.4</span></span>
+<span data-line> </span>
+<span data-line><span>pkg:github/package-url/purl-spec@244fd47e07d1004f0aed9c</span></span>
+<span data-line> </span>
+<span data-line><span>pkg:golang/google.golang.org/genproto#googleapis/api/annotations</span></span>
+<span data-line> </span>
+<span data-line><span>pkg:maven/org.apache.xmlgraphics/batik-anim@1.9.1?packaging=sources</span></span>
+<span data-line><span>pkg:maven/org.apache.xmlgraphics/batik-anim@1.9.1?repository_url=repo.spring.io%2Frelease</span></span>
+<span data-line> </span>
+<span data-line><span>pkg:npm/%40angular/animation@12.3.1</span></span>
+<span data-line><span>pkg:npm/foobar@12.3.1</span></span>
+<span data-line> </span>
+<span data-line><span>pkg:nuget/EnterpriseLibrary.Common@6.0.1304</span></span>
+<span data-line> </span>
+<span data-line><span>pkg:pypi/django@1.11.1</span></span>
+<span data-line> </span>
+<span data-line><span>pkg:rpm/fedora/curl@7.50.3-1.fc25?arch=i386&amp;distro=fedora-25</span></span>
+<span data-line><span>pkg:rpm/opensuse/curl@7.56.1-1.1.?arch=i386&amp;distro=opensuse-tumbleweed</span></span></code></pre></figure>
+<p>完整的标准内容可参考 <a href="https://github.com/package-url/purl-spec/blob/master/PURL-SPECIFICATION.rst" class="external">purl-spec/PURL-SPECIFICATION.rst at master · package-url/purl-spec (github.com)<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<h4 id="common-platform-enumeration-cpe">Common Platform Enumeration (CPE)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#common-platform-enumeration-cpe" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>CPE 是信息技术系统、软件和包的结构化命名方案。基于统一资源标识符 (URI) 的通用语法，CPE 包括正式名称格式、根据系统检查名称的方法以及将文本和测试绑定到名称的描述格式。</p>
+<p>以下是 CPE 产品词典的当前 <a href="https://nvd.nist.gov/products/cpe" class="external">官方版本<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>。该词典提供了一份商定的官方 CPE 名称列表。该词典以 XML 格式提供，可供公众使用。请经常回来查看，因为 CPE 产品词典将继续增长以包括所有过去、现在和未来的产品版本。当修改或添加新名称时，CPE 词典每晚更新一次。</p>
+<blockquote>
+<p><a href="https://nvd.nist.gov/products/cpe" class="external">https://nvd.nist.gov/products/cpe<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+</blockquote>
+<p>自 2009 年 12 月起，美国国家漏洞数据库正在接受对官方 CPE 词典的投稿。有兴趣提交 CPE 名称的组织应通过 <a href="mailto:cpe_dictionary@nist.gov" class="external">cpe_dictionary@nist.gov<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 联系 NVD CPE 团队，以寻求处理其提交的帮助。</p>
+<p>由 NIST 托管和维护的 CPE 词典可由非政府组织自愿使用，在美国不受版权保护。但是，NIST 会赞赏署名。</p>
+<p>CPE 目前最新 <a href="https://cpe.mitre.org/specification/" class="external">标准<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 版本为 2.3，例如对于 <code>internet_explorer</code> ，使用 well-formed CPE name (WFN) 方法</p>
+<pre><code>wfn:[part=&quot;a&quot;,vendor=&quot;microsoft&quot;,product=&quot;internet_explorer&quot;,
+version=&quot;8\.0\.6001&quot;,update=&quot;beta&quot;]
+</code></pre>
+<p>它的 CPE URL Binding（兼容 2.2）格式如下</p>
+<pre><code>cpe:/a:microsoft:internet_explorer:8.0.6001:beta
+</code></pre>
+<p>当携带 Formatted String Binding（2.3 新增）时，其格式如下</p>
+<pre><code>cpe:2.3:a:microsoft:internet_explorer:8.0.6001:beta:*:*:*:*:*:*
+</code></pre>
+<p>并提供了正则表达式用于检查，见 <code>xsd:anyURI</code> 和 <code>xsd:pattern</code></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="xml" data-theme="github-light github-dark"><code data-language="xml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:simpleType</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> name</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;cpe22Type&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:annotation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:documentation</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> xml:lang</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;en&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">>Define the format for acceptable CPE Names. A URN format is used with the id starting with the word cpe followed by :/ and then some number of individual components separated by colons.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:documentation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:annotation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:restriction</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> base</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;xsd:anyURI&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:pattern</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> value</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;[c][pP][eE]:/[AHOaho]?(:[A-Za-z0-9\._\-~%]*){0,6}&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">/></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:restriction</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:simpleType</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:simpleType</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> name</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;cpe23Type&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:annotation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:documentation</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> xml:lang</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;en&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">>Define the format for acceptable CPE Names. A string format is used with the id starting with the word cpe:2.3 followed by : and then some number of individual components separated by colons.&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:documentation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:annotation</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:restriction</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> base</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;xsd:string&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    &lt;</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:pattern</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> value</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;cpe:2\.3:[aho\*\-](:(((\?*|\*?)([a-zA-Z0-9\-\._]|(\\[\\\*\?!&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">#$$%&amp;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">'\(\)\+,/:;&lt;=>@\[\]\^`\{\|}~]))+(\?*|\*?))|[\*\-])){5}(:(([a-zA-Z]{2,3}(-([a-zA-Z]{2}|[0-9]{3}))?)|[\*\-]))(:(((\?*|\*?)([a-zA-Z0-9\-\._]|(\\[\\\*\?!&quot;#$$%</span><span style="--shiki-light:#B31D28;--shiki-dark:#FDAEB7;--shiki-light-font-style:italic;--shiki-dark-font-style:italic;">&amp;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">'</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">\(\)\+,/:;&lt;=>@\[\]\^`\{\|}~]))+(\?*|\*?))|[\*\-])){4}&quot;/></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  &lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:restriction</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">&lt;/</span><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">xsd:simpleType</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">></span></span></code></pre></figure>
+<h3 id="vulnerabilities">Vulnerabilities<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#vulnerabilities" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>vulnerabilities</code> 字段的格式</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  &quot;bomFormat&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;CycloneDX&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  &quot;specVersion&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;1.4&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  &quot;version&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  &quot;vulnerabilities&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;bom-ref&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;pkg:maven/org.eclipse.aether/aether-api@1.0.0.v20140518?package-id=9829ceca9410ef7e&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;id&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;CVE-2018-7489&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;source&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">        &quot;name&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;NVD&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">        &quot;url&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;https://nvd.nist.gov/vuln/detail/CVE-2019-9997&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      },</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;references&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;id&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;GHSA-6phf-73q6-gh87&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;source&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;https://github.com/advisories/GHSA-6phf-73q6-gh87&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;ratings&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;source&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">            &quot;name&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;NVD&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">            &quot;url&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;url&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">          },</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;score&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">9.8</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;severity&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;critical&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;method&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;CVSSv3&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;vector&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;AN/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;cwes&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">        184</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">        502</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;description&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;description&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;detail&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;detail&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;recommendation&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;recommendation&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;advisories&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;title&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;NVD&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;url&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;https://nvd.nist.gov/vuln/detail/CVE-2019-10086&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;created&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;2021-01-01T00:00:00.000Z&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;published&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;2021-01-01T00:00:00.000Z&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;updated&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;2021-01-01T00:00:00.000Z&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;credits&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">        &quot;name&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;name&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">        &quot;email&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;email&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">        &quot;phone&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;phone&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      },</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;analysis&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">        &quot;state&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;not_affected&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">        &quot;justification&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;code_not_reachable&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">        &quot;response&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">          &quot;will_not_fix&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">          &quot;update&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">        &quot;detail&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;detail&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      },</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;affects&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;ref&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;bom-ref&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;versions&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">            {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">              &quot;version&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;version&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">              &quot;status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;affected&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">            },</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">            {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">              &quot;range&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;versions&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">              &quot;status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;affected&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">            }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">          ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">      &quot;properties&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        {</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;name&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;name&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">          &quot;value&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;value&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    }</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  ]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></figure>
+<p>影响版本字段，版本的表示形式有两种，</p>
+<ul>
+<li>单个 <code>version</code></li>
+<li>范围 <code>range</code>。</li>
+</ul>
+<p>而 <code>range</code> 的格式规范，<a href="https://cyclonedx.org/docs/1.4/json/#vulnerabilities_items_affects_items_versions_items_range" class="external">Cyclondx标准<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 中提到的是 PURL 中定义的 <a href="https://github.com/package-url/purl-spec/VERSION-RANGE-SPEC.rst" class="external">VERSION-RANGE-SPEC<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> ，目前该格式标准在 PUR L 中已经删除。在 <code>Cyclonedx</code> 的官方 <a href="https://github.com/CycloneDX/bom-examples/blob/master/VEX/CISA-Use-Cases/Case-8/vex.json#L51" class="external">示例<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 中有采用下面这样的格式</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="json" data-theme="github-light github-dark"><code data-language="json" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;versions&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">	{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">		&quot;range&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;vers:generic/>=4.5|&lt;=5.0&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">		&quot;status&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;affected&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">	}</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">]</span></span></code></pre></figure>
+<h2 id="示例">示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#示例" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="plantuml" data-theme="github-light github-dark"><code data-language="plantuml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>@startjson</span></span>
+<span data-line><span>{</span></span>
+<span data-line><span>  &quot;bomFormat&quot;: &quot;CycloneDX&quot;,</span></span>
+<span data-line><span>  &quot;specVersion&quot;: &quot;1.4&quot;,</span></span>
+<span data-line><span>  &quot;version&quot;: 1,</span></span>
+<span data-line><span>  &quot;components&quot;: [</span></span>
+<span data-line><span>    {</span></span>
+<span data-line><span>      &quot;bom-ref&quot;: &quot;pkg:maven/org.eclipse.aether/aether-api@1.0.0.v20140518?package-id=cc6e954335dcb0ad&quot;,</span></span>
+<span data-line><span>      &quot;mime-type&quot;: &quot;application/java-archive&quot;,</span></span>
+<span data-line><span>      &quot;type&quot;: &quot;library&quot;,</span></span>
+<span data-line><span>      &quot;group&quot;: &quot;org.eclipse.aether&quot;,</span></span>
+<span data-line><span>      &quot;name&quot;: &quot;aether-api&quot;,</span></span>
+<span data-line><span>      &quot;version&quot;: &quot;1.0.0.v20140518&quot;,</span></span>
+<span data-line><span>      &quot;purl&quot;: &quot;pkg:maven/org.eclipse.aether/aether-api@1.0.0.v20140518&quot;,</span></span>
+<span data-line><span>      &quot;properties&quot;: [</span></span>
+<span data-line><span>        {</span></span>
+<span data-line><span>          &quot;name&quot;: &quot;coffsca:package:foundBy&quot;,</span></span>
+<span data-line><span>          &quot;value&quot;: &quot;java-cataloger&quot;</span></span>
+<span data-line><span>        },</span></span>
+<span data-line><span>        {</span></span>
+<span data-line><span>          &quot;name&quot;: &quot;coffsca:package:language&quot;,</span></span>
+<span data-line><span>          &quot;value&quot;: &quot;java&quot;</span></span>
+<span data-line><span>        },</span></span>
+<span data-line><span>        {</span></span>
+<span data-line><span>          &quot;name&quot;: &quot;coffsca:package:metadataType&quot;,</span></span>
+<span data-line><span>          &quot;value&quot;: &quot;JavaMetadata&quot;</span></span>
+<span data-line><span>        },</span></span>
+<span data-line><span>        {</span></span>
+<span data-line><span>          &quot;name&quot;: &quot;coffsca:package:type&quot;,</span></span>
+<span data-line><span>          &quot;value&quot;: &quot;java-archive&quot;</span></span>
+<span data-line><span>        }</span></span>
+<span data-line><span>      ]</span></span>
+<span data-line><span>    }</span></span>
+<span data-line><span>  ],</span></span>
+<span data-line><span>  &quot;vulnerabilities&quot;: [</span></span>
+<span data-line><span>    {</span></span>
+<span data-line><span>      &quot;bom-ref&quot;: &quot;pkg:maven/org.eclipse.aether/aether-api@1.0.0.v20140518?package-id=9829ceca9410ef7e&quot;,</span></span>
+<span data-line><span>      &quot;id&quot;: &quot;CVE-2018-7489&quot;,</span></span>
+<span data-line><span>      &quot;source&quot;: {</span></span>
+<span data-line><span>        &quot;name&quot;: &quot;NVD&quot;,</span></span>
+<span data-line><span>        &quot;url&quot;: &quot;https://nvd.nist.gov/vuln/detail/CVE-2019-9997&quot;</span></span>
+<span data-line><span>      },</span></span>
+<span data-line><span>      &quot;references&quot;: [</span></span>
+<span data-line><span>        {</span></span>
+<span data-line><span>          &quot;id&quot;: &quot;GHSA-6phf-73q6-gh87&quot;,</span></span>
+<span data-line><span>          &quot;source&quot;: &quot;https://github.com/advisories/GHSA-6phf-73q6-gh87&quot;</span></span>
+<span data-line><span>        }</span></span>
+<span data-line><span>      ],</span></span>
+<span data-line><span>      &quot;ratings&quot;: [</span></span>
+<span data-line><span>        {</span></span>
+<span data-line><span>          &quot;source&quot;: {</span></span>
+<span data-line><span>            &quot;name&quot;: &quot;NVD&quot;,</span></span>
+<span data-line><span>            &quot;url&quot;: &quot;url&quot;</span></span>
+<span data-line><span>          },</span></span>
+<span data-line><span>          &quot;score&quot;: 9.8,</span></span>
+<span data-line><span>          &quot;severity&quot;: &quot;critical&quot;,</span></span>
+<span data-line><span>          &quot;method&quot;: &quot;CVSSv3&quot;,</span></span>
+<span data-line><span>          &quot;vector&quot;: &quot;AN/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H&quot;</span></span>
+<span data-line><span>        }</span></span>
+<span data-line><span>      ],</span></span>
+<span data-line><span>      &quot;cwes&quot;: [</span></span>
+<span data-line><span>        184,</span></span>
+<span data-line><span>        502</span></span>
+<span data-line><span>      ],</span></span>
+<span data-line><span>      &quot;description&quot;: &quot;description&quot;,</span></span>
+<span data-line><span>      &quot;detail&quot;: &quot;detail&quot;,</span></span>
+<span data-line><span>      &quot;recommendation&quot;: &quot;recommendation&quot;,</span></span>
+<span data-line><span>      &quot;advisories&quot;: [</span></span>
+<span data-line><span>        {</span></span>
+<span data-line><span>          &quot;title&quot;: &quot;NVD&quot;,</span></span>
+<span data-line><span>          &quot;url&quot;: &quot;https://nvd.nist.gov/vuln/detail/CVE-2019-10086&quot;</span></span>
+<span data-line><span>        }</span></span>
+<span data-line><span>      ],</span></span>
+<span data-line><span>      &quot;created&quot;: &quot;2021-01-01T00:00:00.000Z&quot;,</span></span>
+<span data-line><span>      &quot;published&quot;: &quot;2021-01-01T00:00:00.000Z&quot;,</span></span>
+<span data-line><span>      &quot;updated&quot;: &quot;2021-01-01T00:00:00.000Z&quot;,</span></span>
+<span data-line><span>      &quot;credits&quot;: {</span></span>
+<span data-line><span>        &quot;name&quot;: &quot;name&quot;,</span></span>
+<span data-line><span>        &quot;email&quot;: &quot;email&quot;,</span></span>
+<span data-line><span>        &quot;phone&quot;: &quot;phone&quot;</span></span>
+<span data-line><span>      },</span></span>
+<span data-line><span>      &quot;analysis&quot;: {</span></span>
+<span data-line><span>        &quot;state&quot;: &quot;not_affected&quot;,</span></span>
+<span data-line><span>        &quot;justification&quot;: &quot;code_not_reachable&quot;,</span></span>
+<span data-line><span>        &quot;response&quot;: [</span></span>
+<span data-line><span>          &quot;will_not_fix&quot;,</span></span>
+<span data-line><span>          &quot;update&quot;</span></span>
+<span data-line><span>        ],</span></span>
+<span data-line><span>        &quot;detail&quot;: &quot;detail&quot;</span></span>
+<span data-line><span>      },</span></span>
+<span data-line><span>      &quot;affects&quot;: [</span></span>
+<span data-line><span>        {</span></span>
+<span data-line><span>          &quot;ref&quot;: &quot;bom-ref&quot;,</span></span>
+<span data-line><span>          &quot;versions&quot;: [</span></span>
+<span data-line><span>            {</span></span>
+<span data-line><span>              &quot;version&quot;: &quot;version&quot;,</span></span>
+<span data-line><span>              &quot;status&quot;: &quot;affected&quot;</span></span>
+<span data-line><span>            },</span></span>
+<span data-line><span>            {</span></span>
+<span data-line><span>              &quot;range&quot;: &quot;versions&quot;,</span></span>
+<span data-line><span>              &quot;status&quot;: &quot;affected&quot;</span></span>
+<span data-line><span>            }</span></span>
+<span data-line><span>          ]</span></span>
+<span data-line><span>        }</span></span>
+<span data-line><span>      ],</span></span>
+<span data-line><span>      &quot;properties&quot;: [</span></span>
+<span data-line><span>        {</span></span>
+<span data-line><span>          &quot;name&quot;: &quot;name&quot;,</span></span>
+<span data-line><span>          &quot;value&quot;: &quot;value&quot;</span></span>
+<span data-line><span>        }</span></span>
+<span data-line><span>      ]</span></span>
+<span data-line><span>    }</span></span>
+<span data-line><span>  ]</span></span>
+<span data-line><span>}</span></span>
+<span data-line><span>@endjson</span></span></code></pre></figure>
+<h2 id="参考">参考<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#参考" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><a href="https://cpe.mitre.org/specification/" class="external">https://cpe.mitre.org/specification/<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://cybox.mitre.org/language/version2.0.1/xsddocs/extensions/platform/cpe2.3/1.0.1/cpe-naming_2_3_xsd.html#:~:text=Define%20the%20format%20for%20acceptable%20CPE%20Names.%20A,some%20number%20of%20individual%20components%20separated%20by%20colons" class="external">https://cybox.mitre.org/language/version2.0.1/xsddocs/extensions/platform/cpe2.3/1.0.1/cpe-naming_2_3_xsd.html#:~:text=Define%20the%20format%20for%20acceptable%20CPE%20Names.%20A,some%20number%20of%20individual%20components%20separated%20by%20colons<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>.</li>
+<li><a href="https://github.com/package-url/purl-spec/blob/master/PURL-SPECIFICATION.rst" class="external">e-url/purl-spec · GitHub<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://semver.org/" class="external">Semantic Versioning 2.0.0 | Semantic Versioning<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://cyclonedx.org/docs/1.4/json/#vulnerabilities_items_affects_items_versions_items_range" class="external">Cyclonedx Range<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/CycloneDX/bom-examples/blob/master/VEX/CISA-Use-Cases/Case-8/vex.json" class="external">bom-examples/vex.json at master · CycloneDX/bom-examples · GitHub<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://metacpan.org/pod/RPM::NEVRA" class="external">RPM::NEVRA - Parses, validates NEVRA format - metacpan.org<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ol></article></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div id="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false}"></div><svg version="1.1" id="global-graph-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+	s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+	c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+	C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+	c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+	v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+	s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+	C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+	S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+	s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+	s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></div><div id="global-graph-outer"><div id="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" id="toc" class><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="toc-content"><ul class="overflow"><li class="depth-1"><a href="#vulnerabilities" data-for="vulnerabilities">Vulnerabilities</a></li><li class="depth-0"><a href="#示例" data-for="示例">示例</a></li><li class="depth-0"><a href="#参考" data-for="参考">参考</a></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul class="overflow"><li>No backlinks found</li></ul></div></div></div><footer class><hr/><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.2.3</a> © 2024</p><ul><li><a href="https://github.com/trganda">GitHub</a></li><li><a href="https://www.trganda.top/index.xml">RSS</a></li></ul></footer></div></body><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js" type="application/javascript"></script><script type="application/javascript">function c(){let t=this.parentElement;t.classList.toggle("is-collapsed");let l=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=l+"px";let o=t,e=t.parentElement;for(;e;){if(!e.classList.contains("callout"))return;let n=e.classList.contains("is-collapsed")?e.scrollHeight:e.scrollHeight+o.scrollHeight;e.style.maxHeight=n+"px",o=e,e=e.parentElement}}function i(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let l=s.firstElementChild;if(l){l.addEventListener("click",c),window.addCleanup(()=>l.removeEventListener("click",c));let e=s.classList.contains("is-collapsed")?l.scrollHeight:s.scrollHeight;s.style.maxHeight=e+"px"}}}document.addEventListener("nav",i);window.addEventListener("resize",i);
+</script><script type="module">
+          let mermaidImport = undefined
+          document.addEventListener('nav', async () => {
+            if (document.querySelector("code.mermaid")) {
+              mermaidImport ||= await import('https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs')
+              const mermaid = mermaidImport.default
+              const darkMode = document.documentElement.getAttribute('saved-theme') === 'dark'
+              mermaid.initialize({
+                startOnLoad: false,
+                securityLevel: 'loose',
+                theme: darkMode ? 'dark' : 'default'
+              })
+
+              await mermaid.run({
+                querySelector: '.mermaid'
+              })
+            }
+          });
+          </script><script src="../../../../../postscript.js" type="module"></script></html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>OAuth Attacks</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM Plex Mono&amp;family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta property="og:title" content="OAuth Attacks"/><meta property="og:description" content="OAuth Authorization Code 模式回顾 Authorization Code 授权模式的大致流程如下，注意其中未使用 state 参数，各个请求阶段相对独立而无状态。 @startuml skinparam Shadowing true skinparam sequenceMessageAlign direction ..."/><meta property="og:image" content="https://www.trganda.top/static/og-image.png"/><meta property="og:width" content="1200"/><meta property="og:height" content="675"/><link rel="icon" href="../../../../static/icon.png"/><meta name="description" content="OAuth Authorization Code 模式回顾 Authorization Code 授权模式的大致流程如下，注意其中未使用 state 参数，各个请求阶段相对独立而无状态。 @startuml skinparam Shadowing true skinparam sequenceMessageAlign direction ..."/><meta name="generator" content="Quartz"/><link href="../../../../index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../../../../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../../../../static/contentIndex.json").then(data => data.json())</script></head><body data-slug="articles/security/web/oauth/OAuth-Attacks"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h1 class="page-title"><a href="../../../..">Trganda's Notes</a></h1><div class="spacer mobile-only"></div><div class="search"><div id="search-icon"><p>Search</p><div></div><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search</title><desc id="desc">Search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></div><div id="search-container"><div id="search-space"><input autocomplete="off" id="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div id="search-layout" data-preview="true"></div></div></div></div><div class="darkmode"><input class="toggle" id="darkmode-toggle" type="checkbox" tabindex="-1"/><label id="toggle-label-light" for="darkmode-toggle" tabindex="-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg></label><label id="toggle-label-dark" for="darkmode-toggle" tabindex="-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></label></div><div class="recent-notes desktop-only"><h3>Recent Notes</h3><ul class="recent-ul"><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../til/issues/甲状腺结节与胆结石注意事项" class="internal">甲状腺结节与胆结石注意事项</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../cavans/拉里事迹" class="internal">拉里事迹</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../projects/Web-漏洞解析与攻防实战/HTTP-协议与编码" class="internal">HTTP 协议与编码</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li></ul></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../articles/">articles</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../articles/security/">security</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../articles/security/web/">web</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../articles/security/web/oauth/">oauth</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>OAuth Attacks</a></div></nav><h1 class="article-title">OAuth Attacks</h1><p show-comma="true" class="content-meta"><span>Oct 31, 2023</span><span>13 min read</span></p><ul class="tags"><li><a href="../../../../tags/oauth" class="internal tag-link">oauth</a></li><li><a href="../../../../tags/csrf" class="internal tag-link">csrf</a></li></ul></div></div><article class="popover-hint"><h2 id="oauth-authorization-code-模式回顾">OAuth Authorization Code 模式回顾<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#oauth-authorization-code-模式回顾" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><code>Authorization Code</code> 授权模式的大致流程如下，注意其中未使用 <code>state</code> 参数，各个请求阶段相对独立而无状态。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="plantuml" data-theme="github-light github-dark"><code data-language="plantuml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>@startuml</span></span>
+<span data-line><span>skinparam Shadowing true</span></span>
+<span data-line><span>skinparam sequenceMessageAlign direction</span></span>
+<span data-line><span>participant User</span></span>
+<span data-line><span>participant Client</span></span>
+<span data-line><span>participant AuthServer</span></span>
+<span data-line><span>participant ResourceServer</span></span>
+<span data-line><span>autonumber</span></span>
+<span data-line><span>User -> Client: &quot;GET /peek&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>activate Client</span></span>
+<span data-line> </span>
+<span data-line><span>Client -> User : &quot;302: Location=auth/authorize&quot;</span></span>
+<span data-line><span>deactivate Client</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line> </span>
+<span data-line><span>User -> AuthServer: &quot;GET /authorize&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>activate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>AuthServer -> User: &quot;{messages: &quot;Do you approve?&quot;}&quot;</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line><span>deactivate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>User -> AuthServer: &quot;approve&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>activate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>AuthServer -> User: &quot;302: Location=clien/handle_code?code=random_code&quot;</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line><span>deactivate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>User -> Client: &quot;GET /handle_code?code=randome_code&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>activate Client</span></span>
+<span data-line> </span>
+<span data-line><span>Client -> AuthServer: &quot;POST /token?code=randome_code&quot;</span></span>
+<span data-line><span>activate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>AuthServer -> Client: &quot;200: {access_token=random_token}&quot;</span></span>
+<span data-line><span>deactivate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>Client -> ResourceServer: &quot;GET /resource?token=access_token&quot;</span></span>
+<span data-line><span>activate ResourceServer</span></span>
+<span data-line> </span>
+<span data-line><span>ResourceServer -> Client: &quot;200: respoonse&quot;</span></span>
+<span data-line><span>deactivate ResourceServer</span></span>
+<span data-line> </span>
+<span data-line><span>Client -> User: &quot;200: result&quot;</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line><span>deactivate Client</span></span>
+<span data-line><span>@enduml</span></span></code></pre></figure>
+<h2 id="oauth-下的安全问题">OAuth 下的安全问题<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#oauth-下的安全问题" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p><code>HTTP</code> 是无状态协议，需要通过 <code>Session</code> 一类的机制，来区分请求来自谁，来自哪里。</p>
+</blockquote>
+<p>OAuth 下的安全问题</p>
+<ul>
+<li>缺少 <code>state</code> 参数，或者 <code>state</code> 参数是固定可猜测的从而导致 <code>OAuth</code> 下的 <code>CSRF</code> 问题。</li>
+<li><code>redirect_uri</code> 的绕过，如果 redirect_uri 可控，那么意味着可以获取 <code>access_token</code>。一般 <code>redirect_uri</code> 都会有过滤机制，可能的绕过方式
+<ul>
+<li>开放重定向：<code>https://yourtweetreader.com/callback?redirectUrl=https://evil.com</code></li>
+<li>目录遍历：<code>https://yourtweetreader.com/callback/../redirect?url=https://evil.com</code>，需要目标站点有一个带有重定向功能的接口 redirect。</li>
+<li>不安全的 <code>redirect_uri</code> 正则匹配：<code>https://yourtweetreader.com.evil.com</code></li>
+<li>通过 HTML 注入，借助 Referer 字段获取请求内容 <code>https://yourtweetreader.com/callback/home/attackerimg.jpg</code></li>
+</ul>
+</li>
+<li>Pre Account Takeover，如果目标站点有一个注册功能，但是这个注册功能并不会验证邮箱的有效性。如果攻击者在用户之前通过该邮箱进行注册，当用户下次访问这个客户端应用时，选择通过社交账号登陆，并关联邮箱时，发现已经注册过了就好把这个账号和社交账号绑定至一起。</li>
+<li><code>client_id</code> 和 <code>client_secret</code> 的泄露，特别是 <code>client_secret</code> 的泄露，攻击者可以伪装成客户端应用，完成正常绑定的所有步骤从而窃取用户信息。</li>
+</ul>
+<h3 id="implicit-grant-attacks">Implicit Grant Attacks<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#implicit-grant-attacks" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>一种最糟糕的情况，如果用户已经登陆过 <code>AuthServer</code>，且给于了授权。若攻击者知晓 <code>client_id</code> 和 <code>client_secret</code>。</p>
+<p>那么可以构造如下的恶意请求并欺骗用户点击，让 <code>redirect_uri</code> 指向攻击者地址『对应步骤 <code>3</code>』，这样攻击者可以得知 <code>AuthServer</code> 返回的 <code>code</code> 甚至 <code>token</code>。</p>
+<pre><code>http://authserver.com/oauth/authorize?response_type=token&amp;client_id=my-trusted-client&amp;redirect_uri=http://dsyer.github.com/spring-security-oauth/attack.html&amp;scope=read
+</code></pre>
+<p>对于这种方式，<code>AuthServer</code> 应当验证 <code>client_id</code> 与 <code>redirect_uri</code> 的关联性，确保 <code>redirect_uri</code> 指向的是 <code>Client</code> 注册时指定的 <code>URL</code>。</p>
+<h3 id="authorization-code-attacks">Authorization Code Attacks<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#authorization-code-attacks" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>此类攻击尝试获取用户的授权码，攻击者首先构造恶意链接让用户点击来触发请求。它有一个前置条件，攻击者需要知道被攻击目标的 <code>client_secret</code>。</p>
+<p>下面是对应的攻击时序图</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="plantuml" data-theme="github-light github-dark"><code data-language="plantuml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>@startuml</span></span>
+<span data-line><span>skinparam Shadowing true</span></span>
+<span data-line><span>skinparam sequenceMessageAlign direction</span></span>
+<span data-line><span>participant User</span></span>
+<span data-line><span>participant BadClient</span></span>
+<span data-line><span>participant AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>User -> AuthServer: &quot;GET /authorize?client_id=good&amp;redirect_uri=bad/peek&amp;state=pololu&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>activate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>AuthServer -> User: &quot;302: Location=/bad/peek?code=code&amp;state=pololu&quot;</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line><span>deactivate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>User -> BadClient: &quot;GET /peek?code=code&amp;state=pololu&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>activate BadClient</span></span>
+<span data-line> </span>
+<span data-line><span>BadClient -> AuthServer: &quot;POST /token?code=code&amp;state=pololu&quot;</span></span>
+<span data-line><span>note right of BadClient</span></span>
+<span data-line><span>Assume BadClient knows </span></span>
+<span data-line><span>client secret</span></span>
+<span data-line><span>end note</span></span>
+<span data-line><span>AuthServer -> BadClient: &quot;200: {access_token:token}&quot;</span></span>
+<span data-line> </span>
+<span data-line><span>deactivate BadClient</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line><span>@enduml</span></span></code></pre></figure>
+<p>假设攻击者知道了 <code>client_id</code> 和 <code>client_secret</code>，构造如下请求</p>
+<pre><code>http://authserver.com/oauth/authorize?response_type=token&amp;client_id=good&amp;redirect_uri=http://dsyer.github.com/bad/peek&amp;scope=read
+</code></pre>
+<p>用户点击后，重定向至攻击者控制的 <code>Client</code>，此时攻击者可通过 <code>client_secret</code> 获取 <code>token</code>。</p>
+<h3 id="csrf-attacks">CSRF Attacks<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#csrf-attacks" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>CSRF</code> 攻击能够用于改变 <code>Client</code> 的状态，如果 <code>Client</code> 没有维护和验证 <code>User</code> 的状态『例如不确定 <code>code</code> 是否为当前用户的，当前请求是否来自用户』，则会受到 <code>CSRF</code> 的影响。单纯的 <code>CSRF</code> 并没有办法直接窃取 <code>token</code>，但可能会改变用户在 <code>Client</code> 中的状态，例如将用户绑定至攻击者的在 <code>AuthServer</code> 中的账号。</p>
+<p>下面的时序图展示了通过 <code>state</code> 参数来防护 <code>CSRF</code> 攻击的过程。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="plantuml" data-theme="github-light github-dark"><code data-language="plantuml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>@startuml</span></span>
+<span data-line><span>skinparam Shadowing true</span></span>
+<span data-line><span>skinparam sequenceMessageAlign direction</span></span>
+<span data-line><span>participant User</span></span>
+<span data-line><span>participant Client</span></span>
+<span data-line><span>participant AuthServer</span></span>
+<span data-line><span>participant Session</span></span>
+<span data-line><span>participant ResourceServer</span></span>
+<span data-line><span>User -> Client: &quot;GET /peek&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>activate Client</span></span>
+<span data-line> </span>
+<span data-line><span>note right of Client: generate random key for state</span></span>
+<span data-line><span>Client -> Session : &quot;store: {request:/peek, pololu:random_key}&quot;</span></span>
+<span data-line><span>activate Session</span></span>
+<span data-line> </span>
+<span data-line><span>Client -> User : &quot;302: Location=auth/authorize?state=pololu&quot;</span></span>
+<span data-line><span>deactivate Client</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line> </span>
+<span data-line><span>User -> AuthServer: &quot;GET /authorize?state=pololu&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>activate AuthServer</span></span>
+<span data-line><span>AuthServer -> User: &quot;302: Location=clien/handle_code?code=random_code&amp;state=pololu&quot;</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line><span>deactivate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>User -> Client: &quot;GET /handle_code?code=random_code&amp;state=pololu&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>activate Client</span></span>
+<span data-line> </span>
+<span data-line><span>note left of Client: check state</span></span>
+<span data-line><span>Client -> Session: &quot;get pololu&quot;</span></span>
+<span data-line><span>Session -> Client: &quot;random_key&quot;</span></span>
+<span data-line><span>note left of Client: OK(state exists)</span></span>
+<span data-line> </span>
+<span data-line><span>Client -> AuthServer: &quot;POST: /token?code=random_code&quot;</span></span>
+<span data-line><span>activate AuthServer</span></span>
+<span data-line><span>AuthServer -> Client: &quot;200: {access_token:random_token}&quot;</span></span>
+<span data-line><span>deactivate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>Client -> Session: &quot;get request&quot;</span></span>
+<span data-line><span>Session -> Client: &quot;get /peek&quot;</span></span>
+<span data-line><span>note left of Client: continue with /peek</span></span>
+<span data-line> </span>
+<span data-line><span>Client -> ResourceServer: &quot;GET /resource?access_token=random_token&quot;</span></span>
+<span data-line><span>activate ResourceServer</span></span>
+<span data-line><span>ResourceServer -> Client: &quot;200: response&quot;</span></span>
+<span data-line><span>deactivate ResourceServer</span></span>
+<span data-line> </span>
+<span data-line><span>Client -> User: &quot;200: result&quot;</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line><span>deactivate Client</span></span>
+<span data-line> </span>
+<span data-line><span>@enduml</span></span></code></pre></figure>
+<h4 id="防护策略">防护策略<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#防护策略" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>要防止这样的攻击其实很容易，作为第三方应用的开发者，只需在 <code>OAuth</code> 认证过程中加入 <code>state</code> 参数，并验证它的参数值即可。具体细节如下：</p>
+<ul>
+<li>在将用户重定向到 OAuth2 的 Authorization Endpoint 去的时候，为用户生成一个随机的字符串，并作为 <code>state</code> 参数加入到 URL 中。</li>
+<li>在收到 <code>OAuth2</code> 服务提供者返回的 <code>Authorization Code</code> 请求的时候，验证接收到的 <code>state</code> 参数值。如果是正确合法的请求，那么此时接受到的参数值应该和上一步提到的为该用户生成的 <code>state</code> 参数值完全一致，否则就是异常请求。</li>
+<li><code>state</code> 参数值需要具备下面几个特性：
+<ul>
+<li>不可预测性：足够的随机，使得攻击者难以猜到正确的参数值</li>
+<li>关联性：<code>state</code> 参数值和当前用户会话（user session）是相互关联的</li>
+<li>唯一性：每个用户，甚至每次请求生成的 <code>state</code> 参数值都是唯一的</li>
+<li>时效性：<code>state</code> 参数一旦被使用则立即失效</li>
+</ul>
+</li>
+</ul>
+<h3 id="ssrf-via-openid">SSRF via OpenID<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ssrf-via-openid" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>OpenID</code> 是针对 <code>OAuth</code> 开发的拓展机制，用于规范化使用 <code>OAuth</code> 进行身份认证的过程。</p>
+<blockquote>
+<p><code>OAuth</code> 的设计初衷只是为了进行授权，<code>Client</code> 并不知道用户『资源所有者』在 <code>OAuth</code> 认证服务器上何时何地如何进行认证的。</p>
+</blockquote>
+<p><code>OpenID</code> 中有部分个术语，它们与 <code>OAuth</code> 中的术语有一定的对应关系</p>
+<ul>
+<li>Relying party- 请求用户身份验证的应用程序，等价于 <code>OAuth</code> 中的 <code>Client</code>；</li>
+<li>End user- 正在接受身份认证的用户，等价于 <code>OAuth</code> 中的资源所有者；</li>
+<li>OpenID provider- 配置为支持 <code>OpenID Connect</code> 的 <code>OAuth</code> 服务。</li>
+</ul>
+<p>OpenID 中还有一个概念，叫 <code>claims</code>，它是一个键值对，用于表示用户的身份信息，例如 <code>&quot;family_name&quot;:&quot;Montoya&quot;</code>。</p>
+<p>此外 <code>OpenID</code> 在 <code>OAuth</code> 之上定义 <code>4</code> 种标准 <code>scope</code> 类型，每一种类型表示所需读取的与用户相关的 <code>claims</code> 信息，可以同时指定多个，空格分隔</p>
+<ul>
+<li><code>profile</code>：<code>identify</code> 信息</li>
+<li><code>email</code></li>
+<li><code>address</code></li>
+<li><code>phone</code></li>
+</ul>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="http" data-theme="github-light github-dark"><code data-language="http" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">GET</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> /auth?client_id=h82l3xtkcwuja5fv1iiiy&amp;redirect_uri=https://0ad700bc0475d06b856b554500db00c4.web-security-academy.net/oauth-callback&amp;response_type=code&amp;scope=openid%20profile%20email </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">HTTP</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">1.1</span></span></code></pre></figure>
+<p>以及 <code>1</code> 种 <code>response</code> 类型</p>
+<ul>
+<li><code>id_token</code></li>
+</ul>
+<p><code>id_token</code> 的标准形式是经过 <code>Json Web Signature(JWS)</code> 签名的 <code>Json Web Token(JWT)</code>。通常来讲，可以访问 <code>OAuth</code> 提供者的路由 <code>/.well-known/openid-configuration</code> 来查看相关配置。</p>
+<p>而 <code>OpenID</code> 中引入了一个标准，允许 <code>Client</code> 向 <code>OpenID</code> 提供商进行注册的标准化方法，在注册时要求 <code>Client</code> 认证它自身的身份。下面是一个示例请求</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="http" data-theme="github-light github-dark"><code data-language="http" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">POST</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> /openid/register </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">HTTP</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">1.1</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Content-Type</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> application/json</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Accept</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> application/json</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Host</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> oauth-authorization-server.com</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Authorization</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> Bearer ab12cd34ef56gh89</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;application_type&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;web&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;redirect_uris&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">        &quot;https://client-app.com/callback&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">        &quot;https://client-app.com/callback2&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        ],</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;client_name&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;My Application&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;logo_uri&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;https://client-app.com/logo.png&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;token_endpoint_auth_method&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;client_secret_basic&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;jwks_uri&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;https://client-app.com/my_public_keys.jwks&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;userinfo_encrypted_response_alg&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;RSA1_5&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;userinfo_encrypted_response_enc&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;A128CBC-HS256&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#B31D28;--shiki-dark:#FDAEB7;--shiki-light-font-style:italic;--shiki-dark-font-style:italic;">    …</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></figure>
+<p>而如果 <code>OpenID</code> 提供商允许无需认证的动态 <code>Client</code> 注册，则可能引发一些安全问题。而注册操作中的参数涉及到多个 URL，若是 <code>OpenID</code> 提供商在访问这些 <code>URL</code> 时处理不当则会导致 <code>SSRF</code> 漏洞，见 <a href="../../../../articles/security/web/oauth/OAuth-Labs#lab-5---ssrf-via-openid-dynamic-client-registration" class="internal alias" data-slug="articles/security/web/oauth/OAuth-Labs">Lab 5 - SSRF via OpenID Dynamic Client Registration</a>。</p>
+<h3 id="abusing-oauth">Abusing OAuth<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#abusing-oauth" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>由于 <code>Fackbook</code>『其它 <code>OAuth</code> 认证提供者可能也有类似问题』 默认不主动对 <code>Token</code> 进行验证，若 <code>Client</code> 没有自行验证，则可能导致用户账号被窃取。具体见 <a href="../../../../articles/security/web/oauth/OAuth---Abusing-OAuth-to-take-over-millions-of-accounts" class="internal alias" data-slug="articles/security/web/oauth/OAuth---Abusing-OAuth-to-take-over-millions-of-accounts">OAuth - Abusing OAuth to take over millions of accounts</a>。</p>
+<h2 id="pkce">PKCE<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pkce" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><code>PKCE</code> 是 <code>OAuth</code> 的一个拓展，<code>PKCE</code> 借助哈希算法的不可逆的特性，来验证授权码的唯一性和关联性。可使用 <code>PKCE</code> 保护授权码，防范 <code>CSRF</code> 和授权码注入攻击。</p>
+<h3 id="playground">Playground<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#playground" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Info</p></div>
+                  
+                </div>
+<p>可通过 OAuth 的示例 <a href="https://www.oauth.com/playground/authorization-code-with-pkce.html" class="external">https://www.oauth.com/playground/authorization-code-with-pkce.html<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 了解 <code>PKCE</code> 的流程。</p>
+</blockquote>
+<h4 id="注册">注册<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#注册" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li><code>client_id</code>：<code>mEwZJp0AN5k5rTq-rMCB1toG</code></li>
+<li><code>client_secret</code>：<code>7y8nyD57kCG_K9DZbGf-xS2RvNrHIKl9ptxMzKp4PNoGPpyG</code></li>
+<li><code>login</code>：<code>crowded-deer@example.com</code></li>
+<li><code>password</code>：<code>Calm-Flamingo-41</code></li>
+</ul>
+<h4 id="重定向前的准备">重定向前的准备<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#重定向前的准备" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p><code>Client</code> 将用户重定向至 <code>OAuth</code> 认证服务器前，生成一个 <code>secret code verifier</code> 和 <code>challenge</code>，前者字母、数字、标点符号『<code>-._~</code>』组成，长度介于 <code>40-128</code>；后者在 <code>Client</code> 支持 <code>SHA256</code> 的情况下，对 <code>code verifier</code> 进行 <code>SHA256-BASE64-URl</code> <code>3</code> 重编码，否则直接使用 <code>code verifier</code> 作为 <code>challenge</code>。</p>
+<p>例如对于如下 <code>code verifier</code>，</p>
+<pre><code>ZU7Sg87rWCWqNKFPz_RzdUoG9TUkVRKam4WyBALkksVDAeo8
+</code></pre>
+<p>生成 <code>challenge=base64url(sha256(code_verifier))</code>，</p>
+<pre><code>pDEnD7FW5vyK22pmKxsdwb_O810Vl3eH2fTzzd4arns
+</code></pre>
+<p><code>Client</code> 保存 <code>code verifier</code> 供后续使用，例如存放在 <code>cookie</code> 中。同时，<code>Client</code> 需要生成一个随机的 <code>state</code> 参数，同样的可以选择存放在 <code>cookie</code> 中。最后返回给用户的重定向 <code>URL</code> 如下，其中携带 <code>code_challenge</code> 和 <code>state</code></p>
+<pre><code>https://authorization-server.com/authorize?
+  response_type=code
+  &amp;client_id=mEwZJp0AN5k5rTq-rMCB1toG
+  &amp;redirect_uri=https://www.oauth.com/playground/authorization-code-with-pkce.html
+  &amp;scope=photo+offline_access
+  &amp;state=IVgHkilS32JLrf70
+  &amp;code_challenge=pDEnD7FW5vyK22pmKxsdwb_O810Vl3eH2fTzzd4arns
+  &amp;code_challenge_method=S256
+</code></pre>
+<h4 id="验证-state">验证 State<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#验证-state" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>用户根据重定向 <code>URL</code> 访问 <code>OAuth</code> 授权服务器后，会带回如下参数访问 <code>Client</code>。这里 <code>state</code> 和 <code>code</code> 都具有防护 CSRF 的功能，在实际应用中，如果支持 <code>PKCE</code>，可以使用 <code>state</code> 来表示应用的其它状态。</p>
+<pre><code>?state=IVgHkilS32JLrf70&amp;code=1kC7qeB4VpGn1i0HKIA0U30GPcOhz_BVMxtkkf3hu8t2rgf4
+</code></pre>
+<p>接着要 <code>Client</code> 使用 <code>code</code> 与 <code>OAuth</code> 授权服务器交换 <code>access_token</code> 了，在使用 <code>PKCE</code> 的情况下，<code>Client</code> 会带上参数 <code>code_verifier</code>。授权服务器会对 <code>code_verifier</code> 计算一次哈希，并判断它与最初接收到的 <code>code_challenge</code> 是否相同，通过了该挑战才会返回 <code>token</code>。</p>
+<pre><code>POST https://authorization-server.com/token?
+	grant_type=authorization_code
+	&amp;client_id=mEwZJp0AN5k5rTq-rMCB1toG
+	&amp;client_secret=7y8nyD57kCG_K9DZbGf-xS2RvNrHIKl9ptxMzKp4PNoGPpyG
+	&amp;redirect_uri=https://www.oauth.com/playground/authorization-code-with-pkce.html
+	&amp;code=1kC7qeB4VpGn1i0HKIA0U30GPcOhz_BVMxtkkf3hu8t2rgf4
+	&amp;code_verifier=ZU7Sg87rWCWqNKFPz_RzdUoG9TUkVRKam4WyBALkksVDAeo8
+</code></pre>
+<h4 id="验证-code">验证 Code<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#验证-code" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p><code>OAuth</code> 使用 <code>code_verifier</code> 完成 <code>challenge</code> 后，才会返回 <code>access_token</code></p>
+<blockquote>
+<p>由于 <code>code_verifier</code> 每一次都是独立随机的，即使前面的请求被伪造，由于不知道 <code>code_verifier</code>，攻击者无法完成 <code>CSRF</code> 攻击。</p>
+</blockquote>
+<pre><code>{
+  &quot;token_type&quot;: &quot;Bearer&quot;,
+  &quot;expires_in&quot;: 86400,
+  &quot;access_token&quot;: &quot;XWLW_BFt6komy57NpPKHyEqFZyiJG12bNpSh23tyBLBI1Ok_D-r5BZxjZIamKZY8DjIPT2rJ&quot;,
+  &quot;scope&quot;: &quot;photo offline_access&quot;,
+  &quot;refresh_token&quot;: &quot;acyLSsgyi-M5DAWoj12zg3uV&quot;
+}
+</code></pre>
+<h3 id="时序图">时序图<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#时序图" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>以下为 <code>PKCE</code> 的挑战时序图</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="plantuml" data-theme="github-light github-dark"><code data-language="plantuml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>@startuml</span></span>
+<span data-line><span>skinparam Shadowing true</span></span>
+<span data-line><span>skinparam sequenceMessageAlign direction</span></span>
+<span data-line><span>participant User</span></span>
+<span data-line><span>participant Client</span></span>
+<span data-line><span>participant AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>User -> Client: &quot;GET /peek&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>activate Client</span></span>
+<span data-line> </span>
+<span data-line><span>note left of Client</span></span>
+<span data-line><span>generate code verifier and challenge,</span></span>
+<span data-line><span>and send the challenge</span></span>
+<span data-line><span>end note</span></span>
+<span data-line><span>Client -> User: &quot;302 Location: GET /auth?response_type=code&amp;state=pololu&amp;code_challenge=&amp;code_challenge_method=S256&quot;</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line> </span>
+<span data-line><span>User -> AuthServer: &quot;GET /auth?response_type=code&amp;state=pololu&amp;code_challenge=&amp;code_challenge_method=S256&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>activate AuthServer</span></span>
+<span data-line><span>AuthServer -> User: &quot;302 Location: GET /client/handle_code?state=pololu&amp;code=code&quot;</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line><span>deactivate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>User -> Client: &quot;GET /client/handle_code?state=&lt;state>&amp;code=&lt;code>&quot;</span></span>
+<span data-line><span>activate User</span></span>
+<span data-line><span>Client -> AuthServer: &quot;POST /token?code=code&amp;code_verifier=code_verifier&quot;</span></span>
+<span data-line><span>note left of AuthServer: use the code_verifier to complete the challenge</span></span>
+<span data-line><span>activate AuthServer</span></span>
+<span data-line><span>AuthServer -> Client: &quot;200 token&quot;</span></span>
+<span data-line><span>deactivate AuthServer</span></span>
+<span data-line> </span>
+<span data-line><span>Client -> User: &quot;200: result&quot;</span></span>
+<span data-line><span>deactivate Client</span></span>
+<span data-line><span>deactivate User</span></span>
+<span data-line><span>@enduml</span></span></code></pre></figure>
+<h2 id="参考">参考<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#参考" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><a href="https://spring.io/blog/2011/11/30/cross-site-request-forgery-and-oauth2" class="external">https://spring.io/blog/2011/11/30/cross-site-request-forgery-and-oauth2<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://salt.security/blog/traveling-with-oauth-account-takeover-on-booking-com" class="external">https://salt.security/blog/traveling-with-oauth-account-takeover-on-booking-com<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://www.oauth.com/playground/authorization-code-with-pkce.html" class="external">https://www.oauth.com/playground/authorization-code-with-pkce.html<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 『Playground: Authorization Code with PKCE』</li>
+</ol></article></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div id="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false}"></div><svg version="1.1" id="global-graph-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+	s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+	c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+	C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+	c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+	v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+	s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+	C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+	S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+	s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+	s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></div><div id="global-graph-outer"><div id="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" id="toc" class><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="toc-content"><ul class="overflow"><li class="depth-0"><a href="#oauth-authorization-code-模式回顾" data-for="oauth-authorization-code-模式回顾">OAuth Authorization Code 模式回顾</a></li><li class="depth-0"><a href="#oauth-下的安全问题" data-for="oauth-下的安全问题">OAuth 下的安全问题</a></li><li class="depth-1"><a href="#implicit-grant-attacks" data-for="implicit-grant-attacks">Implicit Grant Attacks</a></li><li class="depth-1"><a href="#authorization-code-attacks" data-for="authorization-code-attacks">Authorization Code Attacks</a></li><li class="depth-1"><a href="#csrf-attacks" data-for="csrf-attacks">CSRF Attacks</a></li><li class="depth-1"><a href="#ssrf-via-openid" data-for="ssrf-via-openid">SSRF via OpenID</a></li><li class="depth-1"><a href="#abusing-oauth" data-for="abusing-oauth">Abusing OAuth</a></li><li class="depth-0"><a href="#pkce" data-for="pkce">PKCE</a></li><li class="depth-1"><a href="#playground" data-for="playground">Playground</a></li><li class="depth-1"><a href="#时序图" data-for="时序图">时序图</a></li><li class="depth-0"><a href="#参考" data-for="参考">参考</a></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul class="overflow"><li>No backlinks found</li></ul></div></div></div><footer class><hr/><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.2.3</a> © 2024</p><ul><li><a href="https://github.com/trganda">GitHub</a></li><li><a href="https://www.trganda.top/index.xml">RSS</a></li></ul></footer></div></body><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js" type="application/javascript"></script><script type="application/javascript">function c(){let t=this.parentElement;t.classList.toggle("is-collapsed");let l=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=l+"px";let o=t,e=t.parentElement;for(;e;){if(!e.classList.contains("callout"))return;let n=e.classList.contains("is-collapsed")?e.scrollHeight:e.scrollHeight+o.scrollHeight;e.style.maxHeight=n+"px",o=e,e=e.parentElement}}function i(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let l=s.firstElementChild;if(l){l.addEventListener("click",c),window.addCleanup(()=>l.removeEventListener("click",c));let e=s.classList.contains("is-collapsed")?l.scrollHeight:s.scrollHeight;s.style.maxHeight=e+"px"}}}document.addEventListener("nav",i);window.addEventListener("resize",i);
+</script><script type="module">
+          let mermaidImport = undefined
+          document.addEventListener('nav', async () => {
+            if (document.querySelector("code.mermaid")) {
+              mermaidImport ||= await import('https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs')
+              const mermaid = mermaidImport.default
+              const darkMode = document.documentElement.getAttribute('saved-theme') === 'dark'
+              mermaid.initialize({
+                startOnLoad: false,
+                securityLevel: 'loose',
+                theme: darkMode ? 'dark' : 'default'
+              })
+
+              await mermaid.run({
+                querySelector: '.mermaid'
+              })
+            }
+          });
+          </script><script src="../../../../postscript.js" type="module"></script></html>

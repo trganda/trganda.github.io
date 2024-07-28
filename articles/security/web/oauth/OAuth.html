@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>OAuth - 简介</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM Plex Mono&amp;family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta property="og:title" content="OAuth - 简介"/><meta property="og:description" content="OAuth 是一种开放授权标准，目前广泛使用的版本为 2.0，主要用于解决第三方应用以用户身份访问其它资源的问题。 例如你在 github 拥有账号，通过 oauth 授权 synk 扫描在 github 上的仓库，特别是私有仓库。 概念定义 RFC6749 文档中将整个授权过程的参与者抽象成了 3 类，资源所有者（Resource ..."/><meta property="og:image" content="https://www.trganda.top/static/og-image.png"/><meta property="og:width" content="1200"/><meta property="og:height" content="675"/><link rel="icon" href="../../../../static/icon.png"/><meta name="description" content="OAuth 是一种开放授权标准，目前广泛使用的版本为 2.0，主要用于解决第三方应用以用户身份访问其它资源的问题。 例如你在 github 拥有账号，通过 oauth 授权 synk 扫描在 github 上的仓库，特别是私有仓库。 概念定义 RFC6749 文档中将整个授权过程的参与者抽象成了 3 类，资源所有者（Resource ..."/><meta name="generator" content="Quartz"/><link href="../../../../index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../../../../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../../../../static/contentIndex.json").then(data => data.json())</script></head><body data-slug="articles/security/web/oauth/OAuth"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h1 class="page-title"><a href="../../../..">Trganda's Notes</a></h1><div class="spacer mobile-only"></div><div class="search"><div id="search-icon"><p>Search</p><div></div><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search</title><desc id="desc">Search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></div><div id="search-container"><div id="search-space"><input autocomplete="off" id="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div id="search-layout" data-preview="true"></div></div></div></div><div class="darkmode"><input class="toggle" id="darkmode-toggle" type="checkbox" tabindex="-1"/><label id="toggle-label-light" for="darkmode-toggle" tabindex="-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg></label><label id="toggle-label-dark" for="darkmode-toggle" tabindex="-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></label></div><div class="recent-notes desktop-only"><h3>Recent Notes</h3><ul class="recent-ul"><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../til/issues/甲状腺结节与胆结石注意事项" class="internal">甲状腺结节与胆结石注意事项</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../cavans/拉里事迹" class="internal">拉里事迹</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../projects/Web-漏洞解析与攻防实战/HTTP-协议与编码" class="internal">HTTP 协议与编码</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li></ul></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../articles/">articles</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../articles/security/">security</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../articles/security/web/">web</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../articles/security/web/oauth/">oauth</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>OAuth - 简介</a></div></nav><h1 class="article-title">OAuth - 简介</h1><p show-comma="true" class="content-meta"><span>Nov 06, 2023</span><span>14 min read</span></p><ul class="tags"><li><a href="../../../../tags/oauth" class="internal tag-link">oauth</a></li></ul></div></div><article class="popover-hint"><p><a href="https://en.wikipedia.org/wiki/OAuth" class="external">OAuth<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 是一种开放授权标准，目前广泛使用的版本为 <code>2.0</code>，主要用于解决第三方应用以用户身份访问其它资源的问题。</p>
+<p>例如你在 <code>github</code> 拥有账号，通过 <code>oauth</code> 授权 <a href="https://snyk.io/" class="external">synk<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 扫描在 <a href="https://github.com/" class="external">github<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 上的仓库，特别是私有仓库。</p>
+<h2 id="概念定义">概念定义<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#概念定义" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><a href="http://www.rfcreader.com/#rfc6749" class="external">RFC6749<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 文档中将整个授权过程的参与者抽象成了 3 类，资源所有者（Resource Owner）、客户端（Client）和认证服务器（Authorization Server）</p>
+<ul>
+<li>Client：指第三方应用</li>
+<li>Resource Owner：指用户</li>
+<li>Authorization Server：指 OAuth 认证和授权服务提供者</li>
+<li>Resource server：资源服务器，即服务提供商存放用户生资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器『位于内部网络』。</li>
+</ul>
+<p>下图展示了通过 OAuth 进行授权的例子</p>
+<p><img src="../../../../assets/articles/security/web/oauth/OAuth/IMG-20240417002755451.png" alt/></p>
+<p>OAuth 2.0 定义了四种授权方式，上图展示的是 <code>implicit</code> 模式。</p>
+<ol>
+<li>授权码模式（authorization code）</li>
+<li>简化模式（implicit）</li>
+<li>密码模式（resource owner password credentials）</li>
+<li>客户端模式（client credentials）</li>
+</ol>
+<h2 id="授权方式">授权方式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#授权方式" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="authorization-code">Authorization Code<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#authorization-code" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>最完善的模式，也是相对最安全的模式。该模式下第三方应用先申请一个验证码，然后再用该验证码获取访问令牌。</p>
+<p>它的工作流程如下：</p>
+<ol>
+<li>用户访问客户端，客户端将用户重定向至目标服务器，例如前面的 <code>google</code>。</li>
+<li>用户根据重定向的地址，访问并登录 <code>goole</code>，选择是否给予客户端授权。</li>
+<li>假设用户给予授权，<code>google</code> 会让用户重定向至客户端，重定向的 <code>URL</code> 包含一个授权码。</li>
+<li>客户端收到授权码，携带 <code>client_id</code> 和 <code>client_secret</code>，向认证服务器申请令牌。这一步是在客户端的后台的服务器上完成的，对用户不可见。</li>
+<li>认证服务器核对了授权码和 <code>client_id</code> 和 <code>client_secret</code>，确认无误后，向客户端发送访问令牌（access token）和更新令牌（refresh token），后续如果令牌到期，客户端可以使用更新令牌从认证服务器获取新的访问令牌。</li>
+</ol>
+<p>各个步骤所需要的参数如下</p>
+<p>步骤 <code>1</code> 中，客户端申请认证的 <code>URI</code>，包含以下参数：</p>
+<ul>
+<li><code>response_type</code>：表示授权类型，必选项，授权码模式下固定为 “<code>code</code>”。</li>
+<li><code>client_id</code>：表示客户端的 <code>ID</code>，必选项。</li>
+<li><code>redirect_uri</code>：表示重定向 <code>URI</code>，可选项。</li>
+<li><code>scope</code>：表示申请的权限范围，可选项。</li>
+<li><code>state</code>：表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。这个 <code>state</code> <strong>相当于一个 <code>csrf token</code></strong>。</li>
+</ul>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="http" data-theme="github-light github-dark"><code data-language="http" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">GET</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> /authorize?response_type=code&amp;client_id=s6BhdRkqt3&amp;state=xyz&amp;redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">HTTP</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">1.1</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Host</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> server.example.com</span></span></code></pre></figure>
+<p>步骤 <code>3</code> 中，服务器响应客户端的 <code>URI</code>，包含以下参数：</p>
+<ul>
+<li><code>code</code>：表示授权码，必选项。该码的有效期应该很短，通常设为 <code>10</code> 分钟，客户端只能使用该码一次，否则会被授权服务器拒绝。该码与客户端 <code>ID</code> 和重定向 <code>URI</code>，是一一对应关系。</li>
+<li><code>state</code>：如果客户端的请求中包含这个参数，认证服务器的回应也必须一模一样包含这个参数。</li>
+</ul>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="http" data-theme="github-light github-dark"><code data-language="http" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">HTTP/1.1 302 Found</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Location</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">          &amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">state=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">xyz</span></span></code></pre></figure>
+<p>步骤 <code>4</code> 中，客户端向认证服务器申请令牌的 <code>HTTP</code> 请求，包含以下参数：</p>
+<ul>
+<li><code>grant_type</code>：表示使用的授权模式，必选项，此处的值固定为 “<code>authorization_code</code>”。</li>
+<li><code>code</code>：上一步获取的授权码，必选项。</li>
+<li><code>redirect_uri</code>：表示重定向 <code>URI</code>，必选项，且必须与 <code>A</code> 步骤中的该参数值保持一致。</li>
+<li><code>client_id</code>：表示客户端 <code>ID</code>，必选项。</li>
+<li><code>client_secret</code>：表示客户端密钥，必选项</li>
+</ul>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="http" data-theme="github-light github-dark"><code data-language="http" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">POST</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> /token </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">HTTP</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">1.1</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Host</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> server.example.com</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Authorization</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Content-Type</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> application/x-www-form-urlencoded</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">grant_type=authorization_code&amp;code=SplxlOBeZQQYbYS6WxSbIA</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">&amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">redirect_uri=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb&amp;client_id=CLIENT_ID&amp; client_secret=CLIENT_SECRET</span></span></code></pre></figure>
+<p>步骤 <code>5</code> 中，认证服务器发送的 <code>HTTP</code> 响应，包含以下参数：</p>
+<ul>
+<li><code>access_token</code>：表示访问令牌，必选项。</li>
+<li><code>token_type</code>：表示令牌类型，该值大小写不敏感，必选项，可以是 bearer 类型或 mac 类型。</li>
+<li><code>expires_in</code>：表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。</li>
+<li><code>refresh_token</code>：表示更新令牌，用来获取下一次的访问令牌，可选项。</li>
+<li><code>scope</code>：表示权限范围，如果与客户端申请的范围一致，此项可省略。</li>
+</ul>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="http" data-theme="github-light github-dark"><code data-language="http" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">HTTP/1.1 200 OK</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Content-Type</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> application/json;charset=UTF-8</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Cache-Control</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> no-store</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Pragma</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> no-cache</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">{</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;access_token&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;2YotnFZFEjr1zCsicMWpAA&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;token_type&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;example&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;expires_in&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">3600</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;refresh_token&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">    &quot;example_parameter&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;example_value&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></figure>
+<p>从上面代码可以看到，相关参数使用 <code>JSON</code> 格式发送（Content-Type: application/json）。此外，<code>HTTP</code> 头信息中明确指定不得缓存。当然，这只是标准中规定的，具体情况需要看实现。</p>
+<h3 id="implicit">Implicit<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#implicit" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>前面的 <code>Authorization Code</code> 模式，需要客户端有后端服务器。对于无后端的应用进行授权则需要使用 <code>Implicit</code> 模式。简化模式将客户端和认证服务器的通信过程，放到了 <code>User-Agent</code>（用户） 中进行。跳过了『授权码』这个步骤，但也带来了一定的安全风险。</p>
+<p>在前面的模式下，<code>User-Agent</code> 先将 <code>Authorization Code</code> 交给 <code>Client</code>，<code>Client</code> 再根据此 <code>Code</code> 去获取 <code>Access Code</code>。而此模式下，略过了第一步，当用户通过 <code>User-Agent</code> 访问认证服务后，直接得到 <code>Access Code</code> 并交给 <code>Client</code>。</p>
+<p>它的工作流程如下：</p>
+<ol>
+<li>客户端将用户重定向认证服务器。</li>
+<li>用户决定是否给于客户端授权。</li>
+<li>假设用户给予授权，认证服务器将用户导向客户端指定的『重定向 <code>URL</code>』，并在 <code>URL</code> 中包含了一个访问令牌，位于 <code>Fragment</code> 中。</li>
+<li><code>User-Agent</code> 根据重定向请求访问 <code>Web-Hosted Client Resource</code>，此时不会带上前一步 <code>Fragment</code> 中的访问令牌。</li>
+<li><code>User-Agent</code> 获取包含 <code>Script</code> 的响应内容，这个 <code>Script</code> 能够获取步骤 <code>C</code> 中位于 <code>Fragment</code> 中的访问令牌。</li>
+<li><code>User-Agent</code> 执行 <code>Script</code> 获取访问令牌。</li>
+<li><code>User-Agent</code> 将访问令牌发送给 <code>Client</code>。</li>
+</ol>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Tip</p></div>
+                  
+                </div>
+<p>注意，步骤 <code>3</code> 返回的令牌的位置是 <code>URL</code> 锚点（<code>fragment</code>），而不是查询字符串（<code>querystring</code>），这是因为 <code>OAuth 2.0</code> 允许跳转网址是 <code>HTTP</code> 协议，因此存在 ” 中间人攻击 ” 的风险，而浏览器跳转时，锚点不会发到服务器，只能在本地（User-Agetn）获取，就减少了泄漏令牌的风险。</p>
+</blockquote>
+<p>各个步骤所需要的参数如下</p>
+<p>步骤 <code>1</code> 中，客户端发出的 HTTP 请求，包含以下参数：</p>
+<ul>
+<li><code>response_type</code>：表示授权类型，此验证模式下值固定为『<code>token</code>』，必选项。</li>
+<li><code>client_id</code>：表示客户端的 <code>ID</code>，必选项。</li>
+<li><code>redirect_uri</code>：表示重定向的 <code>URI</code>，可选项。</li>
+<li><code>scope</code>：表示权限范围，可选项。</li>
+<li><code>state</code>：表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。</li>
+</ul>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="http" data-theme="github-light github-dark"><code data-language="http" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">GET</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> /authorize?response_type=token&amp;client_id=s6BhdRkqt3&amp;state=xyz</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">    &amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">redirect_uri=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb HTTP/1.1</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Host</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> server.example.com</span></span></code></pre></figure>
+<p>步骤 <code>3</code> 中，认证服务器响应应客户端的 <code>URL</code>，包含以下参数：</p>
+<ul>
+<li><code>access_token</code>：表示访问令牌，必选项。</li>
+<li><code>token_type</code>：表示令牌类型，该值大小写不敏感，必选项。</li>
+<li><code>expires_in</code>：表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。</li>
+<li><code>scope</code>：表示权限范围，如果与客户端申请的范围一致，此项可省略。</li>
+<li><code>state</code>：如果客户端的请求中包含这个参数，认证服务器的回应也必须一模一样包含这个参数。</li>
+</ul>
+<p>但这些参数都位于 <code>#</code> 后面，也就是 <code>Fragment</code> 中。</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="http" data-theme="github-light github-dark"><code data-language="http" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">HTTP/1.1 302 Found</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Location</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> http://example.com/cb#access_token=2YotnFZFEjr1zCsicMWpAA</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">          &amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">state=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">xyz&amp;token_type=example&amp;expires_in=3600</span></span></code></pre></figure>
+<p>根据上面的步骤 <code>4</code>，下一步浏览器会访问 <code>Location</code> 指定的 <code>URL</code>，但不会带上 <code>Fragment</code> 。访问后，<code>Web-Hosted Client Resource</code> 返回解析代码用于从步骤 <code>4</code> 获取的 <code>URL</code> 中出 <code>Fragment</code> 中的令牌。最后在 <code>6</code> 步骤中，将令牌交给 <code>Client</code>。</p>
+<p>至于为什么将返回到 token 等信息放在 Fragment 中，主要原因有下面 3 个 <a href="../../../../journals/2022/10---October/24---Monday/OAuth-2-and-Fragment-encoding" class="internal alias" data-slug="journals/2022/10---October/24---Monday/OAuth-2-and-Fragment-encoding">OAuth 2 and Fragment encoding.</a>：</p>
+<ol>
+<li>这种方式对于 <code>JS</code> 环境下的 <code>Client</code> 而言（<code>User-Agent</code>，如浏览器）可以很方便的获取响应中的内容，节省操作次数。</li>
+<li>此方式相比 <code>Post</code> 而言，不会在 <code>Referrer</code> 字段中泄露信息。</li>
+<li><code>Fragment</code> 在重定向时，不会被包含在请求的 <code>URL</code> 中。（不过现在的浏览器不一定会准守该行为准则）。</li>
+</ol>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Info</p></div>
+                  
+                </div>
+<p>至于为什么标准中假定解析 Fragment 的脚本放在 <code>Web-Hosted Client Resource</code>，没有找到具体这么做的解释。这里只找到一个 <a href="https://stackoverflow.com/questions/23780909/why-does-the-implicit-authorization-grant-in-oauth-require-a-web-hosted-client" class="external">回答<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>，但解释的也不够详细</p>
+</blockquote>
+<h3 id="password-credentials">Password Credentials<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#password-credentials" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>Password Credentials</code> 模式与其它授权方式不同的是，它直接返回用户的账号和密码给客户端。</p>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Info</p></div>
+                  
+                </div>
+<p>除非非常信任目标客户端，否则不要这么做。</p>
+</blockquote>
+<p>它的工作流程如下：</p>
+<ol>
+<li>客户端向用户索取认证服务器所需的用户名和密码。</li>
+<li>客户端携带用户名和密码从认证服务器请求令牌。</li>
+</ol>
+<p>步骤 <code>2</code> 中，客户端向认证服务器发送的请求包含以下参数：</p>
+<ul>
+<li><code>grant_type</code>：表示使用的授权模式，必选项，此处的值固定为『<code>password</code>』。</li>
+<li><code>username</code>：上一步获取的用户名，必选项。</li>
+<li><code>password</code>：上一步获取的密码，必选项。</li>
+<li><code>client_id</code>：表示客户端 <code>ID</code>，必选项。</li>
+</ul>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="http" data-theme="github-light github-dark"><code data-language="http" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">GET</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> /authorize?grant_type=password&amp;username=USERNAME&amp;password=PASSWORD&amp;client_id=CLIENT_ID </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">HTTP</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">1.1</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Host</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> server.example.com</span></span></code></pre></figure>
+<h3 id="client-credentials">Client Credentials<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#client-credentials" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>Client Credentials</code> 模式，这种模式适合没有前端的控制台应用。</p>
+<p>它的工作流程如下：</p>
+<ol>
+<li>控制台应用向认证服务器发送授权请求。</li>
+<li>认证服务器验证后直接返回令牌。</li>
+</ol>
+<p>注意上面的交互过程不需要『用户参与』，该模式通常适用于第三方应用访问它自己的所属的资源。</p>
+<p>步骤 <code>1</code> 中，客户端向认证服务器发送的请求包含以下参数：</p>
+<ul>
+<li><code>grant_type</code>：表示使用的授权模式，必选项，此处的值固定为『<code>password</code>』。</li>
+<li><code>username</code>：上一步获取的用户名，必选项。</li>
+<li><code>password</code>：上一步获取的密码，必选项。</li>
+<li><code>client_id</code>：表示客户端 <code>ID</code>，必选项。</li>
+<li><code>scope</code>：表示权限范围，可选项。</li>
+</ul>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="http" data-theme="github-light github-dark"><code data-language="http" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">GET</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> /authorize?grant_type=client_credentials&amp;client_id=CLIENT_ID&amp;client_secret=CLIENT_SECRET </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">HTTP</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">1.1</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">Host</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> server.example.com</span></span></code></pre></figure>
+<p>步骤 <code>2</code> 中，认证服务器的响应格式为 <code>json</code>，包含以下字段：</p>
+<ul>
+<li><code>access_token</code>：表示访问令牌，必选项。</li>
+<li><code>token_type</code>：表示令牌类型，该值大小写不敏感，必选项，可以是 bearer 类型或 mac 类型。</li>
+<li><code>expires_in</code>：表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。</li>
+<li><code>refresh_token</code>：表示更新令牌，用来获取下一次的访问令牌，可选项。</li>
+<li><code>scope</code>：表示权限范围，如果与客户端申请的范围一致，此项可省略。</li>
+</ul>
+<h2 id="代码示例">代码示例<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#代码示例" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>这里可以参考 <a href="https://www.ruanyifeng.com/blog/2019/04/github-oauth.html" class="external">ruanyifeng<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 博客中的示例代码，上手体验通过 OAuth 进行授权。</p>
+<h2 id="reference">Reference<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#reference" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><a href="https://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" class="external">理解OAuth 2.0 - 阮一峰的网络日志 (ruanyifeng.com)<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://oauth.net/2/" class="external">OAuth 2.0 — OAuth<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://portswigger.net/web-security/oauth" class="external">OAuth 2.0 authentication vulnerabilities | Web Security Academy (portswigger.net)<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://portswigger.net/web-security/oauth/grant-types" class="external">OAuth grant types | Web Security Academy (portswigger.net)<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="http://www.rfcreader.com/#rfc6749" class="external">RFC Reader - An online reader for IETF RFCs<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ol></article></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div id="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false}"></div><svg version="1.1" id="global-graph-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+	s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+	c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+	C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+	c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+	v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+	s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+	C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+	S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+	s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+	s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></div><div id="global-graph-outer"><div id="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" id="toc" class><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="toc-content"><ul class="overflow"><li class="depth-0"><a href="#概念定义" data-for="概念定义">概念定义</a></li><li class="depth-0"><a href="#授权方式" data-for="授权方式">授权方式</a></li><li class="depth-1"><a href="#authorization-code" data-for="authorization-code">Authorization Code</a></li><li class="depth-1"><a href="#implicit" data-for="implicit">Implicit</a></li><li class="depth-1"><a href="#password-credentials" data-for="password-credentials">Password Credentials</a></li><li class="depth-1"><a href="#client-credentials" data-for="client-credentials">Client Credentials</a></li><li class="depth-0"><a href="#代码示例" data-for="代码示例">代码示例</a></li><li class="depth-0"><a href="#reference" data-for="reference">Reference</a></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul class="overflow"><li>No backlinks found</li></ul></div></div></div><footer class><hr/><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.2.3</a> © 2024</p><ul><li><a href="https://github.com/trganda">GitHub</a></li><li><a href="https://www.trganda.top/index.xml">RSS</a></li></ul></footer></div></body><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js" type="application/javascript"></script><script type="application/javascript">function c(){let t=this.parentElement;t.classList.toggle("is-collapsed");let l=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=l+"px";let o=t,e=t.parentElement;for(;e;){if(!e.classList.contains("callout"))return;let n=e.classList.contains("is-collapsed")?e.scrollHeight:e.scrollHeight+o.scrollHeight;e.style.maxHeight=n+"px",o=e,e=e.parentElement}}function i(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let l=s.firstElementChild;if(l){l.addEventListener("click",c),window.addCleanup(()=>l.removeEventListener("click",c));let e=s.classList.contains("is-collapsed")?l.scrollHeight:s.scrollHeight;s.style.maxHeight=e+"px"}}}document.addEventListener("nav",i);window.addEventListener("resize",i);
+</script><script type="module">
+          let mermaidImport = undefined
+          document.addEventListener('nav', async () => {
+            if (document.querySelector("code.mermaid")) {
+              mermaidImport ||= await import('https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs')
+              const mermaid = mermaidImport.default
+              const darkMode = document.documentElement.getAttribute('saved-theme') === 'dark'
+              mermaid.initialize({
+                startOnLoad: false,
+                securityLevel: 'loose',
+                theme: darkMode ? 'dark' : 'default'
+              })
+
+              await mermaid.run({
+                querySelector: '.mermaid'
+              })
+            }
+          });
+          </script><script src="../../../../postscript.js" type="module"></script></html>

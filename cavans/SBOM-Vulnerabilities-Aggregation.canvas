@@ -1,0 +1,31 @@
+{
+	"nodes":[
+		{"type":"group","id":"3a9fa3bab8fa67ee","x":600,"y":290,"width":690,"height":260,"label":"OSV Vulnerabilities"},
+		{"type":"text","text":"[deps.dev](https://docs.deps.dev/api/v3alpha/index.html)","id":"da785391883fbda5","x":-240,"y":-120,"width":250,"height":60},
+		{"type":"text","text":"```plantuml\n@startjson\n{\n\t\"schema_version\": \"string\",\n\t\"id\": \"string\",\n\t\"modified\": \"string\",\n\t\"published\": \"string\",\n\t\"withdrawn\": \"string\",\n\t\"aliases\": [ \"string\" ],\n\t\"related\": [ \"string\" ],\n\t\"summary\": \"string\",\n\t\"details\": \"string\",\n\t\"severity\": [ {\n\t\t\"type\": \"string\",\n\t\t\"score\": \"string\"\n\t} ],\n\t\"affected\": [ {\n\t\t\"package\": {\n\t\t\t\"ecosystem\": \"string\",\n\t\t\t\"name\": \"string\",\n\t\t\t\"purl\": \"string\"\n\t\t},\n\t\t\"ranges\": [ {\n\t\t\t\"type\": \"string\",\n\t\t\t\"repo\": \"string\",\n\t\t\t\"events\": [ {\n\t\t\t\t\"introduced\": \"string\",\n\t\t\t\t\"fixed\": \"string\",\n\t\t\t\t\"last_affected\": \"string\",\n\t\t\t\t\"limit\": \"string\"\n\t\t\t} ],\n\t\t\t\"database_specific\": {  }\n\t\t} ],\n\t\t\"versions\": [ \"string\" ],\n\t\t\"ecosystem_specific\": {  },\n\t\t\"database_specific\": {  }\n\t} ],\n\t\"references\": [ {\n\t\t\"type\": \"string\",\n\t\t\"url\": \"string\"\n\t} ],\n\t\"credits\": [ {\n\t\t\"name\": \"string\",\n\t\t\"contact\": [ \"string\" ]\n\t} ],\n\t\"database_specific\": {  }\n}\n@endjson\n```\n","id":"13f16c7058f0c3f4","x":107,"y":914,"width":936,"height":324},
+		{"type":"text","text":"OSV Format","id":"a0fb918b4c44c0cb","x":450,"y":760,"width":250,"height":60},
+		{"type":"text","text":"id 从 id 中提取\nreferences - aliases 『 CycloneDX 中的 references 与 osv 中的 references 含义不同』","id":"fb78311a6ae58d43","x":-244,"y":1387,"width":424,"height":193},
+		{"type":"text","text":"```plantuml\n@startjson\n{\n  \"vulnerabilities\": [\n    {\n      \"bom-ref\": \"bom-ref\",\n      \"id\": \"CVE-2018-7489\",\n      \"source\": {\n        \"name\": \"NVD\",\n        \"url\": \"https://nvd.nist.gov/vuln/detail/CVE-2019-9997\"\n      },\n      \"references\": [\n        {\n          \"id\": \"GHSA-6phf-73q6-gh87\",\n          \"source\": \"https://github.com/advisories/GHSA-6phf-73q6-gh87\"\n        }\n      ],\n      \"ratings\": [\n        {\n          \"source\": {\n            \"name\": \"NVD\",\n            \"url\": \"url\"\n          },\n          \"score\": 9.8,\n          \"severity\": \"critical\",\n          \"method\": \"CVSSv3\",\n          \"vector\": \"AN/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H\"\n        }\n      ],\n      \"cwes\": [\n        184,\n        502\n      ],\n      \"description\": \"description\",\n      \"detail\": \"detail\",\n      \"recommendation\": \"recommendation\",\n      \"advisories\": [\n        {\n          \"title\": \"NVD\",\n          \"url\": \"https://nvd.nist.gov/vuln/detail/CVE-2019-10086\"\n        }\n      ],\n      \"created\": \"2021-01-01T00:00:00.000Z\",\n      \"published\": \"2021-01-01T00:00:00.000Z\",\n      \"updated\": \"2021-01-01T00:00:00.000Z\",\n      \"credits\": {\n        \"name\": \"name\",\n        \"email\": \"email\",\n        \"phone\": \"phone\"\n      },\n      \"analysis\": {\n        \"state\": \"not_affected\",\n        \"justification\": \"code_not_reachable\",\n        \"response\": [\n          \"will_not_fix\",\n          \"update\"\n        ],\n        \"detail\": \"detail\"\n      },\n      \"affects\": [\n        {\n          \"ref\": \"bom-ref\",\n          \"versions\": [\n            {\n              \"version\": \"version\",\n              \"status\": \"affected\"\n            },\n            {\n              \"range\": \"versions\",\n              \"status\": \"affected\"\n            }\n          ]\n        }\n      ],\n      \"properties\": [\n        {\n          \"name\": \"name\",\n          \"value\": \"value\"\n        }\n      ]\n    }\n  ]\n}\n@endjson\n```","id":"b624953f7ccb5b1e","x":-1440,"y":880,"width":1332,"height":400},
+		{"type":"file","file":"archived/projects/supply chains/Dependency Data for Secure Supply Chains.md","id":"eb37f29d7db05034","x":-315,"y":140,"width":400,"height":400},
+		{"type":"text","text":"Licenses","id":"47fdee420adb751f","x":-760,"y":480,"width":250,"height":60},
+		{"type":"text","text":"GetVersion","id":"e8991fa3dd7cb5f8","x":-760,"y":310,"width":250,"height":60},
+		{"type":"text","text":"CycloneDX Format","id":"d0fa1cfd464520fc","x":-899,"y":730,"width":250,"height":60},
+		{"type":"text","text":"Vulnerabilities","id":"e368a1509606befb","x":1020,"y":470,"width":250,"height":60},
+		{"type":"text","text":"GetAdvisory","id":"206ef2c6abdc8a64","x":200,"y":310,"width":250,"height":60},
+		{"type":"text","text":"[osv.dev](https://osv.dev/)","id":"5a4d173aa8281f52","x":620,"y":310,"width":250,"height":60},
+		{"type":"text","text":"[https://api.osv.dev/v1/query](https://api.osv.dev/v1/query)","id":"4ea40366bd1d1f0a","x":620,"y":470,"width":250,"height":60}
+	],
+	"edges":[
+		{"id":"c285592b911583b2","fromNode":"5a4d173aa8281f52","fromSide":"bottom","toNode":"4ea40366bd1d1f0a","toSide":"top"},
+		{"id":"63a2eb413eff5fe5","fromNode":"4ea40366bd1d1f0a","fromSide":"right","toNode":"e368a1509606befb","toSide":"left"},
+		{"id":"99ad74e4c0cf8d2d","fromNode":"da785391883fbda5","fromSide":"bottom","toNode":"eb37f29d7db05034","toSide":"top"},
+		{"id":"9d8dc6f71573a94e","fromNode":"eb37f29d7db05034","fromSide":"left","toNode":"e8991fa3dd7cb5f8","toSide":"right"},
+		{"id":"4168799635b20388","fromNode":"eb37f29d7db05034","fromSide":"right","toNode":"206ef2c6abdc8a64","toSide":"left"},
+		{"id":"e1957353c7917321","fromNode":"206ef2c6abdc8a64","fromSide":"right","toNode":"5a4d173aa8281f52","toSide":"left"},
+		{"id":"cb17039cffc6824d","fromNode":"e8991fa3dd7cb5f8","fromSide":"bottom","toNode":"47fdee420adb751f","toSide":"top"},
+		{"id":"c2cd84980a1014a4","fromNode":"d0fa1cfd464520fc","fromSide":"bottom","toNode":"b624953f7ccb5b1e","toSide":"top"},
+		{"id":"48c067cd1f73cc52","fromNode":"a0fb918b4c44c0cb","fromSide":"bottom","toNode":"13f16c7058f0c3f4","toSide":"top"},
+		{"id":"a6e6c8a92076dac0","fromNode":"13f16c7058f0c3f4","fromSide":"bottom","toNode":"fb78311a6ae58d43","toSide":"top"},
+		{"id":"530e8c61e3076cd0","fromNode":"b624953f7ccb5b1e","fromSide":"bottom","toNode":"fb78311a6ae58d43","toSide":"top"}
+	]
+}

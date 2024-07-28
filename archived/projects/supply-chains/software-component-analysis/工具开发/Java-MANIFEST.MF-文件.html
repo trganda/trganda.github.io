@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Java MANIFEST.MF 文件</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM Plex Mono&amp;family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta property="og:title" content="Java MANIFEST.MF 文件"/><meta property="og:description" content="MANIFEST.MF 是 Java 中包的描述文件，用于记录包的元信息。 结构 默认的 MANIFEST 在 openjdk11 下，执行如下命令 jar cf MyJar.jar classes/ 生成的 Jar 包中的 MANIFEST 文件内容如下 Manifest-Version: 1.0 Created-By: 11.0.3 (AdoptOpenJDK) ..."/><meta property="og:image" content="https://www.trganda.top/static/og-image.png"/><meta property="og:width" content="1200"/><meta property="og:height" content="675"/><link rel="icon" href="../../../../../static/icon.png"/><meta name="description" content="MANIFEST.MF 是 Java 中包的描述文件，用于记录包的元信息。 结构 默认的 MANIFEST 在 openjdk11 下，执行如下命令 jar cf MyJar.jar classes/ 生成的 Jar 包中的 MANIFEST 文件内容如下 Manifest-Version: 1.0 Created-By: 11.0.3 (AdoptOpenJDK) ..."/><meta name="generator" content="Quartz"/><link href="../../../../../index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../../../../../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../../../../../static/contentIndex.json").then(data => data.json())</script></head><body data-slug="archived/projects/supply-chains/software-component-analysis/工具开发/Java-MANIFEST.MF-文件"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h1 class="page-title"><a href="../../../../..">Trganda's Notes</a></h1><div class="spacer mobile-only"></div><div class="search"><div id="search-icon"><p>Search</p><div></div><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search</title><desc id="desc">Search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></div><div id="search-container"><div id="search-space"><input autocomplete="off" id="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div id="search-layout" data-preview="true"></div></div></div></div><div class="darkmode"><input class="toggle" id="darkmode-toggle" type="checkbox" tabindex="-1"/><label id="toggle-label-light" for="darkmode-toggle" tabindex="-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg></label><label id="toggle-label-dark" for="darkmode-toggle" tabindex="-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></label></div><div class="recent-notes desktop-only"><h3>Recent Notes</h3><ul class="recent-ul"><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../../til/issues/甲状腺结节与胆结石注意事项" class="internal">甲状腺结节与胆结石注意事项</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../../cavans/拉里事迹" class="internal">拉里事迹</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../../../../projects/Web-漏洞解析与攻防实战/HTTP-协议与编码" class="internal">HTTP 协议与编码</a></h3></div><p class="meta">Jul 28, 2024</p><ul class="tags"></ul></div></li></ul></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../../archived/">archived</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../../archived/projects/">projects</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../../archived/projects/supply-chains/">supply chains</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../../archived/projects/supply-chains/software-component-analysis/">software component analysis</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../../../archived/projects/supply-chains/software-component-analysis/工具开发/">工具开发</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Java MANIFEST.MF 文件</a></div></nav><h1 class="article-title">Java MANIFEST.MF 文件</h1><p show-comma="true" class="content-meta"><span>Jun 12, 2023</span><span>4 min read</span></p><ul class="tags"><li><a href="../../../../../tags/manifest" class="internal tag-link">manifest</a></li><li><a href="../../../../../tags/jar" class="internal tag-link">jar</a></li></ul></div></div><article class="popover-hint"><p><code>MANIFEST.MF</code> 是 Java 中包的描述文件，用于记录包的元信息。</p>
+<h2 id="结构">结构<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#结构" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="默认的-manifest">默认的 MANIFEST<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#默认的-manifest" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在 openjdk11 下，执行如下命令</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">jar</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> cf</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> MyJar.jar</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> classes/</span></span></code></pre></figure>
+<p>生成的 Jar 包中的 MANIFEST 文件内容如下</p>
+<pre><code>Manifest-Version: 1.0
+Created-By: 11.0.3 (AdoptOpenJDK)
+</code></pre>
+<h3 id="自定义-manifest">自定义 MANIFEST<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#自定义-manifest" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><code>MANIFEST</code> 允许自定义内容，增加字段值和描述。</p>
+<p>例如，有 <code>MANIFEST</code> 文件 manifest.txt，把它添加进 Jar 包中</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="sh" data-theme="github-light github-dark"><code data-language="sh" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">jar</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> cfm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> MyJar.jar</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> manifest.txt</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> classes/</span></span></code></pre></figure>
+<p>生成的 MANIFEST 文件内容如下</p>
+<pre><code>Manifest-Version: 1.0
+Built-By: baeldung
+Created-By: 11.0.3 (AdoptOpenJDK)
+</code></pre>
+<h3 id="headers">Headers<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#headers" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Header 字段由 key 和 value 组成，形式如下</p>
+<pre><code>key: value
+</code></pre>
+<p>Main Header，也就是默认生成的字段，通常提供了基础信息，如：</p>
+<ul>
+<li><em>Manifest-Version</em>: the version of the specification</li>
+<li><em>Created-By</em>: the tool version and vendor that created the manifest file</li>
+<li><em>Multi-Release</em>: if <em>true</em>, then this is a <a href="https://www.baeldung.com/java-multi-release-jar" class="external">Multi-Release Jar<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><em>Built-By</em>: this custom header gives the name of the user that created the manifest file</li>
+</ul>
+<h4 id="entry-point-和-classpath">Entry Point 和 Classpath<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#entry-point-和-classpath" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>可以在 MANIFEST 中指定 Jar 包的入口类以及 Classpath，从而避免运行 Jar 包时，手动指定。</p>
+<ul>
+<li><em>Main-Class</em>: the package and name of the class with a main method (no .class extension)</li>
+<li><em>Class-Path</em>: a space separated list of relative paths to libraries or resources，一般用的很少。
+示例如下：</li>
+</ul>
+<pre><code>Main-Class: com.baeldung.Application
+Class-Path: core.jar lib/ properties/
+</code></pre>
+<h4 id="package-版本和封装">Package 版本和封装<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#package-版本和封装" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>以下是标准头部</p>
+<ul>
+<li><em>Name</em>: the package</li>
+<li><em>Implementation-Build-Date</em>: the build date for the implementation</li>
+<li><em>Implementation-Title</em>: the title of the implementation</li>
+<li><em>Implementation-Vendor</em>: the vendor for the implementation</li>
+<li><em>Implementation-Version</em>: the implementation version</li>
+<li><em>Specification-Title</em>: the title for the specification</li>
+<li><em>Specification-Vendor</em>: the vendor for the specification</li>
+<li><em>Specification-Version</em>: the specification version</li>
+<li><em>Sealed</em>: 如果为 true，则表示所有类文件都位于此 Jar 包中，默认为 false
+如，中 MySQL Connector 驱动的 Jar 包中有如下内容，描述了实现的 JDBC 标准的版本</li>
+</ul>
+<pre><code>Specification-Title: JDBC
+Specification-Version: 4.2
+Specification-Vendor: Oracle Corporation
+Implementation-Title: MySQL Connector/J
+Implementation-Version: 8.0.16
+Implementation-Vendor: Oracle
+</code></pre>
+<h4 id="osgi">OSGI<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#osgi" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p><a href="http://docs.osgi.org/reference/bundle-headers.html" class="external">OSGI bundle<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 中的 Jar 包的 MANIFEST 会包含如下头部：</p>
+<ul>
+<li><em>Bundle-Name</em>: title</li>
+<li><em>Bundle-SymbolicName</em>: a unique identifier</li>
+<li><em>Bundle-Version</em>: version</li>
+<li><em>Import-Package</em>: packages and versions the bundle depends on</li>
+<li><em>Export-Package</em>: bundle packages and versions available for use</li>
+</ul>
+<h4 id="section">Section<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#section" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p><code>MANIFEST</code> 文件中的 <code>Section</code> 分为两种，<code>Main</code> 和 <code>Per-Entry</code>。在 <code>Main</code> 部分的内容是每个 <code>Jar</code> 文件都可能出现的，而 <code>Per-Entry</code> 中的内容只会出现在指定的包或类名下。</p>
+<p><code>Per-Entry</code> 中的内容优先级高于 <code>Main</code> 中的内容，如果出现同名字段，<code>Per-Entry</code> 中的内容会被采用。<code>Per-Entry</code> 通常存放版本和数字签名信息。见下面的示例：</p>
+<pre><code># Main Section
+Implementation-Title: baeldung-examples
+Implementation-Version: 1.0.1
+Implementation-Vendor: Baeldung
+Sealed: true
+
+# Pre-Entry Section
+Name: com/baeldung/utils/
+Sealed: false
+</code></pre>
+<p>其中，<code>Pre-Entry Section</code> 表示用于描述 <code>com/baeldung/utils/</code> 包。</p>
+<h2 id="总结">总结<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#总结" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><code>MANIFEST.MF</code> 中可表示包名称的字段</p>
+<ul>
+<li><code>Name</code></li>
+<li><code>Bundle-Name</code></li>
+<li><code>Short-Name</code></li>
+<li><code>Extension-Name</code></li>
+<li><code>Implementation-Title</code></li>
+</ul>
+<p><code>MANIFEST.MF</code> 中可表示包版本的字段</p>
+<ul>
+<li><code>Implementation-Version</code></li>
+<li><code>Specification-Version</code></li>
+<li><code>Plugin-Version</code></li>
+<li><code>Bundle-Version</code></li>
+</ul>
+<p><code>MANIFEST.MF</code> 中可表示包 <code>LICENSE</code> 的字段</p>
+<ul>
+<li><code>Bundle-License</code></li>
+<li><code>Plugin-License-Name</code></li>
+</ul>
+<h2 id="参考">参考<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#参考" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li><a href="https://www.baeldung.com/java-jar-manifest" class="external">Understanding the JAR Manifest File | Baeldung<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/11/docs/specs/jar/jar.html#jar-manifest" class="external">JAR File Specification (oracle.com)<svg class="external-icon" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ol></article></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div id="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false}"></div><svg version="1.1" id="global-graph-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+	s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+	c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+	C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+	c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+	v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+	s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+	C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+	S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+	s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+	s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></div><div id="global-graph-outer"><div id="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:false,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" id="toc" class><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="toc-content"><ul class="overflow"><li class="depth-0"><a href="#结构" data-for="结构">结构</a></li><li class="depth-1"><a href="#默认的-manifest" data-for="默认的-manifest">默认的 MANIFEST</a></li><li class="depth-1"><a href="#自定义-manifest" data-for="自定义-manifest">自定义 MANIFEST</a></li><li class="depth-1"><a href="#headers" data-for="headers">Headers</a></li><li class="depth-0"><a href="#总结" data-for="总结">总结</a></li><li class="depth-0"><a href="#参考" data-for="参考">参考</a></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul class="overflow"><li>No backlinks found</li></ul></div></div></div><footer class><hr/><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.2.3</a> © 2024</p><ul><li><a href="https://github.com/trganda">GitHub</a></li><li><a href="https://www.trganda.top/index.xml">RSS</a></li></ul></footer></div></body><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/copy-tex.min.js" type="application/javascript"></script><script type="application/javascript">function c(){let t=this.parentElement;t.classList.toggle("is-collapsed");let l=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=l+"px";let o=t,e=t.parentElement;for(;e;){if(!e.classList.contains("callout"))return;let n=e.classList.contains("is-collapsed")?e.scrollHeight:e.scrollHeight+o.scrollHeight;e.style.maxHeight=n+"px",o=e,e=e.parentElement}}function i(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let l=s.firstElementChild;if(l){l.addEventListener("click",c),window.addCleanup(()=>l.removeEventListener("click",c));let e=s.classList.contains("is-collapsed")?l.scrollHeight:s.scrollHeight;s.style.maxHeight=e+"px"}}}document.addEventListener("nav",i);window.addEventListener("resize",i);
+</script><script type="module">
+          let mermaidImport = undefined
+          document.addEventListener('nav', async () => {
+            if (document.querySelector("code.mermaid")) {
+              mermaidImport ||= await import('https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs')
+              const mermaid = mermaidImport.default
+              const darkMode = document.documentElement.getAttribute('saved-theme') === 'dark'
+              mermaid.initialize({
+                startOnLoad: false,
+                securityLevel: 'loose',
+                theme: darkMode ? 'dark' : 'default'
+              })
+
+              await mermaid.run({
+                querySelector: '.mermaid'
+              })
+            }
+          });
+          </script><script src="../../../../../postscript.js" type="module"></script></html>
